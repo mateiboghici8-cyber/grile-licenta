@@ -1,0 +1,2029 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grile Licență — Radiolocație · Război Electronic · Teoria Comunicării</title>
+<style>
+:root{
+  --bleu-inchis:#0b2545;
+  --bleu:#13315c;
+  --bleu-mediu:#1d4e89;
+  --bleu-deschis:#2a6fb0;
+  --cer:#e8f1fb;
+  --auriu:#c9a227;
+  --auriu-clar:#e6c860;
+  --verde:#1a7f4b;
+  --verde-fundal:#e5f5ec;
+  --rosu:#b3261e;
+  --rosu-fundal:#fbe9e7;
+  --gri:#5a6b82;
+  --gri-clar:#eef2f7;
+  --alb:#ffffff;
+  --umbra:0 6px 24px rgba(11,37,69,.10);
+  --umbra-mica:0 2px 8px rgba(11,37,69,.08);
+  --radius:14px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;
+  color:#132033;
+  background:linear-gradient(160deg,#eef4fb 0%,#e3ecf7 100%);
+  line-height:1.55;
+}
+.container{max-width:920px;margin:0 auto;padding:0 18px 80px}
+
+/* ---------- HEADER ---------- */
+header.top{
+  background:linear-gradient(135deg,var(--bleu-inchis),var(--bleu-mediu));
+  color:#fff;padding:26px 18px 22px;box-shadow:var(--umbra);
+  border-bottom:3px solid var(--auriu);
+}
+header.top .wrap{max-width:920px;margin:0 auto;display:flex;align-items:center;gap:18px}
+.stema{
+  width:60px;height:60px;flex:0 0 60px;border-radius:50%;
+  background:radial-gradient(circle at 50% 40%,#20416e,#0b2545);
+  border:2px solid var(--auriu);display:flex;align-items:center;justify-content:center;
+  font-size:30px;box-shadow:0 0 0 4px rgba(201,162,39,.15);
+}
+header.top h1{margin:0;font-size:1.28rem;letter-spacing:.3px}
+header.top p{margin:3px 0 0;font-size:.86rem;opacity:.85}
+.badge-neclasificat{
+  display:inline-block;margin-top:6px;font-size:.68rem;letter-spacing:1px;
+  border:1px solid rgba(255,255,255,.4);padding:2px 8px;border-radius:20px;opacity:.8
+}
+
+/* ---------- BARA DE CONTROL ---------- */
+.panou{
+  background:var(--alb);border-radius:var(--radius);box-shadow:var(--umbra);
+  padding:20px;margin-top:22px;
+}
+.eticheta{font-size:.75rem;text-transform:uppercase;letter-spacing:1px;color:var(--gri);margin-bottom:8px;font-weight:600}
+.materii{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.materie-btn{
+  border:2px solid var(--gri-clar);background:var(--gri-clar);color:var(--bleu);
+  border-radius:12px;padding:14px 12px;cursor:pointer;font-size:.95rem;font-weight:600;
+  transition:.15s;text-align:center;line-height:1.3;
+}
+.materie-btn small{display:block;font-weight:400;font-size:.72rem;color:var(--gri);margin-top:3px}
+.materie-btn:hover{border-color:var(--bleu-deschis);transform:translateY(-2px)}
+.materie-btn.activ{background:linear-gradient(135deg,var(--bleu-mediu),var(--bleu-deschis));color:#fff;border-color:var(--bleu-inchis)}
+.materie-btn.activ small{color:rgba(255,255,255,.85)}
+.materie-btn.complet-btn{grid-column:1/-1;border-color:var(--auriu);background:#fffaf0}
+.materie-btn.complet-btn small{color:#8a7220}
+.materie-btn.complet-btn.activ{background:linear-gradient(135deg,var(--auriu),var(--auriu-clar));color:#3a2e07;border-color:#a8891f}
+.materie-btn.complet-btn.activ small{color:#5a4a10}
+
+/* separator de materie în examen complet */
+.sectiune-materie{
+  margin:26px 0 4px;padding:12px 18px;border-radius:12px;font-weight:700;font-size:1.05rem;
+  color:#fff;background:linear-gradient(135deg,var(--bleu-inchis),var(--bleu-mediu));
+  box-shadow:var(--umbra-mica);border-left:5px solid var(--auriu);letter-spacing:.3px
+}
+.sectiune-materie:first-child{margin-top:8px}
+
+/* defalcare pe materii în rezultat */
+.defalcare{margin-top:18px;display:grid;gap:10px;max-width:460px;margin-left:auto;margin-right:auto;text-align:left}
+.defalcare-item{display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:center}
+.defalcare-nume{font-size:.9rem;opacity:.95}
+.defalcare-scor{font-weight:700;font-size:.95rem}
+.defalcare-bara{grid-column:1/-1;height:8px;background:rgba(255,255,255,.2);border-radius:20px;overflow:hidden}
+.defalcare-bara > div{height:100%;background:linear-gradient(90deg,var(--auriu),var(--auriu-clar));border-radius:20px;transition:width .6s ease}
+
+.optiuni-rand{display:flex;flex-wrap:wrap;gap:14px;align-items:center;margin-top:16px;justify-content:space-between}
+.mod-switch{display:flex;gap:6px;background:var(--gri-clar);padding:5px;border-radius:12px}
+.mod-switch button{
+  border:none;background:transparent;padding:8px 14px;border-radius:9px;cursor:pointer;
+  font-size:.85rem;font-weight:600;color:var(--gri);transition:.15s
+}
+.mod-switch button.activ{background:#fff;color:var(--bleu);box-shadow:var(--umbra-mica)}
+.btn-principal{
+  background:linear-gradient(135deg,var(--auriu),var(--auriu-clar));color:#3a2e07;
+  border:none;padding:13px 22px;border-radius:12px;font-size:.95rem;font-weight:700;
+  cursor:pointer;box-shadow:var(--umbra-mica);transition:.15s;letter-spacing:.2px
+}
+.btn-principal:hover{filter:brightness(1.05);transform:translateY(-2px)}
+.btn-principal:active{transform:translateY(0)}
+
+/* ---------- ANTET SET ---------- */
+.antet-set{
+  display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;
+  margin-top:26px;margin-bottom:6px;
+}
+.antet-set h2{margin:0;color:var(--bleu-inchis);font-size:1.2rem}
+.antet-set .contor{font-size:.85rem;color:var(--gri);font-weight:600}
+
+/* ---------- CARD ÎNTREBARE ---------- */
+.card{
+  background:var(--alb);border-radius:var(--radius);box-shadow:var(--umbra-mica);
+  padding:20px 20px 18px;margin-top:16px;border-left:5px solid var(--bleu-deschis);
+  transition:.2s
+}
+.card.corect{border-left-color:var(--verde)}
+.card.gresit{border-left-color:var(--rosu)}
+.card .q-nr{
+  display:inline-flex;align-items:center;justify-content:center;min-width:28px;height:28px;
+  background:var(--bleu);color:#fff;border-radius:8px;font-weight:700;font-size:.85rem;margin-right:10px;padding:0 6px
+}
+.card .tema-tag{
+  float:right;font-size:.68rem;color:var(--bleu-mediu);background:var(--cer);
+  padding:3px 10px;border-radius:20px;font-weight:600;margin-top:2px
+}
+.card .intrebare{font-weight:600;font-size:1.02rem;margin:2px 0 14px;color:#16233a}
+.optiune{
+  display:flex;align-items:flex-start;gap:11px;border:1.5px solid #e2e8f1;border-radius:11px;
+  padding:12px 14px;margin-bottom:9px;cursor:pointer;transition:.12s;background:#fbfcfe
+}
+.optiune:hover{border-color:var(--bleu-deschis);background:#f4f8fd}
+.optiune.selectat{border-color:var(--bleu-mediu);background:#eaf2fb;box-shadow:inset 0 0 0 1px var(--bleu-mediu)}
+.optiune .litera{
+  flex:0 0 26px;width:26px;height:26px;border-radius:50%;background:#e2e8f1;color:var(--bleu);
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.82rem;transition:.12s
+}
+.optiune.selectat .litera{background:var(--bleu-mediu);color:#fff}
+.optiune .txt{flex:1;font-size:.94rem;padding-top:2px}
+.optiune.raspuns-corect{border-color:var(--verde);background:var(--verde-fundal)}
+.optiune.raspuns-corect .litera{background:var(--verde);color:#fff}
+.optiune.raspuns-gresit{border-color:var(--rosu);background:var(--rosu-fundal)}
+.optiune.raspuns-gresit .litera{background:var(--rosu);color:#fff}
+.optiune.blocat{cursor:default;pointer-events:none}
+
+/* ---------- EXPLICAȚIE ---------- */
+.explicatie{
+  margin-top:12px;border-radius:11px;padding:14px 16px;font-size:.9rem;line-height:1.6;
+  display:none;animation:apar .25s ease
+}
+.explicatie.vizibil{display:block}
+.explicatie.ok{background:var(--verde-fundal);border:1px solid #b7e0c6}
+.explicatie.nu{background:var(--rosu-fundal);border:1px solid #f0c4bf}
+.explicatie .titlu{font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:7px}
+.explicatie.ok .titlu{color:var(--verde)}
+.explicatie.nu .titlu{color:var(--rosu)}
+@keyframes apar{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+
+/* ---------- REZULTAT ---------- */
+#rezultat{margin-top:26px}
+.scor-card{
+  background:linear-gradient(135deg,var(--bleu-inchis),var(--bleu-mediu));color:#fff;
+  border-radius:var(--radius);padding:26px;text-align:center;box-shadow:var(--umbra);
+  border-bottom:3px solid var(--auriu)
+}
+.scor-card .nota{font-size:3rem;font-weight:800;line-height:1;margin:6px 0}
+.scor-card .nota small{font-size:1.1rem;opacity:.75;font-weight:600}
+.scor-card .mesaj{font-size:1rem;opacity:.92;margin-top:6px}
+.bara-scor{height:12px;background:rgba(255,255,255,.2);border-radius:20px;margin:16px auto 0;max-width:420px;overflow:hidden}
+.bara-scor > div{height:100%;border-radius:20px;transition:width .6s ease;background:linear-gradient(90deg,var(--auriu),var(--auriu-clar))}
+.teme-repetat{
+  background:var(--alb);border-radius:var(--radius);box-shadow:var(--umbra-mica);
+  padding:18px 20px;margin-top:16px;border-left:5px solid var(--auriu)
+}
+.teme-repetat h3{margin:0 0 8px;color:var(--bleu-inchis);font-size:1.02rem}
+.teme-repetat ul{margin:6px 0 0;padding-left:20px}
+.teme-repetat li{margin-bottom:5px;font-size:.92rem}
+.teme-repetat .felicitari{color:var(--verde);font-weight:600}
+
+.actiuni-jos{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:22px}
+.btn-secundar{
+  background:#fff;color:var(--bleu);border:2px solid var(--bleu-deschis);
+  padding:12px 20px;border-radius:12px;font-weight:600;cursor:pointer;transition:.15s;font-size:.92rem
+}
+.btn-secundar:hover{background:var(--cer)}
+
+/* ---------- FOOTER / MISC ---------- */
+.hint{font-size:.8rem;color:var(--gri);margin-top:10px;text-align:center}
+footer{text-align:center;color:var(--gri);font-size:.78rem;margin-top:40px;padding-top:16px;border-top:1px solid #dbe3ee}
+.avertisment{
+  background:#fff8e1;border:1px solid #f0dca0;border-radius:12px;padding:10px 14px;
+  font-size:.82rem;color:#6b5713;margin-top:14px
+}
+@media(max-width:560px){
+  header.top h1{font-size:1.05rem}
+  .card .tema-tag{display:none}
+  .scor-card .nota{font-size:2.4rem}
+}
+
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="stema">🎯</div>
+    <div>
+      <h1>Pregătire Licență — Grile</h1>
+      <p>Academia Forțelor Aeriene „Henri Coandă” · Radiolocație · Război Electronic · Teoria Comunicării</p>
+      <span class="badge-neclasificat">NECLASIFICAT · sesiunea 2026</span>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="panou">
+    <div class="eticheta">1. Alege materia (9 grile per set)</div>
+    <div class="materii" id="materii"><!-- butoane materii injectate --></div>
+
+    <div class="optiuni-rand">
+      <div>
+        <div class="eticheta" style="margin-bottom:6px">Mod de lucru</div>
+        <div class="mod-switch">
+          <button data-mod="examen" class="activ">📝 Mod examen</button>
+          <button data-mod="invatare">💡 Mod învățare</button>
+        </div>
+      </div>
+      <button class="btn-principal" onclick="setNou()">🔄 Set nou de 9 grile</button>
+    </div>
+
+    <div class="avertisment">
+      ⚠️ <b>Atenție:</b> anul acesta examenul de Radiolocație <b>nu mai conține problema de calcul cu ecuația radarului</b>.
+      Grilele de RDLC de aici sunt conceptuale/teoretice. La <b>Teoria Comunicării</b> întrebările sunt gândite exact ca profesorul —
+      fiecare concept ancorat în mediul militar (ordin, raport, drapel, onor, convorbiri radio, AFASTUD).
+    </div>
+    <p class="hint">💡 <b>Mod examen:</b> răspunzi la toate, apoi apeși „Verifică”. &nbsp; <b>Mod învățare:</b> primești explicația imediat după fiecare răspuns. &nbsp; <b>🎖️ Examen complet:</b> 27 de grile (9 din fiecare materie) + defalcare a scorului pe materii, ca o simulare cap-coadă.</p>
+  </div>
+
+  <div class="antet-set">
+    <h2 id="titlu-set">Set de 9 grile</h2>
+    <span class="contor" id="contor-banca"></span>
+  </div>
+
+  <div id="grile"><!-- carduri întrebări --></div>
+
+  <div id="bara-actiune" class="actiuni-jos" style="display:none">
+    <button id="btn-verifica" class="btn-principal">✅ Verifică cele 9 răspunsuri</button>
+    <button class="btn-secundar" onclick="setNou()">🔄 Alt set</button>
+  </div>
+
+  <div id="rezultat"></div>
+
+  <footer>
+    Instrument de autoevaluare · 191 de întrebări în bănci (53 Radiolocație · 46 Război Electronic · 92 Teoria Comunicării) · seturile se schimbă la fiecare încărcare/refresh<br>
+    Bazat pe materia de licență (Radiolocație–Război Electronic–Teoria Comunicării) și pe structura subiectelor din sesiunea anterioară.
+  </footer>
+</div>
+
+<script>
+/* ============================================================
+   BANCĂ DE GRILE — RADIOLOCAȚIE
+   Academia Forțelor Aeriene "Henri Coandă" — pregătire licență
+   Redactare exigentă: cele 4 variante au lungime comparabilă (corectul
+   NU este sistematic cel mai lung); distractorii sunt plauzibili,
+   construiți din concepte reale din materie (confuzii tipice).
+   Notă: anul acesta NU se mai dă problema de calcul cu ecuația radarului.
+   ============================================================ */
+window.BANCA_RDLC = [
+  /* ---------- 2.1.3 PRINCIPII FUNDAMENTALE ---------- */
+  {
+    t: "Care dintre următoarele NU este un principiu fundamental al radiolocației?",
+    o: ["Amplificarea spontană a undelor în atmosferă", "Reflexia undelor pe suprafețele de separație", "Propagarea rectilinie a undelor prin mediu", "Interferența constructivă și cea distructivă"],
+    c: 0,
+    e: "✓ Corect: principiile fundamentale sunt reflexia, propagarea rectilinie, interferența și viteza constantă a luminii (c). Amplificarea spontană în atmosferă nu există — atmosfera atenuează semnalul. 📌 Reflexie + propagare rectilinie + interferență + viteza c.",
+    tema: "Principii fundamentale", ref: "2.1.3"
+  },
+  {
+    t: "Viteza de propagare a undelor electromagnetice în vid este aproximativ:",
+    o: ["3 × 10⁸ m/s", "3 × 10⁶ m/s", "3 × 10¹⁰ m/s", "3 × 10⁵ m/s"],
+    c: 0,
+    e: "✓ Corect: c ≈ 3 × 10⁸ m/s (300.000 km/s), folosită pentru a calcula distanța din timpul de zbor al impulsului. 📌 10⁶ ar fi prea mic; 10¹⁰ prea mare.",
+    tema: "Principii fundamentale", ref: "2.1.3"
+  },
+  {
+    t: "Cantitatea de energie reflectată de un obiect depinde, printre altele, de:",
+    o: ["Unghiul de incidență și proprietățile electrice ale materialului", "Culoarea vizibilă și textura suprafeței exterioare a țintei", "Temperatura aerului și umiditatea relativă din zona țintei", "Ora din zi și poziția soarelui în momentul măsurării"],
+    c: 0,
+    e: "✓ Corect: energia reflectată depinde de unghiul de incidență, proprietățile electrice ale materialului, forma și dimensiunea obiectului. Culoarea, temperatura aerului și ora nu intervin. 📌 Reflexia are loc la separația a două medii cu proprietăți electrice diferite.",
+    tema: "Principii fundamentale", ref: "2.1.3"
+  },
+  {
+    t: "Propagarea rectilinie a undelor radio poate fi modificată de:",
+    o: ["Fenomenele de refracție, difracție și reflexie multiplă", "Rotația mecanică și viteza de baleiere a antenei", "Efectul Doppler produs de mișcarea radială a țintei", "Factorul de umplere și durata impulsului emis"],
+    c: 0,
+    e: "✓ Corect: în condiții ideale undele se propagă în linie dreaptă, dar traiectoria e influențată de refracție, difracție și reflexie multiplă. Rotația antenei, Doppler și duty cycle nu curbează traiectoria. 📌 Propagarea rectilinie stă la baza determinării direcției.",
+    tema: "Principii fundamentale", ref: "2.1.3"
+  },
+  {
+    t: "Interferența a două unde este CONSTRUCTIVĂ atunci când undele sunt:",
+    o: ["În fază (undă rezultată cu amplitudine mai mare)", "În antifază (amplitudine mai mică sau chiar nulă)", "De frecvențe complet diferite una față de cealaltă", "Reflectate de ținte diferite, aflate la distanțe egale"],
+    c: 0,
+    e: "✓ Corect: în fază → interferență constructivă (amplitudine mai mare); în antifază → distructivă (amplitudine mai mică/nulă). 📌 Se folosește pentru a întări semnalul util sau a elimina semnale nedorite.",
+    tema: "Principii fundamentale", ref: "2.1.3"
+  },
+
+  /* ---------- TIPURI DE RADIOLOCAȚIE ---------- */
+  {
+    t: "Prin ce se deosebește radarul PASIV de cel ACTIV?",
+    o: ["Nu emite semnale proprii, ci le detectează pe cele existente", "Emite semnale de putere mai mare decât radarul activ", "Folosește obligatoriu un transponder montat pe fiecare țintă", "Funcționează numai pe timp de noapte și vizibilitate redusă"],
+    c: 0,
+    e: "✓ Corect: radarul pasiv nu emite; detectează semnale emise de alte surse (radare/comunicații inamice), deci e invizibil pentru inamic. Radarul activ emite și analizează ecoul. 📌 Pasiv = tăcut, discret.",
+    tema: "Tipuri de radar", ref: "Tipuri de Radiolocație"
+  },
+  {
+    t: "Care este principala LIMITARE a radarului pasiv?",
+    o: ["Depinde de semnalele deja existente în mediul electromagnetic", "Poate fi detectat cu ușurință de sistemele adversarului", "Consumă o cantitate foarte mare de energie la emisie", "Necesită rotația continuă și rapidă a antenei directive"],
+    c: 0,
+    e: "✓ Corect: radarul pasiv nu poate detecta o țintă care nu emite radiație — depinde de semnalele existente. Nu e ușor de detectat (asta e chiar avantajul lui). 📌 Avantaj = discreție; limitare = dependența de semnale externe.",
+    tema: "Tipuri de radar", ref: "Tipuri de Radiolocație"
+  },
+  {
+    t: "Radarul PRIMAR (PSR) se caracterizează prin faptul că:",
+    o: ["Detectează orice obiect reflectant, fără un răspuns al țintei", "Necesită un transponder funcțional montat pe ținta detectată", "Oferă automat identitatea, altitudinea și viteza fiecărei ținte", "Funcționează exclusiv cu ținte cooperative, dotate cu emițător"],
+    c: 0,
+    e: "✓ Corect: PSR nu depinde de răspunsul țintei — detectează orice obiect reflectant, dar nu oferă identitate/altitudine. Transponderul și identificarea sunt specifice radarului secundar. 📌 PSR = ecou brut; SSR = dialog cu transponder.",
+    tema: "Tipuri de radar", ref: "Tipuri de Radiolocație"
+  },
+  {
+    t: "Radarul SECUNDAR (SSR) și sistemul IFF se bazează pe:",
+    o: ["Un transponder de pe țintă care răspunde cu informații suplimentare", "Reflexia pură a undelor de la țintă, fără niciun răspuns al acesteia", "Detectarea și analiza radiației infraroșii emise natural de țintă", "Absorbția undelor radar de către materialul din care e făcută ținta"],
+    c: 0,
+    e: "✓ Corect: SSR interacționează cu un transponder ce dă identitate, altitudine, viteză; IFF e o formă specializată de SSR (prieten/inamic). Reflexia pură fără răspuns = radar primar. 📌 IFF = caz special de radar secundar.",
+    tema: "Tipuri de radar", ref: "Tipuri de Radiolocație"
+  },
+  {
+    t: "Radarul IFF (Identification Friend or Foe) servește la:",
+    o: ["Distingerea țintelor prietene de cele inamice, prin cod de răspuns", "Mărirea puterii de emisie a radarului pentru distanțe mai mari", "Înlocuirea completă a radarului primar în supravegherea aeriană", "Măsurarea temperaturii și a presiunii atmosferice pe traiectorie"],
+    c: 0,
+    e: "✓ Corect: IFF emite un semnal la care ținta răspunde cu un cod (prieten/inamic), prevenind atacul asupra propriilor aeronave. 📌 IFF = „cine ești?” — prieten sau dușman.",
+    tema: "Tipuri de radar", ref: "Tipuri de Radiolocație"
+  },
+  {
+    t: "Un avantaj strategic al radarului pasiv de supraveghere este:",
+    o: ["Discreția — nefiind emițător, nu poate fi detectat de inamic", "Puterea de emisie foarte mare, cu rază de acțiune extinsă", "Montarea sa obligatorie pe aeronavele de tip stealth moderne", "Funcționarea sa exclusiv cu ținte fixe, aflate la sol sau pe apă"],
+    c: 0,
+    e: "✓ Corect: nefiind emițător, radarul pasiv e discret și sigur, eficient acolo unde radarele active și-ar dezvălui poziția. 📌 Ideal pentru supraveghere discreționară și război electronic.",
+    tema: "Tipuri de radar", ref: "Tipuri de Radiolocație"
+  },
+
+  /* ---------- 2.1.5.1 SER / ȚINTE ---------- */
+  {
+    t: "Suprafața efectivă de reflexie (SER / RCS), notată σ, se măsoară în:",
+    o: ["Metri pătrați (m²)", "Wați (W)", "Hertzi (Hz)", "Decibeli (dB)"],
+    c: 0,
+    e: "✓ Corect: σ se exprimă în m² și cuantifică capacitatea de reflexie a obiectului. Nu e putere (W) sau frecvență (Hz). 📌 σ depinde de formă, dimensiune, material, unghi și frecvență.",
+    tema: "SER / RCS", ref: "2.1.5.1"
+  },
+  {
+    t: "SER (suprafața efectivă de reflexie) reprezintă, prin definiție:",
+    o: ["Aria echivalentă care reflectă aceeași energie ca ținta reală", "Suprafața fizică reală, măsurată direct pe conturul țintei", "Viteza radială a țintei raportată la poziția stației radar", "Numărul de impulsuri reflectate de țintă într-o singură secundă"],
+    c: 0,
+    e: "✓ Corect: SER = aria unei suprafețe fictive, perpendiculare pe unda incidentă, care creează în antenă aceeași densitate de putere ca ținta reală. NU este suprafața fizică reală. 📌 SER ≠ dimensiunea fizică a țintei.",
+    tema: "SER / RCS", ref: "2.1.5.1"
+  },
+  {
+    t: "Care factor NU influențează valoarea SER a unui obiect?",
+    o: ["Distanța dintre radar și țintă în momentul iluminării", "Forma și dimensiunea geometrică a obiectului detectat", "Materialul din care este fabricat obiectul (conductor sau nu)", "Unghiul de incidență și frecvența undelor radar folosite"],
+    c: 0,
+    e: "✓ Corect: SER depinde de formă, dimensiune, material, unghi de incidență și frecvență — NU de distanță (distanța afectează puterea recepționată, nu SER-ul intrinsec). 📌 Materiale conductoare → SER mare; absorbante → SER mic.",
+    tema: "SER / RCS", ref: "2.1.5.1"
+  },
+  {
+    t: "Tehnologiile „stealth” urmăresc, în esență:",
+    o: ["Reducerea SER a țintei prin formă și materiale absorbante", "Creșterea puterii de emisie a propriilor sisteme de bord", "Mărirea SER a țintei pentru o vizibilitate radar sporită", "Emiterea permanentă de semnale IFF către toate radarele"],
+    c: 0,
+    e: "✓ Corect: stealth = reducerea SER prin forme speciale și materiale absorbante. Mărirea SER ar face aeronava mai ușor de detectat. 📌 SER mic = detecție la distanță mică = supraviețuire mai bună.",
+    tema: "SER / RCS", ref: "2.1.5.1"
+  },
+  {
+    t: "După modul de interacțiune cu radarul, țintele se împart în:",
+    o: ["Cooperative și non-cooperative", "Fixe și metalice", "Lente și rapide", "Reflectante și transparente"],
+    c: 0,
+    e: "✓ Corect: cooperative (răspund la interogare, ex. transponder) și non-cooperative (detectate doar prin reflexie). După mișcare, țintele mai pot fi fixe sau mobile. 📌 Cooperativ = răspunde; non-cooperativ = doar reflectă.",
+    tema: "Ținte", ref: "2.1.5.1"
+  },
+
+  /* ---------- 2.1.5.2 ECUAȚIA RADIOLOCAȚIEI (conceptual) ---------- */
+  {
+    t: "Conform ecuației radiolocației, puterea recepționată Pr este invers proporțională cu:",
+    o: ["R⁴ (puterea a patra a distanței)", "R (distanța simplă până la țintă)", "R² (pătratul distanței măsurate)", "√R (rădăcina pătrată a distanței)"],
+    c: 0,
+    e: "✓ Corect: semnalul se atenuează cu R² la ducere și R² la întoarcere ⇒ Pr ∝ 1/R⁴. De aceea se aplică radicalul de ordin 4 pentru a izola distanța. 📌 R⁴ = „semnătura” ecuației (drum dus-întors).",
+    tema: "Ecuația radiolocației", ref: "2.1.5.2"
+  },
+  {
+    t: "Puterea recepționată Pr este DIRECT proporțională cu:",
+    o: ["Puterea transmisă, câștigul antenelor și SER a țintei", "Distanța până la țintă ridicată la puterea a patra", "Durata perioadei de repetiție și factorul de umplere", "Temperatura de lucru și zgomotul termic al receptorului"],
+    c: 0,
+    e: "✓ Corect: Pr crește cu Pt, câștigul G și SER (σ), și scade cu R⁴. 📌 Mai multă putere/câștig/SER = ecou mai puternic.",
+    tema: "Ecuația radiolocației", ref: "2.1.5.2"
+  },
+  {
+    t: "La un radar MONOSTATIC, câștigul de emisie Gt și cel de recepție Gr:",
+    o: ["Sunt egale, fiind aceeași antenă la emisie și recepție", "Sunt întotdeauna diferite, folosind antene separate", "Au ambele valoarea zero în ecuația radiolocației", "Nu intervin deloc în calculul distanței de acțiune"],
+    c: 0,
+    e: "✓ Corect: la radarul monostatic aceeași antenă emite și recepționează, deci Gt = Gr. 📌 Monostatic = emisie și recepție din același loc, aceeași antenă.",
+    tema: "Ecuația radiolocației", ref: "2.1.5.2"
+  },
+  {
+    t: "Pentru a DUBLA distanța de descoperire, puterea de emisie trebuie mărită de:",
+    o: ["16 ori", "2 ori", "4 ori", "8 ori"],
+    c: 0,
+    e: "✓ Corect: R ∝ ⁴√Pt, deci pentru dublarea distanței Pt crește de 2⁴ = 16 ori. Alternativ, se mărește de 4 ori câștigul antenei sau lungimea de undă. 📌 Dublarea razei ⇒ ×16 putere (sau ×4 câștig/λ).",
+    tema: "Ecuația radiolocației", ref: "2.1.5.2"
+  },
+
+  /* ---------- 2.1.5.3 DISTANȚA DE DESCOPERIRE ---------- */
+  {
+    t: "Care factor NU limitează distanța de descoperire a radarului?",
+    o: ["Creșterea sensibilității receptorului radar", "Curbura Pământului și orizontul radar", "Absorbția undelor radar în atmosferă", "Refracția undelor la variația altitudinii"],
+    c: 0,
+    e: "✓ Corect: creșterea sensibilității MĂREȘTE distanța (detectează semnale slabe). Factorii limitativi: atmosfera (atenuare, refracție, difuzie), curbura Pământului, absorbția. 📌 Sensibilitate/putere/SER mari = distanță mai mare.",
+    tema: "Distanța de descoperire", ref: "2.1.5.3"
+  },
+  {
+    t: "Influența atmosferei asupra propagării undelor radar se manifestă prin:",
+    o: ["Atenuare, refracție și difuzie a undelor radar", "Amplificarea semnalului recepționat de antenă", "Mărirea suprafeței efective de reflexie a țintei", "Accelerarea rotației și baleierii antenei radar"],
+    c: 0,
+    e: "✓ Corect: atmosfera produce atenuare (absorbție, mai mare la frecvențe înalte/precipitații), refracție (curbarea traiectoriei) și difuzie (reducerea puterii). Toate trei afectează negativ semnalul. 📌 Atmosfera slăbește, nu întărește semnalul.",
+    tema: "Distanța de descoperire", ref: "2.1.5.3"
+  },
+  {
+    t: "Pentru a depăși limitarea impusă de curbura Pământului se folosesc:",
+    o: ["Radare cu vedere peste orizont (reflexie în ionosferă)", "Radare cu putere de emisie redusă până aproape de zero", "Radare care emit exclusiv în banda de infraroșu apropiat", "Radare montate subacvatic pentru detecția sub suprafață"],
+    c: 0,
+    e: "✓ Corect: radarele „over-the-horizon” exploatează reflexia undelor în ionosferă pentru a ocoli curbura Pământului. 📌 Undele se propagă aproape rectiliniu ⇒ orizontul radar limitează raza fără această tehnică.",
+    tema: "Distanța de descoperire", ref: "2.1.5.3"
+  },
+  {
+    t: "Față de distanța de descoperire, frecvențele JOASE au avantajul că:",
+    o: ["Sunt mai puțin atenuate și absorbite pe traseul de propagare", "Oferă cea mai bună rezoluție unghiulară în azimut și elevație", "Nu se propagă deloc prin straturile inferioare ale atmosferei", "Necesită antene de dimensiuni foarte mici și ușor de deplasat"],
+    c: 0,
+    e: "✓ Corect: frecvențele joase, mai puțin atenuate/absorbite, permit distanțe mai mari; cele înalte dau rezoluție și precizie mai bune, dar sunt mai atenuate. 📌 Joase = rază; înalte = rezoluție.",
+    tema: "Distanța de descoperire", ref: "2.1.5.3"
+  },
+
+  /* ---------- 2.2.1 PARAMETRI TEHNICI ȘI TACTICI ---------- */
+  {
+    t: "Care dintre următorii este un parametru TACTIC (nu tehnic)?",
+    o: ["Distanța de descoperire", "Frecvența de operare", "Lățimea de bandă", "Durata impulsului"],
+    c: 0,
+    e: "✓ Corect: parametrii tactici descriu performanța operațională (distanță de descoperire, precizie, rezoluție, mobilitate, cost). Frecvența, banda, durata impulsului sunt tehnici. 📌 Tehnic = „cum e construit”; tactic = „ce poate face”.",
+    tema: "Parametri tehnici/tactici", ref: "2.2.1"
+  },
+  {
+    t: "Câștigul antenei radar exprimă capacitatea acesteia de a:",
+    o: ["Concentra energia radiată pe o anumită direcție", "Reduce puterea de emisie a semnalului transmis", "Prelungi durata fiecărui impuls radar emis", "Micșora frecvența de operare a sistemului radar"],
+    c: 0,
+    e: "✓ Corect: un câștig mai mare = concentrare mai eficientă a energiei ⇒ rază mai mare și rezoluție unghiulară mai bună. 📌 Câștig mare = fascicul „strâns” și puternic.",
+    tema: "Parametri tehnici/tactici", ref: "2.2.1"
+  },
+  {
+    t: "Lățimea fasciculului antenei (la scăderea de 3 dB) influențează:",
+    o: ["Rezoluția unghiulară, în azimut și elevație", "Durata impulsului emis de către radar", "Frecvența de repetiție a impulsurilor (PRF)", "Factorul de umplere al ciclului de emisie"],
+    c: 0,
+    e: "✓ Corect: un fascicul mai îngust = rezoluție unghiulară mai bună; cei 3 dB = punctul unde puterea scade la jumătate. NU influențează rezoluția în distanță (aceea depinde de durata impulsului/bandă). 📌 Fascicul îngust = rezoluție unghiulară bună.",
+    tema: "Parametri tehnici/tactici", ref: "2.2.1"
+  },
+  {
+    t: "Costul LCC (Life Cycle Cost) al unui radar cuprinde:",
+    o: ["Achiziția, operarea, mentenanța și scoaterea din uz", "Doar prețul de achiziție al antenei principale", "Doar consumul de energie electrică pe o oră", "Doar salariul lunar al operatorului de radar"],
+    c: 0,
+    e: "✓ Corect: LCC = costul total pe întreg ciclul de viață (achiziție + operare + mentenanță + retragere + reutilizare). 📌 LCC ≠ doar prețul de cumpărare.",
+    tema: "Parametri tehnici/tactici", ref: "2.2.1"
+  },
+
+  /* ---------- 2.2.2 STAȚII ÎN IMPULS ---------- */
+  {
+    t: "Rolul COMUTATORULUI DE ANTENĂ într-o stație radar în impuls este de a:",
+    o: ["Dirija emisia spre antenă și recepția spre receptor, protejându-l", "Amplifica semnalul de frecvență intermediară în lanțul de recepție", "Afișa datele despre țintă pe ecranul indicatorului pentru operator", "Stabili durata și frecvența de repetiție a impulsurilor emise"],
+    c: 0,
+    e: "✓ Corect: comutatorul dirijează emisia spre antenă / recepția spre receptor și protejează receptorul de puterea mare a emisiei. Afișarea = indicatorul; durata/repetiția = modulatorul. 📌 Fără comutator, emisia ar distruge receptorul.",
+    tema: "Stații în impuls", ref: "2.2.2"
+  },
+  {
+    t: "MODULATORUL dintr-o stație radar în impuls controlează:",
+    o: ["Durata și frecvența de repetiție a impulsurilor emise", "Luminozitatea și contrastul ecranului indicatorului radar", "Numărul total de antene folosite de sistemul radar", "Temperatura de lucru și răcirea blocului receptor"],
+    c: 0,
+    e: "✓ Corect: modulatorul controlează durata impulsului (→ rezoluția în distanță) și frecvența de repetiție (→ distanța maximă neambiguă). 📌 Modulator = „ritmul” emisiei; emițător = „forța” emisiei.",
+    tema: "Stații în impuls", ref: "2.2.2"
+  },
+  {
+    t: "În receptorul radar, MIXER-ul are rolul de a:",
+    o: ["Transforma înalta frecvență într-o frecvență intermediară (FI)", "Emite impulsul de mare putere spre țintă prin intermediul antenei", "Roti mecanic antena directivă pentru baleierea spațiului aerian", "Genera semnalul de sincronizare care coordonează întregul sistem"],
+    c: 0,
+    e: "✓ Corect: mixerul convertește înalta frecvență în frecvență intermediară (FI). Receptorul mai are un LNA și un amplificator FI. 📌 Recepție: LNA → mixer (→ FI) → amplificator FI → detecție.",
+    tema: "Stații în impuls", ref: "2.2.2"
+  },
+  {
+    t: "PROCESORUL unei stații radar realizează:",
+    o: ["Filtrarea, corelația și analiza spectrală a semnalului recepționat", "Emisia impulsului de mare putere spre țintele din spațiul aerian", "Comutarea rapidă între regimul de emisie și cel de recepție", "Alimentarea electrică și răcirea componentelor stației radar"],
+    c: 0,
+    e: "✓ Corect: procesorul extrage distanța, viteza și direcția prin filtrare, corelație și analiză spectrală (și, modern, filtrare adaptivă și recunoaștere automată a țintelor). 📌 Procesorul transformă ecoul în date despre țintă.",
+    tema: "Stații în impuls", ref: "2.2.2"
+  },
+  {
+    t: "INDICATORUL unei stații de radiolocație are rolul de a:",
+    o: ["Afișa datele despre ținte într-un format util pentru operator", "Amplifica puterea semnalului emis înainte de a ajunge la antenă", "Comuta căile de semnal între blocul de emisie și cel de recepție", "Genera frecvența intermediară necesară procesării semnalului"],
+    c: 0,
+    e: "✓ Corect: indicatorul afișează informațiile despre ținte (hărți, grafice, valori); modern, se integrează într-un sistem de comandă și control. 📌 Indicator = interfața cu operatorul.",
+    tema: "Stații în impuls", ref: "2.2.2"
+  },
+  {
+    t: "Cum influențează durata impulsului rezoluția în distanță?",
+    o: ["Impulsul scurt dă o rezoluție în distanță mai bună", "Impulsul lung dă o rezoluție în distanță mai bună", "Durata impulsului nu are legătură cu rezoluția", "Rezoluția depinde doar de câștigul antenei radar"],
+    c: 0,
+    e: "✓ Corect: rezoluția în distanță = c·τ/2, deci un impuls scurt separă mai bine ținte apropiate; impulsul lung crește raza dar înrăutățește rezoluția. 📌 Impuls scurt = rezoluție bună; impuls lung = rază mare.",
+    tema: "Stații în impuls", ref: "2.2.2"
+  },
+  {
+    t: "Frecvența de repetiție a impulsurilor (PRF / Fr) determină:",
+    o: ["Distanța maximă neambiguă de măsurare", "Rezoluția unghiulară a țintei în azimut", "Suprafața efectivă de reflexie a țintei", "Câștigul antenei radar la recepție"],
+    c: 0,
+    e: "✓ Corect: PRF stabilește distanța maximă neambiguă (Tr = 1/Fr) și viteza Doppler maximă neambiguă. PRF mare = actualizare rapidă dar ambiguitate; PRF mică = detecție precisă la distanțe mari. 📌 PRF = parametru al sincronizatorului.",
+    tema: "Stații în impuls", ref: "2.2.2"
+  },
+  {
+    t: "Factorul de umplere (Q – Duty Cycle) reprezintă raportul dintre:",
+    o: ["Durata impulsului și perioada ciclului radar", "Puterea semnalului emis și cea recepționată", "Numărul de ținte și numărul de impulsuri", "Câștigul de emisie și câștigul de recepție"],
+    c: 0,
+    e: "✓ Corect: Q = durata impulsului / perioada ciclului; un Q ridicat = consum energetic mai mare și risc de supraîncălzire. 📌 Duty cycle mare = energie medie mare, solicitare termică mare.",
+    tema: "Stații în impuls", ref: "2.2.2"
+  },
+  {
+    t: "Distanța până la țintă este determinată prin măsurarea:",
+    o: ["Timpului de zbor al impulsului (dus-întors)", "Deplasării Doppler a frecvenței ecoului", "Amplitudinii semnalului radar reflectat", "Fazei semnalului recepționat de antenă"],
+    c: 0,
+    e: "✓ Corect: distanța rezultă din timpul dus-întors al impulsului, cunoscând c. Doppler → viteza; directivitatea antenei → direcția. 📌 Timp → distanță; Doppler → viteză; antenă → direcție.",
+    tema: "Stații în impuls", ref: "2.2.2"
+  },
+  {
+    t: "Viteza radială a țintei este determinată prin:",
+    o: ["Deplasarea Doppler a frecvenței ecoului", "Timpul de zbor al impulsului radar emis", "Rotația mecanică a antenei directive", "Numărul de impulsuri emise pe secundă"],
+    c: 0,
+    e: "✓ Corect: viteza radială se obține din efectul Doppler (schimbarea frecvenței ecoului). 📌 Apropiere → shift pozitiv; depărtare → shift negativ.",
+    tema: "Stații în impuls", ref: "2.2.2"
+  },
+  {
+    t: "Direcția (coordonatele unghiulare β și ε) a țintei se determină folosind:",
+    o: ["Directivitatea antenei (lobul principal)", "Deplasarea Doppler a frecvenței ecoului", "Timpul de zbor al impulsului transmis", "Factorul de umplere al ciclului radar"],
+    c: 0,
+    e: "✓ Corect: direcția rezultă din directivitatea antenei — semnalul maxim se recepționează pe lobul principal. 📌 Distanță (timp), viteză (Doppler), direcție (antenă directivă).",
+    tema: "Stații în impuls", ref: "2.2.2"
+  },
+  {
+    t: "Care este un AVANTAJ al sistemelor radar în impuls?",
+    o: ["Detectarea la distanțe mari și precizia ridicată în distanță", "Imposibilitatea de a lucra pe timp de ploaie, ceață sau ninsoare", "Lipsa totală a imunității la interferențe și mediul ostil", "Consumul energetic egal cu zero pe durata funcționării"],
+    c: 0,
+    e: "✓ Corect: radarele în impuls detectează la distanțe mari, au precizie ridicată (timpul de zbor), imunitate sporită la interferențe și lucrează în condiții meteo dificile. 📌 Impuls puternic + timp de zbor = rază + precizie.",
+    tema: "Stații în impuls", ref: "2.2.2"
+  },
+
+  /* ---------- 2.2.4 RADIOLOCAȚIA MONOIMPULS ---------- */
+  {
+    t: "Principalul avantaj al radiolocației MONOIMPULS este că:",
+    o: ["Determină coordonatele unghiulare într-un singur impuls", "Necesită mai multe rotații succesive complete ale antenei", "Emite o putere de sute de ori mai mare decât alte radare", "Funcționează exclusiv cu ținte staționare, aflate la sol"],
+    c: 0,
+    e: "✓ Corect: monoimpulsul dă poziția unghiulară dintr-un singur impuls ⇒ viteză de reacție și precizie, mai puțin vulnerabil la bruiaj. „Rotații succesive” descrie tehnicile tradiționale. 📌 Rapid + precis + rezistent la bruiaj.",
+    tema: "Monoimpuls", ref: "2.2.4"
+  },
+  {
+    t: "În radiolocația monoimpuls, coordonatele unghiulare se calculează măsurând:",
+    o: ["Diferențele de amplitudine și de fază ale ecoului recepționat", "Timpul de zbor al fiecărui impuls emis către țintă și înapoi", "Doar culoarea și intensitatea vizuală a semnalului reflectat", "Doar puterea totală recepționată, integrată pe o rotație completă"],
+    c: 0,
+    e: "✓ Corect: monoimpulsul folosește o antenă cu loburi multiple și măsoară diferențele de amplitudine și fază pentru azimut și elevație, într-un singur impuls. 📌 Amplitudine + fază → unghiuri.",
+    tema: "Monoimpuls", ref: "2.2.4.1"
+  },
+  {
+    t: "Metoda de AMPLITUDINE în monoimpuls servește la determinarea:",
+    o: ["Unghiului de azimut al țintei", "Distanței absolute până la țintă", "Compoziției materialului țintei", "Perioadei de repetiție a impulsului"],
+    c: 0,
+    e: "✓ Corect: metoda de amplitudine compară intensitatea pe canale diferite → azimutul; metoda de fază (foarte precisă) → elevația. 📌 Amplitudine → azimut; fază → elevație.",
+    tema: "Monoimpuls — metode", ref: "2.2.4.3"
+  },
+  {
+    t: "Metoda de FAZĂ în monoimpuls se bazează pe:",
+    o: ["Diferențele de fază între semnalele antenei, dând elevația", "Numărarea impulsurilor emise de radar într-o singură secundă", "Măsurarea directă a distanței absolute până la ținta detectată", "Compararea culorii și a intensității ecoului radar reflectat"],
+    c: 0,
+    e: "✓ Corect: metoda de fază măsoară diferențele de fază între elementele antenei → unghiul de elevație, cu mare precizie, dar sensibilă la interferențe/bruiaj. 📌 Fază = precizie pe verticală, dar sensibilă.",
+    tema: "Monoimpuls — metode", ref: "2.2.4.3"
+  },
+  {
+    t: "Semnalele HIBRIDE în monoimpuls reprezintă:",
+    o: ["Combinația între semnalele de amplitudine și cele de fază", "Doar semnalele de amplitudine, întărite prin amplificare", "Semnale infraroșii combinate cu semnalele radar clasice", "Semnale acustice folosite pentru detecția țintelor sub apă"],
+    c: 0,
+    e: "✓ Corect: combinând amplitudinea (azimut) și faza (elevație), sistemul compensează erorile fiecăruia și obține o măsurătoare mai precisă. 📌 Hibrid = amplitudine + fază.",
+    tema: "Monoimpuls — metode", ref: "2.2.4.2"
+  },
+  {
+    t: "În monoimpuls, canalul de SUMĂ (SUM) servește la:",
+    o: ["Determinarea distanței și asigurarea unui raport SNR optim", "Estimarea deviației unghiulare a țintei în plan orizontal", "Estimarea unghiului de elevație al țintei în plan vertical", "Calibrarea sistemului și monitorizarea zgomotului de fond"],
+    c: 0,
+    e: "✓ Corect: SUM (adunarea coerentă a semnalelor) dă distanța și SNR optim. Azimut = DAZ, elevație = DEL, calibrare/zgomot = AUX. 📌 SUM = distanță; DAZ = azimut; DEL = elevație; AUX = auxiliar.",
+    tema: "Monoimpuls — canale", ref: "2.2.4.4"
+  },
+  {
+    t: "Canalul diferențial de AZIMUT (DAZ) estimează:",
+    o: ["Deviația unghiulară a țintei în plan orizontal", "Distanța absolută dintre radar și ținta urmărită", "Unghiul de elevație al țintei, în plan vertical", "Nivelul zgomotului de fond și al interferențelor"],
+    c: 0,
+    e: "✓ Corect: DAZ operează în plan orizontal → azimutul (comparând faza/amplitudinea elementelor dispuse orizontal). Elevația = DEL; distanța = SUM. 📌 DAZ = orizontal/azimut; DEL = vertical/elevație.",
+    tema: "Monoimpuls — canale", ref: "2.2.4.4"
+  },
+  {
+    t: "Canalul diferențial de ELEVAȚIE (DEL) furnizează:",
+    o: ["Unghiul de elevație al țintei, în plan vertical", "Distanța absolută dintre radar și ținta urmărită", "Azimutul țintei detectate, în plan orizontal", "Frecvența de emisie folosită de stația radar"],
+    c: 0,
+    e: "✓ Corect: DEL operează în plan vertical → unghiul de elevație (altitudinea). DAZ = orizontal (azimut); SUM = distanța. 📌 DEL = vertical/elevație.",
+    tema: "Monoimpuls — canale", ref: "2.2.4.4"
+  },
+  {
+    t: "Canalul AUXILIAR (AUX) din monoimpuls asigură:",
+    o: ["Monitorizarea zgomotului, calibrarea și redundanța sistemului", "Determinarea principală a distanței până la ținta urmărită", "Rotația mecanică a antenei directive pe durata baleierii", "Emiterea impulsului de vârf de putere maximă spre țintă"],
+    c: 0,
+    e: "✓ Corect: AUX = funcții auxiliare (zgomot de fond, interferențe, calibrare, redundanță). Distanța = SUM. 📌 AUX = „ajutor” pentru fiabilitate, nu canal principal de măsură.",
+    tema: "Monoimpuls — canale", ref: "2.2.4.4"
+  },
+
+  /* ---------- COMPLETĂRI — ACOPERIRE TOTALĂ A MATERIEI ---------- */
+  {
+    t: "RATA DE BALEIERE, ca parametru tactic, definește:",
+    o: ["Viteza cu care radarul scanează spațiul înconjurător", "Timpul necesar detectării și raportării unei ținte", "Capacitatea de a fi deplasat și folosit în alte locații", "Probabilitatea funcționării corecte într-un interval dat"],
+    c: 0,
+    e: "✓ Corect: rata de baleiere = viteza cu care radarul SCANEAZĂ spațiul înconjurător — importantă în aplicațiile de supraveghere care cer acoperirea rapidă a unei zone largi. Timpul de reacție = detectare + furnizarea informațiilor; mobilitatea = deplasarea; fiabilitatea = probabilitatea funcționării corecte. 📌 Baleiere = „cât de repede mătură” radarul cerul.",
+    tema: "Parametri tehnici/tactici", ref: "2.2.1"
+  },
+  {
+    t: "TIMPUL DE REACȚIE al unui radar, ca parametru tactic, reprezintă:",
+    o: ["Timpul necesar detectării țintei și furnizării informațiilor", "Viteza cu care antena scanează întregul spațiu înconjurător", "Durata de viață totală a sistemului radar, până la casare", "Intervalul dintre două impulsuri de sincronizare succesive"],
+    c: 0,
+    e: "✓ Corect: timpul de reacție = timpul necesar radarului să DETECTEZE ținta și să FURNIZEZE informațiile — critic în aplicațiile care cer reacție rapidă la apariția țintelor. Scanarea = rata de baleiere; intervalul dintre impulsuri = perioada de repetiție Tr. 📌 Reacție = detecție + raportare, cât mai repede.",
+    tema: "Parametri tehnici/tactici", ref: "2.2.1"
+  },
+  {
+    t: "SENSIBILITATEA RECEPTORULUI, ca parametru tehnic, definește capacitatea de a:",
+    o: ["Detecta semnale slabe (ținte cu SER mică sau îndepărtate)", "Concentra energia radiată pe o singură direcție anume", "Emite impulsuri de putere cât mai mare către țintă", "Separa în distanță două ținte aflate foarte aproape"],
+    c: 0,
+    e: "✓ Corect: sensibilitatea receptorului = capacitatea de a detecta semnale SLABE; o sensibilitate mai mare permite detectarea unor ținte mai mici (SER mică) sau mai îndepărtate. Concentrarea energiei = câștigul antenei; separarea în distanță = durata impulsului/lățimea de bandă. 📌 Sensibilitate mare = „aude” ecouri slabe.",
+    tema: "Parametri tehnici/tactici", ref: "2.2.1"
+  },
+  {
+    t: "TIPUL DE MODULAȚIE al semnalului radar influențează:",
+    o: ["Rezoluția, distanța de descoperire și rezistența la bruiaj", "Doar culoarea și luminozitatea ecranului indicatorului", "Exclusiv costul total pe ciclul de viață al sistemului", "Numai greutatea și dimensiunile antenei directive folosite"],
+    c: 0,
+    e: "✓ Corect: tipul de modulație (în impulsuri, în frecvență etc.) influențează performanța radarului în termeni de REZOLUȚIE, DISTANȚĂ de descoperire și REZISTENȚĂ LA BRUIAJ. 📌 Modulația = un parametru tehnic cu efect direct asupra performanței și protecției.",
+    tema: "Parametri tehnici/tactici", ref: "2.2.1"
+  }
+];
+
+/* ============================================================
+   BANCĂ DE GRILE — RĂZBOI ELECTRONIC
+   Academia Forțelor Aeriene "Henri Coandă" — pregătire licență
+   Redactare exigentă: variante de lungime comparabilă (corectul NU e
+   sistematic cel mai lung), distractori plauzibili din concepte reale.
+   Capitole: 2.3.2 Doppler/MTI · 3.2.1 ECM · 3.2.2 ECCM · 3.3.1 SIGINT.
+   ============================================================ */
+window.BANCA_RE = [
+  /* ---------- 2.3.2 EFECTUL DOPPLER ȘI SELECȚIA ȚINTELOR MOBILE ---------- */
+  {
+    t: "Conform efectului Doppler, când o țintă se APROPIE de radar, frecvența ecoului este:",
+    o: ["Mai mare decât cea emisă (shift pozitiv)", "Mai mică decât cea emisă (shift negativ)", "Egală cu frecvența emisă (fără shift)", "Nulă, ecoul dispărând complet de pe ecran"],
+    c: 0,
+    e: "✓ Corect: apropiere → shift Doppler pozitiv (frecvență mai mare); depărtare → shift negativ (mai mică). 📌 Din această diferență se determină viteza radială.",
+    tema: "Efectul Doppler", ref: "2.3.2"
+  },
+  {
+    t: "Efectul Doppler este folosit în radiolocație pentru a determina:",
+    o: ["Viteza radială a țintei", "Compoziția materialului țintei", "Numărul de operatori inamici", "Temperatura suprafeței țintei"],
+    c: 0,
+    e: "✓ Corect: efectul Doppler (schimbarea frecvenței datorată mișcării relative) determină viteza radială și distinge mobilul de staționar. 📌 Doppler = „radarul de viteză” al țintei.",
+    tema: "Efectul Doppler", ref: "2.3.2"
+  },
+  {
+    t: "În formula frecvenței Doppler (fD) intervin:",
+    o: ["Viteza țintei, lungimea de undă și unghiul de zbor", "Puterea de emisie și sensibilitatea receptorului", "Durata impulsului și factorul de umplere Q", "Câștigul antenei și lățimea fasciculului radar"],
+    c: 0,
+    e: "✓ Corect: fD depinde de viteza (v), lungimea de undă (λ) și unghiul α dintre direcția semnalului și direcția de zbor. 📌 Când α = 90°, componenta radială (deci fD) tinde spre zero.",
+    tema: "Efectul Doppler", ref: "2.3.2"
+  },
+  {
+    t: "Selecția țintelor mobile (SȚM / MTI) are rolul de a:",
+    o: ["Distinge obiectele mobile de fundalul staționar", "Amplifica ecourile provenite de la sol și clădiri", "Detecta exclusiv țintele complet imobile și fixe", "Distruge fizic țintele aflate în mișcare rapidă"],
+    c: 0,
+    e: "✓ Corect: MTI separă țintele mobile de fundalul fix, eliminând clutterul (teren, clădiri, apă) prin filtru Doppler. 📌 MTI = „văd doar ce se mișcă”.",
+    tema: "MTI / Selecția țintelor mobile", ref: "2.3.2"
+  },
+  {
+    t: "Principiul de funcționare al MTI se bazează pe:",
+    o: ["Compararea fazei semnalelor la momente diferite", "Măsurarea directă a distanței absolute la țintă", "Analiza culorii și intensității ecoului pe ecran", "Numărarea operatorilor din centrul de comandă"],
+    c: 0,
+    e: "✓ Corect: obiectele în mișcare produc o schimbare de fază; MTI detectează aceste variații și filtrează semnalele statice (filtru Doppler, circuite de anulare). 📌 MTI = variația de fază între impulsuri succesive.",
+    tema: "MTI / Selecția țintelor mobile", ref: "2.3.2"
+  },
+  {
+    t: "Sistemele MTI COERENTE se deosebesc prin faptul că:",
+    o: ["Folosesc o referință de fază stabilă", "Folosesc doar metode statistice", "Nu detectează nicio țintă mobilă", "Emit exclusiv în banda infraroșie"],
+    c: 0,
+    e: "✓ Corect: MTI coerent folosește o referință de fază stabilă (măsurare precisă a frecvenței); cel necoerent folosește metode statistice. 📌 Coerent = referință de fază; necoerent = statistic.",
+    tema: "MTI / Selecția țintelor mobile", ref: "2.3.2"
+  },
+  {
+    t: "O LIMITARE a tehnologiei MTI apare când:",
+    o: ["Viteza radială a țintei este apropiată de zero", "Ținta se deplasează cu o viteză radială foarte mare", "Ținta reflectă foarte puternic undele radar incidente", "Radarul emite pe o singură frecvență fixă, îngustă"],
+    c: 0,
+    e: "✓ Corect: la viteză radială ~zero, ținta dă un shift Doppler nesemnificativ și e eliminată ca staționară („blind speed”). 📌 MTI „orbește” pentru ținte cu viteză radială ~0.",
+    tema: "MTI / Selecția țintelor mobile", ref: "2.3.2"
+  },
+  {
+    t: "Eliminarea țintelor false (clutter, reflexii de la structuri) se face prin:",
+    o: ["Filtrare Doppler și analiza spectrului semnalului", "Creșterea puterii de emisie a stației radar", "Mărirea lățimii fasciculului antenei directive", "Reducerea numărului de canale de recepție"],
+    c: 0,
+    e: "✓ Corect: obiectele staționare nu dau efect Doppler semnificativ; prin filtrare Doppler și analiza spectrului se separă mobilul real de clutterul static. 📌 Analiza spectrului = mai puține alarme false.",
+    tema: "Eliminarea țintelor false", ref: "Analiza spectrului"
+  },
+
+  /* ---------- 3.2.1 CONTRAMĂSURI ELECTRONICE (ECM) ---------- */
+  {
+    t: "Contramăsurile electronice (ECM) reprezintă măsuri pentru:",
+    o: ["Destabilizarea sistemului electronic al adversarului", "Protejarea propriilor sisteme contra bruiajului inamic", "Culegerea de date și informații din comunicații adverse", "Reglementarea și controlul traficului aerian civil"],
+    c: 0,
+    e: "✓ Corect: ECM = destabilizarea sistemului electronic advers (prevenirea/reducerea folosirii spectrului de către adversar). Protecția proprie = ECCM; culegerea din comunicații = COMINT. 📌 ECM = ofensiv; ECCM = defensiv.",
+    tema: "ECM", ref: "3.2.1"
+  },
+  {
+    t: "Cele trei componente ale ECM sunt:",
+    o: ["Bruiajul, dezinformarea electronică și distrugerea fizică", "Bruiajul, radiolocația și navigația prin satelit", "Măsurile ESM, ECM și ECCM ale războiului electronic", "Atacul, apărarea și supravegherea electronică"],
+    c: 0,
+    e: "✓ Corect: componentele ECM = bruiaj + dezinformare electronică + distrugere fizică. „ESM/ECM/ECCM” = componentele majore RE; „atac/apărare/supraveghere” = categoriile de acțiuni RE. 📌 Nu confunda componentele ECM cu ale războiului electronic.",
+    tema: "ECM", ref: "3.2.1"
+  },
+  {
+    t: "Bruiajul, ca acțiune deliberată, urmărește:",
+    o: ["Degradarea sistemelor electronice adverse prin emisie", "Îmbunătățirea propriilor comunicații radio de comandă", "Creșterea preciziei și a razei de acțiune a radarului", "Reducerea consumului energetic al propriei stații radar"],
+    c: 0,
+    e: "✓ Corect: bruiajul = acțiune de degradare/neutralizare/distrugere a capacităților electronice adverse prin emisie de energie electromagnetică; se împarte în activ și pasiv. 📌 Bruiajul = componentă de bază a RE.",
+    tema: "Bruiaj", ref: "3.2.1"
+  },
+  {
+    t: "Bruiajul PASIV se caracterizează prin faptul că:",
+    o: ["Reflectă sau absoarbe energia, fără a emite semnale proprii", "Emite deliberat semnale de mare putere către sistemele inamice", "Distruge fizic antena și emițătorul radarului advers", "Este întotdeauna mai eficient decât bruiajul activ"],
+    c: 0,
+    e: "✓ Corect: bruiajul pasiv reflectă/absoarbe energia, fără emisie proprie — mai puțin eficient decât cel activ, dar mai greu de detectat. Emisia deliberată = bruiaj activ. 📌 Pasiv = fără emisie, discret, mai slab.",
+    tema: "Bruiaj pasiv", ref: "3.2.1"
+  },
+  {
+    t: "Bruiajul de tip SPOT constă în:",
+    o: ["Concentrarea pe o singură frecvență / interval îngust", "Bruierea simultană a unui spectru larg de frecvențe", "Crearea de ținte false pe ecranele radar ale inamicului", "Absorbția undelor radar cu ajutorul unor materiale speciale"],
+    c: 0,
+    e: "✓ Corect: spot vizează o frecvență/interval îngust, eficient contra sistemelor pe frecvențe fixe. Spectrul larg = barrage; țintele false = semnal fals. 📌 Spot = țintit; barrage = perdea de frecvențe.",
+    tema: "Bruiaj activ", ref: "3.2.1"
+  },
+  {
+    t: "Bruiajul de tip „BARRAGE” este eficient mai ales contra sistemelor care:",
+    o: ["Operează pe o gamă largă sau își schimbă frecvența", "Emit numai în banda de infraroșu apropiat, îngustă", "Folosesc rachete cu ghidare termică pe timp de noapte", "Au antene parabolice fixe, imobile și nedirective"],
+    c: 0,
+    e: "✓ Corect: barrage acoperă un spectru larg simultan, eficient contra sistemelor cu salt de frecvență/bandă largă, unde spot nu s-ar adapta. 📌 Barrage = putere împrăștiată pe multe frecvențe.",
+    tema: "Bruiaj activ", ref: "3.2.1"
+  },
+  {
+    t: "Bruiajul cu SEMNAL FALS urmărește:",
+    o: ["Inducerea în eroare prin crearea de ținte false", "Absorbția undelor radar incidente pe suprafață", "Creșterea preciziei de urmărire a radarului advers", "Emiterea de radiații infraroșii spre rachetele inamice"],
+    c: 0,
+    e: "✓ Corect: semnalul fals imită sistemul țintă pentru a-l induce în eroare/satura (ținte false pe radar, perturbarea navigației, blocarea comunicațiilor). 📌 Semnal fals = „minciună” electronică.",
+    tema: "Bruiaj activ", ref: "3.2.1"
+  },
+  {
+    t: "Un exemplu practic de bruiaj asupra sistemelor de navigație prin satelit este:",
+    o: ["Bruiajul GNSS, pentru a dezorienta forțele inamice", "Bruiajul propriilor sisteme de identificare IFF", "Bruiajul radarului meteorologic propriu de la sol", "Bruiajul rețelei de telefonie fixă a populației civile"],
+    c: 0,
+    e: "✓ Corect: exemple practice: bruiajul radarelor de supraveghere, al comunicațiilor militare, al GNSS (dezorientare/împiedicarea armelor ghidate), al UAV-urilor. 📌 Bruiaj GNSS = ținta pierde poziția.",
+    tema: "Bruiaj activ", ref: "3.2.1"
+  },
+  {
+    t: "„Chaff”-ul (reflectoare radar) este un bruiaj pasiv care:",
+    o: ["Reflectă undele radar, creând ecouri false pe ecran", "Emite radiații în infraroșu pentru a păcăli rachetele", "Absoarbe complet undele radar incidente pe suprafață", "Emite un semnal activ chiar pe frecvența radarului advers"],
+    c: 0,
+    e: "✓ Corect: chaff = benzi subțiri de material conductor care reflectă undele → ecouri false. IR = flares; absorbția = absorbanți radar. 📌 Chaff reflectă, flares emit IR, absorbanții absorb.",
+    tema: "Bruiaj pasiv", ref: "3.2.1"
+  },
+  {
+    t: "Capcanele termice („flares”) sunt folosite pentru:",
+    o: ["A dezorienta rachetele cu ghidare în infraroșu", "A reflecta undele radar și a crea ecouri false", "A absorbi undele în construcția aeronavelor stealth", "A bruia comunicațiile prin satelit ale inamicului"],
+    c: 0,
+    e: "✓ Corect: flares emit radiații IR pentru a atrage rachetele cu ghidare în infraroșu departe de aeronavă. Ecouri false = chaff; absorbția = absorbanți. 📌 Flares = momeală termică contra rachetelor IR.",
+    tema: "Bruiaj pasiv", ref: "3.2.1"
+  },
+  {
+    t: "Absorbanții radar sunt materiale care:",
+    o: ["Absorb energia undelor, reducând semnalul reflectat", "Emit semnale false chiar pe frecvența radarului advers", "Reflectă puternic undele radar incidente pe suprafață", "Emit radiații în banda infraroșie spre rachetele inamice"],
+    c: 0,
+    e: "✓ Corect: absorbanții reduc semnalul reflectat (deci reduc SER), folosiți la aeronavele stealth. Reflexia puternică = chaff; IR = flares. 📌 Absorbanți = reduc ecoul; chaff = amplifică ecouri false.",
+    tema: "Bruiaj pasiv", ref: "3.2.1"
+  },
+  {
+    t: "Dezinformarea electronică MANIPULATIVĂ presupune:",
+    o: ["Alterarea sau simularea semnalelor din canalele proprii", "Introducerea de radiații ostile în canalele adversarului", "Distrugerea fizică a emițătorului și antenei adverse", "Culegerea de date și informații din comunicații inamice"],
+    c: 0,
+    e: "✓ Corect: manipulativă = alterarea/simularea semnalelor din canalele PROPRII pentru înșelare; imitativă = introducerea de radiații în canalele ADVERSARULUI. 📌 Manipulativă = canalele mele; imitativă = canalele lui.",
+    tema: "Dezinformare electronică", ref: "3.2.1"
+  },
+  {
+    t: "Dezinformarea electronică IMITATIVĂ presupune:",
+    o: ["Introducerea de radiații ostile în canalele adversarului", "Alterarea sau simularea semnalelor din canalele proprii", "Bruierea unei singure frecvențe fixe, de tip spot", "Absorbția undelor radar incidente pe suprafața țintei"],
+    c: 0,
+    e: "✓ Corect: imitativă = radiații care imită o emisie ostilă introduse în canalele de recepție ale adversarului; alterarea canalelor proprii = manipulativă. 📌 Imitativă „vorbește” pe canalele adversarului.",
+    tema: "Dezinformare electronică", ref: "3.2.1"
+  },
+  {
+    t: "Un exemplu de DISTRUGERE FIZICĂ a sistemelor adverse este:",
+    o: ["Lovirea radarului cu rachete anti-radiolocație", "Bruiajul comunicațiilor prin satelit ale inamicului", "Lansarea de chaff pentru a crea ecouri false", "Simularea unor semnale false pe canalele proprii"],
+    c: 0,
+    e: "✓ Corect: distrugerea fizică = suprimarea materială (rachete anti-radiolocație, arme cu energie dirijată, lovirea nucleară a centrelor de comandă). Bruiajul/chaff/simularea nu distrug fizic. 📌 Distrugere fizică = scoatere din funcțiune materială.",
+    tema: "ECM", ref: "3.2.1"
+  },
+
+  /* ---------- 3.2.2 CONTRA-CONTRAMĂSURI ELECTRONICE (ECCM) ---------- */
+  {
+    t: "Contra-contramăsurile electronice (ECCM) au ca scop:",
+    o: ["Protejarea sistemelor radar de bruiajul activ", "Destabilizarea sistemelor electronice ale adversarului", "Distrugerea fizică a radarelor și antenelor inamice", "Culegerea de date și informații de tip COMINT"],
+    c: 0,
+    e: "✓ Corect: ECCM protejează sistemele radar proprii de bruiaj și interferențe, asigurând integritatea semnalului. Destabilizarea adversarului = ECM. 📌 ECCM = scut; ECM = sabie.",
+    tema: "ECCM", ref: "3.2.2"
+  },
+  {
+    t: "Prin ce se deosebește ECCM de ECM?",
+    o: ["ECCM se implementează din faza de proiectare a sistemului", "ECCM este un sistem distinct, separat de cel de bază", "ECCM se aplică doar după neutralizarea fizică a inamicului", "ECCM nu are nicio legătură cu funcționarea sistemelor radar"],
+    c: 0,
+    e: "✓ Corect: ECCM se implementează din faza de proiectare, integrat în structura sistemelor; ECM sunt sisteme DISTINCTE, cu reguli proprii. 📌 ECCM = „built-in”; ECM = echipament separat.",
+    tema: "ECCM", ref: "3.2.2"
+  },
+  {
+    t: "Confruntarea ECM–ECCM, ca „competiție pentru resurse”, presupune că:",
+    o: ["Orice sistem poate fi neutralizat și orice ECM contracarat", "Adversarul renunță întotdeauna primul la lupta electronică", "Bruiajul pasiv învinge întotdeauna bruiajul de tip activ", "Nu se mai pot proiecta deloc sisteme electronice noi"],
+    c: 0,
+    e: "✓ Corect: competiția pentru resurse = nimic nu e invulnerabil, de aici cursa tehnologică. Distinctă de „imaginea în oglindă” (presupui adversarul cel puțin la nivelul tău). 📌 Cursă continuă, fără invulnerabilitate.",
+    tema: "ECCM", ref: "3.2.2"
+  },
+  {
+    t: "Principiul „imaginii în oglindă” care guvernează confruntarea ECM–ECCM presupune că:",
+    o: ["Adversarul are tehnologie cel puțin la fel de bună ca a ta", "Adversarul folosește mereu echipamente mai slabe decât ale tale", "Bruiajul pasiv este întotdeauna superior celui de tip activ", "Radarul propriu nu poate fi bruiat în nicio situație"],
+    c: 0,
+    e: "✓ Corect: imaginea în oglindă = presupui că adversarul are informație/tehnologie cel puțin egală (sau superioară), ceea ce stimulează competiția tehnologică. 📌 Oglindă = respectă adversarul la nivelul tău sau peste.",
+    tema: "ECCM", ref: "3.2.2"
+  },
+  {
+    t: "ECCM cuprinde, în ansamblu, trei tipuri de măsuri:",
+    o: ["Organizatorice, tehnice și de exploatare", "De atac, de apărare și de supraveghere", "Bruiaj, dezinformare și distrugere fizică", "ELINT, COMINT și măsuri de sprijin ESM"],
+    c: 0,
+    e: "✓ Corect: ECCM = măsuri organizatorice + tehnice + de exploatare. „Atac/apărare/supraveghere” = acțiunile RE; „bruiaj/dezinformare/distrugere” = componentele ECM. 📌 Tripleta ECCM: organizatorice–tehnice–exploatare.",
+    tema: "ECCM", ref: "3.2.2"
+  },
+  {
+    t: "Care NU este un obiectiv vizat de ECCM?",
+    o: ["Facilitarea cercetării electronice a adversarului", "Asigurarea stabilității lucrului în condiții de bruiaj", "Contracararea acțiunilor de dezinformare adverse", "Asigurarea compatibilității electromagnetice proprii"],
+    c: 0,
+    e: "✓ Corect: ECCM ÎMPIEDICĂ (nu facilitează) cercetarea electronică adversă. Celelalte sunt obiective reale: stabilitate în bruiaj, contracararea dezinformării, controlul electronic, compatibilitatea electromagnetică. 📌 ECCM ascunde sistemele proprii.",
+    tema: "ECCM", ref: "3.2.2"
+  },
+  {
+    t: "Care este o modalitate de protecție contra ECM ale adversarului?",
+    o: ["Antene cu nivel foarte redus al lobilor laterali", "Creșterea deliberată a nivelului lobilor laterali", "Emisia permanentă pe o singură frecvență fixă", "Renunțarea completă la selecția țintelor mobile"],
+    c: 0,
+    e: "✓ Corect: modalități: lobi laterali reduși, compensare coerentă pe lobii laterali, antene adaptive, STM, radare LPI, gestionare spațio-temporală a puterii. Lobi laterali mari = mai vulnerabil. 📌 Lobi laterali reduși = greu de bruiat lateral.",
+    tema: "Protecție contra ECM", ref: "3.2.2"
+  },
+  {
+    t: "Sistemele radar de tip LPI (Low Probability of Intercept) urmăresc:",
+    o: ["Reducerea probabilității de a fi interceptate de adversar", "Creșterea puterii de emisie pentru o vizibilitate sporită", "Emisia exclusiv în banda de infraroșu, greu de detectat", "Bruierea propriilor comunicații radio de comandă"],
+    c: 0,
+    e: "✓ Corect: LPI = probabilitate mică de interceptare — radarul emite astfel încât să fie greu de detectat de adversar. 📌 LPI = radar „discret”.",
+    tema: "Protecție contra ECM", ref: "3.2.2"
+  },
+  {
+    t: "Radarul MONOIMPULS protejează contra bruiajului activ deoarece:",
+    o: ["Nu depinde de rotații ale antenei, scăzând expunerea", "Emite o putere de mii de ori mai mare decât bruiajul", "Funcționează doar în absența oricărui semnal advers", "Renunță complet la orice procesare a semnalului radar"],
+    c: 0,
+    e: "✓ Corect: monoimpulsul analizează în timp real, pe mai multe canale, fără rotații complete ⇒ mai puțin vulnerabil la bruiaj. 📌 Determinare rapidă = mai puțin timp expus interferențelor.",
+    tema: "Protecție contra ECM", ref: "3.2.2"
+  },
+  {
+    t: "Selectarea semnalelor utile într-un mediu cu bruiaj și clutter se face prin:",
+    o: ["Filtrare avansată și algoritmi de învățare automată", "Creșterea greutății fizice a antenei directive", "Reducerea numărului de canale de recepție folosite", "Oprirea completă a radarului pentru o perioadă"],
+    c: 0,
+    e: "✓ Corect: filtrare avansată (analiză Doppler, frecvențe multiple) și algoritmi de învățare automată/analiză spectrală separă semnalele reale de cele false. 📌 Selecția semnalelor utile = cheia funcționării în bruiaj intens.",
+    tema: "Protecție contra ECM", ref: "3.2.2"
+  },
+
+  /* ---------- 3.3.1 SUPRAVEGHEREA ELECTRONICĂ / SIGINT ---------- */
+  {
+    t: "Acțiunile de război electronic se împart în trei categorii:",
+    o: ["Atac, apărare și supraveghere electronică", "Bruiaj, dezinformare și distrugere fizică", "Măsuri organizatorice, tehnice și de exploatare", "Culegere ELINT, culegere COMINT și sprijin ESM"],
+    c: 0,
+    e: "✓ Corect: acțiunile RE = atac electronic + apărare electronică + supraveghere electronică. „Bruiaj/dezinformare/distrugere” = componentele ECM; „organizatorice/tehnice/exploatare” = măsurile ECCM. 📌 Categoriile RE: atac–apărare–supraveghere.",
+    tema: "Componentele RE", ref: "3.3.1"
+  },
+  {
+    t: "Componentele majore ale războiului electronic se transpun în:",
+    o: ["Măsuri de sprijin (ESM), contramăsuri (ECM) și ECCM", "Radar primar, radar secundar și sistemul IFF", "Chaff, capcane termice (flares) și absorbanți radar", "Componenta locuționară, ilocuționară și perlocuționară"],
+    c: 0,
+    e: "✓ Corect: componentele majore RE = ESM + ECM + ECCM, sprijinite de supravegherea electronică. 📌 ESM (sprijin) – ECM (contramăsuri) – ECCM (contra-contramăsuri).",
+    tema: "Componentele RE", ref: "3.3.1"
+  },
+  {
+    t: "Relația dintre radiolocație și războiul electronic este că:",
+    o: ["RE e ofensiv, iar radiolocația sprijină defensiv apărarea", "Cele două domenii nu au nicio legătură funcțională între ele", "Radiolocația este ofensivă, iar RE este strict defensiv", "Ambele funcționează numai pe timp de pace, nu în conflict"],
+    c: 0,
+    e: "✓ Corect: RE = preponderent ofensiv; radiolocația sprijină aviația/apărarea antiaeriană cu date precise, în timp real. Domeniile nu pot fi analizate separat. 📌 RE ofensiv + radiolocație (sprijin) = complementare.",
+    tema: "Componentele RE", ref: "3.3.1"
+  },
+  {
+    t: "SIGINT (Signal Intelligence) are două componente principale:",
+    o: ["ELINT și COMINT", "ECM și ECCM", "PSR și SSR", "Bruiaj activ și pasiv"],
+    c: 0,
+    e: "✓ Corect: SIGINT = ELINT (date din echipamente non-comunicații, ex. radar) + COMINT (date din comunicații). 📌 SIGINT = umbrela; ELINT (radar) + COMINT (comunicații) = piloni.",
+    tema: "SIGINT", ref: "3.3.1"
+  },
+  {
+    t: "Informațiile furnizate de SIGINT au caracter:",
+    o: ["Analitic și strategic, nu în timp real", "Pur tactic, obținut exclusiv în timp real", "Lipsit de orice valoare informativă utilă", "Doar de natură meteorologică și climatică"],
+    c: 0,
+    e: "✓ Corect: SIGINT = informație analitică, strategică, NU în timp real; beneficiarii sunt pe nivele ierarhice superioare. 📌 SIGINT = informație strategică prelucrată, nu alertă instantanee.",
+    tema: "SIGINT", ref: "3.3.1"
+  },
+  {
+    t: "COMINT (Communications Intelligence) se referă la:",
+    o: ["Date obținute din semnalele de comunicații", "Date din radare și echipamente de conducere a focului", "Distrugerea fizică a centrelor de comandă adverse", "Absorbția undelor radar cu materiale speciale"],
+    c: 0,
+    e: "✓ Corect: COMINT = date din semnale de comunicații (mesaje recepționabile de factorul uman); din radare/echipamente non-comunicații = ELINT. 📌 COMINT ascultă comunicații; ELINT ascultă radare.",
+    tema: "SIGINT", ref: "3.3.1"
+  },
+  {
+    t: "Prin ELINT, radarele sunt identificate pe baza SEMNĂTURII RADAR, care conține:",
+    o: ["PRF, durata impulsurilor, frecvența de emisie, modulația", "Numele, gradul și naționalitatea operatorului advers", "Culoarea și tipul aeronavei care poartă radarul", "Doar altitudinea de zbor a țintei urmărite de radar"],
+    c: 0,
+    e: "✓ Corect: semnătura radar = PRF + durata impulsurilor + frecvența de emisie + tipul de modulație, permițând identificarea în toate modurile (descoperire, urmărire, tragere). 📌 Semnătură radar = „amprenta” tehnică.",
+    tema: "SIGINT / ELINT", ref: "3.3.1"
+  },
+  {
+    t: "Datele primare ELINT se obțin prin cercetare directă și prin:",
+    o: ["Monitorizare regulată a evoluției tehnologice adverse", "Distrugerea fizică imediată a emițătorului advers", "Bruierea deliberată a propriilor sisteme electronice", "Culegerea de date meteorologice din surse civile"],
+    c: 0,
+    e: "✓ Corect: ELINT obține date prin cercetare directă (memorare + analiză) și monitorizare regulată (nivel tehnologic, schimbări de strategie). 📌 Directă = analiză detaliată; regulată = evoluția în timp.",
+    tema: "SIGINT / ELINT", ref: "3.3.1"
+  },
+  {
+    t: "O funcție a ELINT este determinarea EOB (Electronic Order of Battle), adică:",
+    o: ["Situația electronică a adversarului", "Ordinea de tragere a rachetelor proprii", "Programul de mentenanță al radarelor proprii", "Lista frecvențelor civile permise legal"],
+    c: 0,
+    e: "✓ Corect: EOB = situația electronică a adversarului, ce alimentează biblioteca de amenințări folosită de ESM și ECM proprii. 📌 EOB = „harta electronică” a inamicului.",
+    tema: "SIGINT / ELINT", ref: "3.3.1"
+  },
+  {
+    t: "Localizarea emițătoarelor inamice prin TRIANGULAȚIE presupune:",
+    o: ["Măsurarea unghiurilor semnalului din două sau mai multe stații", "Distrugerea fizică a emițătorului advers cu o rachetă dirijată", "Absorbția semnalului inamic cu ajutorul unor materiale speciale", "Emiterea unui semnal fals de dezinformare către inamic"],
+    c: 0,
+    e: "✓ Corect: triangulația folosește ≥2 stații de recepție; din unghiurile măsurate se calculează poziția emițătorului. Alte metode: analiza semnalului, direcționarea antenei. 📌 Triangulație = intersecția direcțiilor.",
+    tema: "Supraveghere electronică", ref: "3.3.1"
+  },
+  {
+    t: "În localizarea emițătoarelor, ANALIZA SEMNALULUI oferă informații despre:",
+    o: ["Frecvența, puterea și tipul semnalului advers", "Greutatea fizică a antenei emițătorului inamic", "Numele și gradul operatorului advers de la stație", "Culoarea și dispunerea centrului de comandă inamic"],
+    c: 0,
+    e: "✓ Corect: pe lângă triangulație, analiza semnalului dă frecvența, puterea și tipul, ajutând la distingerea între tipurile de emițătoare inamice. 📌 Triangulație = UNDE; analiza semnalului = CE fel de emițător.",
+    tema: "Supraveghere electronică", ref: "3.3.1"
+  },
+  {
+    t: "În supravegherea electronică, bruiajul PASIV (clutter) provine din:",
+    o: ["Reflexii de la clădiri, vegetație, sol sau apă", "Emițătoare militare care blochează intenționat radarul", "Transponderele IFF de pe aeronavele proprii, prietene", "Semnalele GPS emise de utilizatorii civili din zonă"],
+    c: 0,
+    e: "✓ Corect: clutterul (bruiaj pasiv) = reflexii neintenționate de la mediu (sol, clădiri, vegetație, apă). Bruiajul intenționat de la emițătoare = bruiaj activ. 📌 Clutter = „zgomot” natural, nu atac deliberat.",
+    tema: "Supraveghere electronică", ref: "3.3.1"
+  },
+  {
+    t: "Fără produsele supravegherii electronice, forțele proprii NU pot:",
+    o: ["Executa apărarea electronică și identifica țintele atacului", "Zbura cu aeronave civile de pasageri pe rute comerciale", "Folosi radarele meteorologice civile de la aeroporturi", "Comunica prin rețeaua publică de telefonie fixă la sol"],
+    c: 0,
+    e: "✓ Corect: supravegherea electronică sprijină ESM, ECM și ECCM; fără produsele ei nu se pot executa acțiuni de apărare electronică și nu se pot identifica țintele atacului electronic. 📌 Supravegherea = „ochii” războiului electronic.",
+    tema: "Supraveghere electronică", ref: "3.3.1"
+  },
+
+  /* ---------- COMPLETĂRI — ACOPERIRE TOTALĂ A MATERIEI ---------- */
+  {
+    t: "Bruiajul sistemelor de control de la distanță ale UAV-urilor urmărește:",
+    o: ["Neutralizarea sau capturarea acestora", "Creșterea preciziei lor de navigație", "Alimentarea lor cu energie electrică", "Identificarea lor ca ținte prietene"],
+    c: 0,
+    e: "✓ Corect: printre exemplele practice de bruiaj electronic se numără bruiajul sistemelor de control de la distanță a UAV-urilor, pentru a le NEUTRALIZA sau a le CAPTURA. Alte exemple: bruiajul radarelor de supraveghere aeriană, al comunicațiilor militare și al GNSS. 📌 Bruiaj control UAV = drona rămâne „fără pilot” → neutralizare/capturare.",
+    tema: "Bruiaj activ", ref: "3.2.1"
+  }
+];
+
+/* ============================================================
+   BANCĂ DE GRILE — TEORIA COMUNICĂRII
+   Academia Forțelor Aeriene "Henri Coandă" — pregătire licență
+   Redactare exigentă: variante de lungime comparabilă (corectul NU e
+   sistematic cel mai lung); distractori plauzibili — alte concepte
+   reale din materie. Stil: concepte ancorate în mediul militar.
+   ============================================================ */
+window.BANCA_TC = [
+  /* ---------- ELEMENTELE PROCESULUI DE COMUNICARE ---------- */
+  {
+    t: "Elementele indispensabile ale procesului de comunicare (extensia modelului E–M–R) sunt:",
+    o: ["Actorii, mesajul, canalul și codul", "Locuționar, ilocuționar și perlocuționar", "Icon, indice, simbol și interpretant", "Emisie, recepție, bruiaj și distrugere"],
+    c: 0,
+    e: "✓ Corect: procesul de comunicare = actorii (emițător/receptor) + mesaj + canal + cod, dezvoltat pe structura E–M–R (la rândul ei pe schema behavioristă S–R). 📌 Cei 4 piloni: actori, mesaj, canal, cod.",
+    tema: "Elementele comunicării", ref: "Elementele procesului"
+  },
+  {
+    t: "La Shannon, distincția dintre EMIȚĂTOR și SURSĂ este că:",
+    o: ["Sursa produce mesajul, iar emițătorul îl transmite", "Sursa și emițătorul sunt întotdeauna una și aceeași", "Sursa doar recepționează și decodifică mesajul primit", "Emițătorul este obligatoriu un aparat tehnic automat"],
+    c: 0,
+    e: "✓ Corect: emițătorul transmite mesajul, care poate fi produs de altă entitate — sursa. Chiar și atunci, emițătorul contribuie creativ (elemente paralingvistice) — emisie „polifonică”. 📌 Sursă = produce; emițător = transmite.",
+    tema: "Elementele comunicării", ref: "Emițător/sursă"
+  },
+  {
+    t: "La Shannon, persoana căreia îi este adresat mesajul se numește:",
+    o: ["Destinatar", "Emițător", "Interpretant", "Referent"],
+    c: 0,
+    e: "✓ Corect: receptorul primește mesajul, dar destinatarul e cel căruia îi e adresat (pot fi persoane diferite). 📌 Receptor = primește; destinatar = ținta mesajului.",
+    tema: "Elementele comunicării", ref: "Receptor/destinatar"
+  },
+  {
+    t: "Hovland (Yale) a arătat că influențarea prin mesaj nu produce efecte fără:",
+    o: ["Atenția, înțelegerea și acceptarea receptorilor", "Un canal tehnic de foarte mare capacitate", "Un cod matematic riguros și strict denotativ", "O distanță spațială cât mai mare între actori"],
+    c: 0,
+    e: "✓ Corect: Hovland et al. — influențarea nu funcționează fără atenție + înțelegere + acceptare. 📌 Militar: un ordin dat neatent (fără atenția/acceptarea subordonatului) nu produce efectul.",
+    tema: "Elementele comunicării", ref: "Mesaj (Hovland)"
+  },
+
+  /* ---------- MIJLOACE DE COMUNICARE ---------- */
+  {
+    t: "La REDACTAREA unui ordin de zi pe unitate (OZU), mijlocul de comunicare este:",
+    o: ["Reprezentațional", "Prezentațional", "Mecanic", "Intrapersonal"],
+    c: 0,
+    e: "✓ Corect: OZU-ul e scris, codificat/„înregistrat” pe bază de convenții, transmisibil indiferent de emițător ⇒ mijloc REPREZENTAȚIONAL. Prezentațional = prezență fizică; mecanic = coprezență temporală + distanță (radio). 📌 Scris + convenție = reprezentațional.",
+    tema: "Mijloace de comunicare", ref: "Fiske 2003:35-36"
+  },
+  {
+    t: "Comanda VOCALĂ dată de comandant plutonului, față în față, folosește un mijloc:",
+    o: ["Prezentațional", "Reprezentațional", "Mecanic", "De masă"],
+    c: 0,
+    e: "✓ Corect: comanda vocală față în față presupune prezența fizică (același loc + timp), canalul e aerul ⇒ mijloc PREZENTAȚIONAL (conduce la acte de comunicare). Prin radio/portavoce ⇒ mecanic. 📌 Voce directă, aici și acum = prezentațional.",
+    tema: "Mijloace de comunicare", ref: "Fiske 2003:35-36"
+  },
+  {
+    t: "Convorbirile RADIO pilot–controlor folosesc un mijloc de comunicare:",
+    o: ["Mecanic", "Prezentațional", "Reprezentațional", "Intrapersonal"],
+    c: 0,
+    e: "✓ Corect: radioul presupune coprezență temporală dar distanță spațială, cu constrângeri tehnice ⇒ mijloc MECANIC (portavoce, microfon, telefon, radio, TV, rețele). 📌 Același timp + la distanță + suport tehnic = mecanic.",
+    tema: "Mijloace de comunicare", ref: "Fiske 2003:35-36"
+  },
+  {
+    t: "Mijloacele de comunicare REPREZENTAȚIONALE dau naștere:",
+    o: ["Operelor de comunicare", "Actelor de comunicare", "Semnalelor radio", "Comunicării intrapersonale"],
+    c: 0,
+    e: "✓ Corect: mijloacele reprezentaționale nu impun prezența emițătorului; mesajul e „înregistrat” și produce OPERE de comunicare (muzică, pictură, arhitectură, literatură). Mijloacele prezentaționale dau ACTE. 📌 Prezentațional → acte; reprezentațional → opere.",
+    tema: "Mijloace de comunicare", ref: "Fiske 2003:35-36"
+  },
+
+  /* ---------- CODURI ---------- */
+  {
+    t: "În cadrul codurilor, sistemul SINTAGMATIC cuprinde:",
+    o: ["Regulile de combinare a unităților", "Seturile de semne disponibile", "Distrugerea semnelor folosite", "Absența oricărei convenții"],
+    c: 0,
+    e: "✓ Corect: paradigmatic = seturile de semne disponibile; sintagmatic = regulile de COMBINARE. Ambele sunt convenite de comunitatea lingvistică. 📌 Paradigmatic = vocabularul; sintagmatic = gramatica combinării.",
+    tema: "Coduri", ref: "2.2 Codurile"
+  },
+  {
+    t: "Distincția cod DIGITAL / ANALOGIC se face astfel:",
+    o: ["Verbalul e digital, nonverbalul e analogic", "Ambele coduri sunt exclusiv nonverbale", "Digitalul este întotdeauna nonverbal", "Analogicul este strict codul matematic"],
+    c: 0,
+    e: "✓ Corect: codurile digitale au distincție clară între componentele semnului (limbaj verbal); cele analogice sunt arbitrare, greu de distins (limbaj nonverbal, perspectiva palo-altistă). 📌 Verbal = digital; nonverbal = analogic.",
+    tema: "Coduri", ref: "2.2 Codurile"
+  },
+  {
+    t: "Codul LOGIC (ex. codul matematic) se caracterizează prin:",
+    o: ["Convenție explicită, elemente denotative, impersonale", "Definire vagă și negociere liberă a înțelesului", "Vocabular redus, oralitate și grad mare de redundanță", "Exprimarea de sentimente și trăiri personale, intime"],
+    c: 0,
+    e: "✓ Corect: codurile logice au convenție explicită, elemente impersonale/denotative (ex. matematica); cele ESTETICE au definire vagă și permit negocierea înțelesului. 📌 Logic = precis; estetic = expresiv, negociabil.",
+    tema: "Coduri", ref: "2.2 Codurile"
+  },
+  {
+    t: "La PREZENTAREA unei lucrări la o conferință științifică (AFASTUD/licența), studentul militar folosește:",
+    o: ["Codul elaborat", "Codul restrâns", "Codul analogic", "Codul broadcast"],
+    c: 0,
+    e: "✓ Corect: comunicarea științifică riguroasă = COD ELABORAT (precis, complex, nonverbal redus); extins la masă = codul NARROWCAST (public țintă delimitat). Restrâns/broadcast = vocabular redus, apartenență la grup. 📌 Elaborat = învățat, abstract, precis.",
+    tema: "Coduri", ref: "Bernstein 1971 / pg. 21"
+  },
+  {
+    t: "Comunicarea informală dintr-un grup restrâns de militari folosește tipic:",
+    o: ["Codul restrâns", "Codul elaborat", "Codul narrowcast", "Codul logic"],
+    c: 0,
+    e: "✓ Corect: în grupul restrâns, comunicarea informală folosește CODUL RESTRÂNS — vocabular redus, sintaxă simplă, oralitate, redundanță; menține canalele deschise și exprimă apartenența la grup. 📌 Cod restrâns = liantul grupului.",
+    tema: "Coduri", ref: "pg. 58 / pg. 21"
+  },
+  {
+    t: "Codul restrâns și cel elaborat se dobândesc diferit:",
+    o: ["Restrânsul ține de experiența culturală, elaboratul se învață", "Ambele coduri se dobândesc identic, încă de la naștere", "Elaboratul ține de experiența culturală, restrânsul se învață", "Niciunul dintre cele două coduri nu poate fi învățat"],
+    c: 0,
+    e: "✓ Corect: codul restrâns depinde de experiența culturală a grupului; cel elaborat se dobândește prin ÎNVĂȚARE (educație). 📌 Restrâns = prins din mediu; elaborat = învățat la academie.",
+    tema: "Coduri", ref: "Bernstein 1971"
+  },
+  {
+    t: "Cele două coduri folosite la DAREA RAPORTULUI către comandant sunt:",
+    o: ["Codul digital (verbal) și codul logic (precis)", "Codul analogic (nonverbal) și codul estetic", "Codul broadcast (de masă) și codul restrâns", "Codul iconic (asemănare) și codul indexical"],
+    c: 0,
+    e: "✓ Corect: raportul se dă verbal ⇒ cod DIGITAL, iar fiind impersonal și precis ⇒ cod LOGIC. Analogic/estetic = opusul rigorii cerute. 📌 Raport = digital (verbal) + logic (precis, impersonal).",
+    tema: "Coduri", ref: "pg. 21"
+  },
+  {
+    t: "Extinsă la comunicarea de masă, distincția cod restrâns/elaborat devine:",
+    o: ["Cod broadcast / cod narrowcast", "Cod digital / cod analogic", "Cod locuționar / perlocuționar", "Cod iconic / cod simbolic"],
+    c: 0,
+    e: "✓ Corect: Fiske — codul BROADCAST (difuzare de masă, ~restrâns) și codul NARROWCAST (public țintă delimitat, ~elaborat, ex. AFASTUD). 📌 Broadcast = pentru toți; narrowcast = public specializat.",
+    tema: "Coduri", ref: "Fiske 2003:99-102"
+  },
+
+  /* ---------- BARIERE ALE COMUNICĂRII ---------- */
+  {
+    t: "Zgomotul SEMANTIC (ex. jargonul, diferențe culturale) acționează asupra:",
+    o: ["Mesajului", "Canalului", "Emițătorului", "Codului matematic"],
+    c: 0,
+    e: "✓ Corect: zgomotul semantic acționează pe MESAJ (disonanța semnificației — jargon, diferențe sociale/culturale); zgomotul mecanic acționează pe CANAL (microfonie, distorsiuni). 📌 Mecanic = canal; semantic = mesaj.",
+    tema: "Bariere de comunicare", ref: "Fiske 2001:358"
+  },
+  {
+    t: "În convorbirile radio, BRUIAJUL de fond pe canal este o barieră:",
+    o: ["De mediu, de natură tehnică", "De limbaj, la nivel semantic", "De concepție, la emițător", "De concepție, la receptor"],
+    c: 0,
+    e: "✓ Corect: bruiajul/poluarea fonică pe canal = barieră DE MEDIU, de natură TEHNICĂ (acționează pe canal). Frazeologia greșită ar fi barieră de LIMBAJ. 📌 Pe canal = mediu tehnic; pe mesaj = limbaj.",
+    tema: "Bariere de comunicare", ref: "pg. 24-25 / 101"
+  },
+  {
+    t: "Nerespectarea FRAZEOLOGIEI STANDARD (termeni confuzi) este o barieră:",
+    o: ["De limbaj, la nivel semantic", "De mediu, de natură tehnică", "De mediu, de natură psihosocială", "De concepție, privind poziția partenerilor"],
+    c: 0,
+    e: "✓ Corect: frazeologia nestandard produce înțelesuri diferite ⇒ barieră DE LIMBAJ (nivel semantic), distinctă de bariera de mediu tehnică (bruiaj). 📌 Limbaj = sensul cuvintelor; mediu tehnic = canalul.",
+    tema: "Bariere de comunicare", ref: "pg. 24-25 / 101"
+  },
+  {
+    t: "„Rutina” și „existența presupunerilor” la comandant (emițător) sunt bariere:",
+    o: ["De concepție, privitoare la emițător", "De concepție, privitoare la receptor", "De mediu, de natură tehnică", "De limbaj, la nivel semantic"],
+    c: 0,
+    e: "✓ Corect: rutina, presupunerile, exprimarea cu stângăcie = bariere de concepție la EMIȚĂTOR; la receptor: neatenția, concluziile grăbite, dezinteresul. 📌 Emițător: presupuneri/rutină; receptor: neatenție/dezinteres.",
+    tema: "Bariere de comunicare", ref: "pg. 24-25"
+  },
+  {
+    t: "Când subordonatul nu recepționează ordinul din LIPSĂ DE ATENȚIE, bariera este:",
+    o: ["De concepție, privitoare la receptor", "De concepție, privitoare la emițător", "De mediu, de natură tehnică", "De limbaj, la nivel semantic"],
+    c: 0,
+    e: "✓ Corect: lipsa de atenție, concluziile grăbite, dezinteresul = bariere de concepție la RECEPTOR. 📌 Subordonat neatent = barieră la receptor (concepție).",
+    tema: "Bariere de comunicare", ref: "pg. 24-25"
+  },
+  {
+    t: "„Climatul de muncă necorespunzător” și „frica de exprimare” sunt bariere de mediu:",
+    o: ["De natură psihosocială", "De natură tehnică", "De concepție, la emițător", "De limbaj, semantice"],
+    c: 0,
+    e: "✓ Corect: barierele de mediu au natură TEHNICĂ (bruiaj, suporturi necorespunzătoare) și PSIHOSOCIALĂ (climat necorespunzător, frica de exprimare). 📌 Tehnic = aparatura; psihosocial = atmosfera/relațiile.",
+    tema: "Bariere de comunicare", ref: "pg. 24-25"
+  },
+
+  /* ---------- COMUNICARE VERBALĂ ---------- */
+  {
+    t: "Pentru Saussure, LIMBAJUL reprezintă:",
+    o: ["Suma dintre limbă și vorbire", "Doar produsul social din mintea cuiva", "Exclusiv punerea în act, individuală", "Un ansamblu de gesturi nonverbale"],
+    c: 0,
+    e: "✓ Corect: Saussure — limbaj = limbă + vorbire. Limba = „produsul social sedimentat” (sistem social); vorbirea = actualizarea individuală, concretă, variabilă. 📌 Limbaj = limbă (social) + vorbire (individual).",
+    tema: "Comunicare verbală", ref: "pg. 34-35 / 3.1"
+  },
+  {
+    t: "„Vorbirea reprezintă punerea în act a limbii” este teza lui:",
+    o: ["Charles Bally", "Otto Jespersen", "Antonio Pagliaro", "Harold Palmer"],
+    c: 0,
+    e: "✓ Corect: Charles Bally — limba e un sistem organizat, iar vorbirea = punerea ei în act. Jespersen = deprinderi ale colectivității; Palmer = convenții ale utilizatorilor; Pagliaro = limba aparține și individului, și comunității. 📌 Bally = vorbirea actualizează limba.",
+    tema: "Comunicare verbală", ref: "pg. 34-35"
+  },
+  {
+    t: "În relația triadică descrisă de Saussure, semnul cuprinde:",
+    o: ["Semnificant, semnificat și realitate externă", "Representamen, obiectul său și interpretantul", "Locuțiune, ilocuțiune și perlocuțiune", "Icon, indice și simbol stabilit prin convenție"],
+    c: 0,
+    e: "✓ Corect: Saussure — semnificant (semnul fizic) + semnificat (conceptul mental), iar semnificația e dată de relația cu realitatea externă. Representamen-obiect-interpretant = Peirce. 📌 Saussure vs Peirce: două trihotomii diferite.",
+    tema: "Comunicare verbală", ref: "12.1"
+  },
+  {
+    t: "Din perspectiva lui Peirce, DRAPELUL militar este un:",
+    o: ["Simbol", "Icon", "Indice", "Semnal"],
+    c: 0,
+    e: "✓ Corect: drapelul nu seamănă cu ceea ce reprezintă și nu are legătură cauzală — semnifică prin CONVENȚIE ⇒ SIMBOL. Iconul seamănă (fotografie); indicele are legătură cauzală (fum → foc). 📌 Simbol = pură convenție.",
+    tema: "Semne (Peirce)", ref: "pg. 121"
+  },
+  {
+    t: "În clasificarea lui Peirce, ICONUL este un semn care:",
+    o: ["Seamănă cu obiectul său", "Are o legătură cauzală cu obiectul", "Nu are nicio legătură cu obiectul", "Cere obligatoriu un răspuns imediat"],
+    c: 0,
+    e: "✓ Corect: iconul seamănă cu obiectul (schemă, hartă) — și-ar păstra caracterul chiar dacă obiectul nu ar exista. Legătura cauzală = indice; convenția = simbol. 📌 Icon = asemănare.",
+    tema: "Semne (Peirce)", ref: "Peirce 1990:276-277"
+  },
+  {
+    t: "În clasificarea lui Peirce, INDICELE este un semn care:",
+    o: ["Are o legătură cauzală cu obiectul", "Seamănă direct cu obiectul său", "Nu are nicio legătură cu obiectul", "Este întotdeauna un cuvânt scris"],
+    c: 0,
+    e: "✓ Corect: indicele are legătură directă/cauzală cu obiectul (fumul e indicele focului; urma de bocanc e indicele trecerii). Asemănarea = icon; convenția = simbol. 📌 Indice = efect care trimite la cauză.",
+    tema: "Semne (Peirce)", ref: "Peirce 1990:276-277"
+  },
+  {
+    t: "Charles Morris, preluând distincția lui Peirce, înlocuiește indicii cu:",
+    o: ["Semnalele", "Simbolurile", "Iconii", "Qualisemnele"],
+    c: 0,
+    e: "✓ Corect: Morris (1938) operează cu semne iconice, SEMNALE și simboluri; semnalele (care înlocuiesc indicii) sunt semne naturale ale organismului/mediului. 📌 Morris: iconic – semnal – simbol.",
+    tema: "Semne (Peirce/Morris)", ref: "3.1"
+  },
+  {
+    t: "Un act de limbaj (Austin) are trei componente, în ordinea:",
+    o: ["Locuționară, ilocuționară, perlocuționară", "Prezentațională, reprezentațională, mecanică", "Emotivă, referențială, conativă", "Icon, indice, simbol"],
+    c: 0,
+    e: "✓ Corect: Austin — locuționar (transmiterea de semnificații) + ilocuționar (intenția comunicativă) + perlocuționar (efectul asupra receptorului). 📌 Spun – intenționez – obțin efectul.",
+    tema: "Acte de limbaj", ref: "Austin 1975:109"
+  },
+  {
+    t: "Comandantul dă un ordin, dar subordonatul nu îl execută. Ce componentă LIPSEȘTE?",
+    o: ["Perlocuționară", "Locuționară", "Ilocuționară", "Referențială"],
+    c: 0,
+    e: "✓ Corect: ordinul a fost emis (locuționar) și a avut intenție (ilocuționar), dar dacă nu e executat, lipsește efectul ⇒ componenta PERLOCUȚIONARĂ. Exemplul e chiar al profesorului. 📌 Perlocuționar = execuția ordinului.",
+    tema: "Acte de limbaj", ref: "pg. 33"
+  },
+  {
+    t: "Componenta ILOCUȚIONARĂ (ex. darea unui ordin) constă în:",
+    o: ["Exprimarea unei intenții comunicative", "Simpla transmitere de semnificații", "Realizarea unui efect la receptor", "Asemănarea semnului cu obiectul"],
+    c: 0,
+    e: "✓ Corect: ilocuționar = exprimarea intenției comunicative („îți DAU un ordin”). Transmiterea de semnificații = locuționar; efectul = perlocuționar. 📌 Ilocuționar = intenția (a comanda, a informa, a promite).",
+    tema: "Acte de limbaj", ref: "Austin 1975:109"
+  },
+  {
+    t: "Cele cinci stiluri de comunicare orală (Joos), de la scris spre oralitate, sunt:",
+    o: ["Rece, formal, consultativ, ocazional, intim", "Locuționar, ilocuționar, perlocuționar, referențial", "Digital, analogic, logic, estetic, restrâns", "Icon, indice, simbol, semnal, representamen"],
+    c: 0,
+    e: "✓ Corect: Joos — rece → formal → consultativ → ocazional → intim, cinci pași de îndepărtare de comunicarea scrisă. 📌 Rece = aproape de scris (R.G.); intim = cel mai personal.",
+    tema: "Stiluri de comunicare", ref: "Joos 1967 / pg. 34"
+  },
+  {
+    t: "Regulamentele generale (R.G.-urile) militare, mediate și fără feedback, sunt exemplu de stil:",
+    o: ["Rece", "Intim", "Ocazional", "Consultativ"],
+    c: 0,
+    e: "✓ Corect: R.G.-urile presupun lipsa feedbackului și apropierea maximă de scris ⇒ STIL RECE. Intim = doi soți militari; ocazional = doi studenți la țigară; consultativ = raportul companiei. 📌 Rece = mediat, fără feedback.",
+    tema: "Stiluri de comunicare", ref: "pg. 34"
+  },
+  {
+    t: "Susținerea licenței / conferința științifică (discurs pregătit dinainte) corespunde stilului:",
+    o: ["Formal", "Rece", "Ocazional", "Intim"],
+    c: 0,
+    e: "✓ Corect: discursul pregătit dinainte, bine organizat, în cadru formal (conferință, licență) = STILUL FORMAL. Nu e rece (mediat, fără feedback). 📌 Formal = pregătit, coerent, public.",
+    tema: "Stiluri de comunicare", ref: "pg. 34"
+  },
+  {
+    t: "RAPORTUL companiei, într-un cadru profesional fără pre-elaborare, corespunde stilului:",
+    o: ["Consultativ", "Rece", "Formal", "Intim"],
+    c: 0,
+    e: "✓ Corect: stilul CONSULTATIV = relații formale în mediul profesional, fără pre-elaborare, cadru informativ (raportul companiei). Diferă de formal (pregătit dinainte). 📌 Consultativ = profesional, spontan.",
+    tema: "Stiluri de comunicare", ref: "pg. 34"
+  },
+  {
+    t: "Discuția liberă dintre doi studenți militari „la o țigară” corespunde stilului:",
+    o: ["Ocazional", "Formal", "Rece", "Consultativ"],
+    c: 0,
+    e: "✓ Corect: stilul OCAZIONAL = conversații libere între cunoștințe, comunicare redundantă, apartenență la același cadru social. 📌 Ocazional = relaxat, redundant, între egali.",
+    tema: "Stiluri de comunicare", ref: "pg. 34"
+  },
+  {
+    t: "Discuția relaxată dintre doi militari căsătoriți (soț–soție) corespunde stilului:",
+    o: ["Intim", "Consultativ", "Formal", "Rece"],
+    c: 0,
+    e: "✓ Corect: relația intimă folosește un COD PERSONAL și exprimă sentimente/trăiri, fără constrângerile convenției de grup ⇒ STILUL INTIM. 📌 Intim = cod personal + trăiri.",
+    tema: "Stiluri de comunicare", ref: "pg. 34"
+  },
+
+  /* ---------- COMUNICARE NONVERBALĂ ---------- */
+  {
+    t: "Gestul PUMNULUI STRÂNS pentru „ÎNGHEAȚĂ/STOP” este, la Ekman–Friesen, un(o):",
+    o: ["Emblemă", "Ilustrator", "Reglator", "Adaptor"],
+    c: 0,
+    e: "✓ Corect: pumnul strâns ține loc de cuvânt, cu înțeles convențional fără echivoc, folosit intenționat ⇒ EMBLEMĂ. Ilustratorii însoțesc vorbirea; adaptorii = stări vagi; reglatorii = interacțiunea. 📌 Emblemă = gest = cuvânt.",
+    tema: "Nonverbal (Ekman-Friesen)", ref: "pg. 36"
+  },
+  {
+    t: "ILUSTRATORII (Ekman–Friesen) sunt elemente nonverbale care:",
+    o: ["Însoțesc și completează mesajul verbal", "Țin loc de cuvinte, funcționând ca un cod", "Exprimă stări de disconfort sau nervozitate", "Controlează și reglează interacțiunea în curs"],
+    c: 0,
+    e: "✓ Corect: ilustratorii însoțesc mesajul verbal; folosiți independent, ar deveni embleme. Emblemele țin loc de cuvinte; adaptorii = disconfort; reglatorii = interacțiunea. 📌 Ilustrator = gest de sprijin al vorbirii.",
+    tema: "Nonverbal (Ekman-Friesen)", ref: "pg. 36"
+  },
+  {
+    t: "REGLATORII (Ekman–Friesen) sunt elemente nonverbale care:",
+    o: ["Mențin și controlează interacțiunea, dând feedback", "Țin loc de cuvinte, alcătuind un cod (embleme)", "Exprimă stări de disconfort, nervozitate, tensiune", "Sunt folosite exclusiv în comunicarea scrisă"],
+    c: 0,
+    e: "✓ Corect: reglatorii mențin/controlează interacțiunea (asigură feedback); adaptorii = gesturi stereotipe cu stări vagi (disconfort). 📌 Reglatori = dirijorul dialogului; adaptori = scăpări de stare.",
+    tema: "Nonverbal (Ekman-Friesen)", ref: "3.2"
+  },
+  {
+    t: "STRÂNGEREA MÂINII între comandant și subaltern ține, la Argyle, de codul:",
+    o: ["Contactul corporal (haptica)", "Cronemica (percepția timpului)", "Olfactica (semnale olfactive)", "Postura (ținuta corporală)"],
+    c: 0,
+    e: "✓ Corect: strângerea mâinii, bătaia pe umăr, îmbrățișarea = CONTACT CORPORAL (haptica), puternic conotat cultural (reguli privind ordinea întinderii mâinii, distanța). 📌 Haptica = comunicarea prin atingere.",
+    tema: "Nonverbal (Argyle)", ref: "pg. 36-39"
+  },
+  {
+    t: "DAREA RAPORTULUI către un superior (dialog formal) se desfășoară, la Hall, în:",
+    o: ["Zona socială (125–360 cm)", "Zona intimă (până la 45 cm)", "Zona personală (45–125 cm)", "Zona publică (peste 360 cm)"],
+    c: 0,
+    e: "✓ Corect: dialogul formal și raporturile de serviciu = ZONA SOCIALĂ (125–360 cm); subzona îndepărtată = distanța ierarhică. Intimă = luptă corp la corp; publică = discursul șefului de promoție. 📌 Raport la superior = zona socială.",
+    tema: "Nonverbal (proximitate/Hall)", ref: "pg. 36-39"
+  },
+  {
+    t: "Lupta CORP LA CORP se desfășoară, la Hall, în:",
+    o: ["Zona intimă (până la 45 cm)", "Zona socială (125–360 cm)", "Zona publică (peste 360 cm)", "Zona personală (45–125 cm)"],
+    c: 0,
+    e: "✓ Corect: zona intimă (până la ~45 cm) e specifică relațiilor intime, dansului și LUPTEI CORP LA CORP. 📌 Intim = cea mai apropiată zonă (< 45 cm).",
+    tema: "Nonverbal (proximitate/Hall)", ref: "pg. 36-39"
+  },
+  {
+    t: "Discursul șefului de promoție, în fața întregii adunări, se încadrează în:",
+    o: ["Zona publică (peste 360 cm)", "Zona socială (125–360 cm)", "Zona personală (45–125 cm)", "Zona intimă (până la 45 cm)"],
+    c: 0,
+    e: "✓ Corect: comunicarea publică în fața unei mulțimi, cu feedback redus = ZONA PUBLICĂ (peste 360 cm). Raportul individual = zona socială. 📌 Public + mulțime + feedback redus = zona publică.",
+    tema: "Nonverbal (proximitate/Hall)", ref: "pg. 36-39"
+  },
+  {
+    t: "La ONOR („față către față” pentru salut), codul nonverbal Argyle implicat este:",
+    o: ["Orientarea", "Cronemica", "Olfactica", "Paralimbajul"],
+    c: 0,
+    e: "✓ Corect: orientarea = poziționarea corpurilor (față-față / profil-profil / spate-spate); orientarea face-to-face maximizează interacțiunea și e singura cu contact vizual direct (cazul onorului). 📌 Onor = orientare față-față.",
+    tema: "Nonverbal (Argyle)", ref: "pg. 36-39"
+  },
+  {
+    t: "Însoțirea răspunsului „Am înțeles!” cu datul din cap ține, la Argyle, de:",
+    o: ["Mișcarea capului (element reglator)", "Olfactica (semnale olfactive)", "Cronemica (percepția timpului)", "Aspectul involuntar (fizionomie)"],
+    c: 0,
+    e: "✓ Corect: mișcarea capului (datul din cap, înclinări) însoțește mesajul verbal și ține de gestiunea interacțiunii (reglator), dublată de orientare și contact vizual. 📌 Datul din cap = reglator al interacțiunii.",
+    tema: "Nonverbal (Argyle)", ref: "pg. 36-39"
+  },
+  {
+    t: "Statul în DREPȚI și salutul cu brațul (onor) țin, la Argyle, de:",
+    o: ["Postură și gesturi", "Olfactica și cronemica", "Paralimbaj și prozodie", "Contactul vizual direct"],
+    c: 0,
+    e: "✓ Corect: postura = ținuta corporală (statul în drepți); gesturile = prin brațe și palme (darea onorului). 📌 Drepți = postură; salutul cu brațul = gest.",
+    tema: "Nonverbal (Argyle)", ref: "pg. 36-39"
+  },
+  {
+    t: "ASPECTUL militar (ținuta, absența tatuajelor vizibile, limita de greutate la piloți) este element:",
+    o: ["Nonverbal (codul „aspect”)", "Verbal (parte a paralimbajului)", "Intrapersonal (dialog interior)", "Un act de limbaj perlocuționar"],
+    c: 0,
+    e: "✓ Corect: aspectul (vestimentație/ținută — voluntar; înălțime/greutate — involuntar) e un cod NONVERBAL. Artefactele (uniforma) exprimă apartenența la organizația militară. 📌 Uniforma „vorbește” = aspect (nonverbal).",
+    tema: "Nonverbal (Argyle)", ref: "pg. 36-39"
+  },
+  {
+    t: "PARALIMBAJUL (element nonverbal al vorbirii) transmite informații despre:",
+    o: ["Vorbitor: ton, timbru, accent, ritm, pauze neintenționate", "Regulile sintactice și gramaticale ale limbii vorbite", "Înțelesul denotativ, „din dicționar”, al cuvintelor", "Conținutul scris al unui regulament sau ordin militar"],
+    c: 0,
+    e: "✓ Corect: paralimbajul transmite informații DESPRE VORBITOR (ton, volum, timbru, accent, erori de pronunție, ritm, pauze neintenționate). Prozodia afectează cuvintele (intonație, accentuare, pauze intenționate). 📌 Prozodia modelează cuvintele; paralimbajul dezvăluie vorbitorul.",
+    tema: "Nonverbal (paralimbaj)", ref: "pg. 36"
+  },
+  {
+    t: "CRONEMICA, ca dimensiune nonverbală (Hall), se referă la:",
+    o: ["Percepția și utilizarea timpului", "Semnalele olfactive dintre oameni", "Atingerea cutanată directă", "Poziționarea corpurilor în spațiu"],
+    c: 0,
+    e: "✓ Corect: cronemica = percepția/semnificația utilizării TIMPULUI (timp monocronic vs policronic). Olfactica = semnale olfactive; haptica = atingerea. 📌 Cronemica = limbajul timpului (punctualitate, ritm).",
+    tema: "Nonverbal (Argyle)", ref: "3.2"
+  },
+
+  /* ---------- ALTE FORME ALE COMUNICĂRII ---------- */
+  {
+    t: "Comunicarea INTRAPERSONALĂ (deliberarea interioară a comandantului) se caracterizează prin:",
+    o: ["Emițător și receptor = aceeași persoană, fără cod", "Doi actori distincți și un feedback imediat între ei", "Difuzarea generalizată prin intermediul mass-media", "Un canal tehnic obligatoriu, de tip radio sau telefon"],
+    c: 0,
+    e: "✓ Corect: intrapersonal = emițătorul și receptorul sunt aceeași persoană (forul interior); lipsind codul, nu e nevoie de codificare-decodificare, ci doar expunere pe fațete. 📌 Intrapersonal = dialog cu sine.",
+    tema: "Forme ale comunicării", ref: "5.1"
+  },
+  {
+    t: "CONVERSAȚIA (dialogul dintre doi camarazi față în față) este o formă:",
+    o: ["Interpersonală, dialogală, cu feedback aproape simultan", "De masă, realizată prin intermediul mass-media", "Intrapersonală, fără cod și fără transfer de mesaj", "Exclusiv scrisă, fără coprezența actorilor în timp"],
+    c: 0,
+    e: "✓ Corect: conversația = comunicare INTERPERSONALĂ, dialogală, orală, cu coprezență și intervenții alternative + feedback (aproape) simultan. Corespondența nu presupune coprezență. 📌 Conversație = față-în-față, feedback rapid.",
+    tema: "Forme ale comunicării", ref: "5.2"
+  },
+  {
+    t: "CORESPONDENȚA (scrisă/electronică) se deosebește de conversație prin faptul că:",
+    o: ["Păstrează dialogul, dar nu coprezența (răspuns în timp)", "Presupune un feedback strict simultan între parteneri", "Nu implică niciun schimb de mesaje între cei doi actori", "Este o formă intrapersonală, în forul interior al persoanei"],
+    c: 0,
+    e: "✓ Corect: corespondența păstrează principiul dialogal, dar NU coprezența; răspunsul poate veni în timp ⇒ necondiționată spațial/temporal, cu secvențe emițător-receptor care se inversează. 📌 Corespondență = dialog decalat în timp.",
+    tema: "Forme ale comunicării", ref: "5.2"
+  },
+  {
+    t: "Comunicarea în CADRU FORMAL (rețeaua oficială dintr-o unitate) se caracterizează prin:",
+    o: ["Canale oficiale, comunicare descendentă, feedback scăzut", "Grup mic, coeziune ridicată și folosirea codului restrâns", "Absența oricăror reguli și canale de comunicare stabilite", "Feedback simultan foarte ridicat între toți participanții"],
+    c: 0,
+    e: "✓ Corect: cadrul formal = rețea de canale oficiale, comunicare preponderent DESCENDENTĂ, feedback scăzut. Cadrul informal = grup mic, coeziune, cod restrâns. 📌 Formal = ierarhic, descendent (specific mediului militar).",
+    tema: "Forme ale comunicării", ref: "Comunicarea socială"
+  },
+  {
+    t: "Comunicarea PUBLICĂ (discursul unui comandant în fața trupei) presupune:",
+    o: ["Un emițător, un public, discurs structurat, feedback redus", "Emițător și receptor identici, în forul interior al persoanei", "Un cod strict personal și exprimarea unor trăiri intime", "Feedback simultan și complet între toți participanții"],
+    c: 0,
+    e: "✓ Corect: comunicarea publică = un emițător + un public; rol fundamental al emițătorului, discurs structurat prealabil, feedback redus (deseori asimilat efectelor urmărite). 📌 Public = un vorbitor, mulți ascultători, discurs pregătit.",
+    tema: "Forme ale comunicării", ref: "Comunicarea socială"
+  },
+  {
+    t: "Comunicarea DE MASĂ (Thompson) presupune:",
+    o: ["Producerea instituționalizată și difuzarea prin mass-media", "Dialogul dintre două persoane, cu un feedback imediat", "Comunicarea în forul interior, fără cod și fără transfer", "Corespondența scrisă între doi camarazi de aceeași armă"],
+    c: 0,
+    e: "✓ Corect: comunicarea de masă (Thompson) = producerea instituționalizată și difuzarea generalizată de bunuri simbolice prin mass-media, cu feedback scăzut. E o formă a comunicării publice. 📌 De masă = mass-media + feedback minim.",
+    tema: "Forme ale comunicării", ref: "Comunicarea socială"
+  },
+
+  /* ---------- MODELE PROCESUALE. SCHEME ---------- */
+  {
+    t: "Modelul liniar Shannon–Weaver are elementele, în ordine:",
+    o: ["Sursă → transmițător → canal → receptor → destinație", "Emițător → interpretant → obiect → simbol convențional", "Componenta locuționară → ilocuționară → perlocuționară", "Icon → indice → simbol → semnal → representamen"],
+    c: 0,
+    e: "✓ Corect: Shannon-Weaver = sursă → transmițător → canal → receptor → destinație; model liniar, mecanicist, cu zgomotul pe canal. 📌 5 elemente liniare: sursă–transmițător–canal–receptor–destinație.",
+    tema: "Modele (Shannon-Weaver)", ref: "10.1"
+  },
+  {
+    t: "Nivelurile lui Weaver, aplicate comunicării pilot–controlor, sunt:",
+    o: ["A (tehnic), B (semantic), C (eficiență)", "Locuționar, ilocuționar, perlocuționar", "Emotiv, referențial, conativ", "Icon, indice, simbol"],
+    c: 0,
+    e: "✓ Corect: Weaver — Nivel A: transmiterea exactă a simbolurilor (TEHNIC); B: precizia înțelesului (SEMANTIC); C: influențarea comportamentului (EFICIENȚĂ). Bruiaj de fond = A; frazeologie greșită = B. 📌 A = tehnic; B = semantic; C = eficiență.",
+    tema: "Modele (Shannon-Weaver)", ref: "pg. 101"
+  },
+  {
+    t: "Modelul S–M–C–R al lui Berlo (1960) mută accentul pe:",
+    o: ["Mesaj și pe nivelul semantic", "Distrugerea fizică a canalului", "Efectul asupra mulțimii", "Semnele iconice ale limbii"],
+    c: 0,
+    e: "✓ Corect: Berlo (Sursă–Mesaj–Canal–Receptor) adaptează modelul lui Shannon comunicării umane, mutând accentul pe MESAJ și nivelul semantic (nivelul B al lui Weaver), rămânând procesual. 📌 Berlo = S-M-C-R, accent pe mesaj.",
+    tema: "Modele (Berlo)", ref: "10.1"
+  },
+
+  /* ---------- MODELE PROCESUALE. FORMULE ---------- */
+  {
+    t: "Formula 5W a lui Lasswell descrie comunicarea prin întrebările:",
+    o: ["Cine? Ce? Prin ce canal? Cui? Cu ce efect?", "Unde? Când? De ce? Cât? Pentru cine anume?", "Sursă? Zgomot? Redundanță? Entropie? Bit?", "Icon? Indice? Simbol? Semnal? Representamen?"],
+    c: 0,
+    e: "✓ Corect: 5W (Lasswell) = Cine? – Ce? – Prin ce canal? – Cui? – Cu ce efect? Accent pe emițător, comunicarea = act de influențare (Lasswell = expert în propagandă). 📌 5W = Cine–Ce–Canal–Cui–Efect.",
+    tema: "Modele (Lasswell)", ref: "11.1"
+  },
+  {
+    t: "Braddock a completat formula lui Lasswell cu întrebările:",
+    o: ["„În ce context?” și „Cu ce scop?”", "„Unde?” și „Când?”", "„Cât costă?” și „Cine plătește?”", "„Ce culoare?” și „Ce formă?”"],
+    c: 0,
+    e: "✓ Corect: Braddock (1958) extinde 5W cu „În ce context?” și „Cu ce scop?”, pentru o analiză mai consistentă. 📌 Braddock = Lasswell + context + scop.",
+    tema: "Modele (Braddock)", ref: "11.1"
+  },
+  {
+    t: "Modelul lui Wendell Johnson (Mr.A / Mr.B) aduce ca principală contribuție:",
+    o: ["Dimensiunea perceptivă și poziționarea egală a actorilor", "Renunțarea completă la orice formă de feedback în proces", "Reducerea comunicării la un singur actor activ, izolat", "Eliminarea totală a mesajului din procesul comunicării"],
+    c: 0,
+    e: "✓ Corect: Johnson notează actorii Mr.A/Mr.B, adâncește dimensiunea PSIHOLOGICĂ (percepția) și îi poziționează egal; prima abordare distinctă a barierelor. 📌 Johnson = perceptiv + actori egali + bariere.",
+    tema: "Modele (Johnson)", ref: "11.2"
+  },
+  {
+    t: "Modelul multifuncțional al lui Gerbner mută accentul pe:",
+    o: ["Mesaj, ancorat în contextul de producere", "Distrugerea fizică a canalului de transmitere", "Numărul de operatori implicați în sistem", "Culoarea și forma semnalului transmis"],
+    c: 0,
+    e: "✓ Corect: Gerbner adâncește studiile lui Johnson, dar mută accentul pe MESAJ, acordat contextului de producere; model de sinteză, cu arie largă de aplicabilitate. 📌 Gerbner = mesaj + context.",
+    tema: "Modele (Gerbner)", ref: "11.3"
+  },
+
+  /* ---------- MODELE SEMIOTICE ---------- */
+  {
+    t: "Saussure definește semnul ca fiind combinația dintre:",
+    o: ["Semnificant și semnificat", "Representamen, obiect și interpretant", "Icon, indice și simbol", "Locuțiune, ilocuțiune, perlocuțiune"],
+    c: 0,
+    e: "✓ Corect: la Saussure semnul = semnificant (partea fizică) + semnificat (conceptul mental). Representamen–obiect–interpretant = Peirce. 📌 Saussure = dihotomie; Peirce = trihotomie.",
+    tema: "Modele semiotice (Saussure)", ref: "12.1"
+  },
+  {
+    t: "În modelul lui Peirce, INTERPRETANTUL este:",
+    o: ["Conceptul mental produs de semn", "Canalul fizic de transmitere", "Obiectul real la care se referă", "Emițătorul mesajului comunicat"],
+    c: 0,
+    e: "✓ Corect: la Peirce, interpretantul NU e receptorul, ci conceptul/reprezentarea mentală produs(ă) de semn + experiența utilizatorului cu obiectul. 📌 Interpretant = reprezentarea mentală, nu persoana.",
+    tema: "Modele semiotice (Peirce)", ref: "12.2"
+  },
+  {
+    t: "Cele trei entități ale semiozei la Peirce sunt:",
+    o: ["Representamen, obiect și interpretant", "Semnificant, semnificat și realitate", "Sursă, canal și destinație finală", "Emițător, mesaj și receptor"],
+    c: 0,
+    e: "✓ Corect: Peirce — semnul (representamen) ține locul unui obiect pentru cineva, creând în minte interpretantul. Saussure = semnificant/semnificat + realitate. 📌 Peirce: representamen – obiect – interpretant.",
+    tema: "Modele semiotice (Peirce)", ref: "12.2"
+  },
+
+  /* ---------- BÜHLER / JAKOBSON ---------- */
+  {
+    t: "Cele trei funcții ale limbajului la Karl Bühler sunt:",
+    o: ["Expresivă, reprezentativă și de apel", "Emotivă, poetică și metalingvistică", "Locuționară, ilocuționară, perlocuționară", "Denotativă, conotativă și mitică"],
+    c: 0,
+    e: "✓ Corect: Bühler — expresivă (emițător), reprezentativă (obiecte/context) și de apel (receptor); toate prezente, dar doar una domină. La ordin domină APELUL (= conativa la Jakobson). 📌 Bühler: expresivă–reprezentativă–apel.",
+    tema: "Funcții (Bühler)", ref: "13.1"
+  },
+  {
+    t: "La DAREA și EXECUTAREA unui ORDIN domină funcția (Jakobson):",
+    o: ["Conativă (persuasivă)", "Emotivă (expresivă)", "Poetică (estetică)", "Fatică (empatică)"],
+    c: 0,
+    e: "✓ Corect: ordinul urmărește un efect asupra receptorului (execuția) ⇒ domină funcția CONATIVĂ/PERSUASIVĂ, echivalentă funcției de apel (Bühler); predominantă în comunicarea formală descendentă din mediul militar. 📌 Ordin = conativă (apel), pe receptor.",
+    tema: "Funcții (Jakobson)", ref: "pg. 129-131"
+  },
+  {
+    t: "Funcția METALINGVISTICĂ (Jakobson) apare tipic în:",
+    o: ["Discursul teoretic/științific (AFASTUD, licența)", "Darea unui ordin ferm către un subordonat direct", "Cântecele de cătănie intonate de recruți în marș", "Salutul militar de rutină, la întâlnirea zilnică"],
+    c: 0,
+    e: "✓ Corect: funcția metalingvistică e centrată pe COD (discursul despre limbaj), în discursul teoretic/științific (lingvistică, licență, AFASTUD). Ordinul = conativă; cântecele = poetică. 📌 Metalingvistică = vorbim despre limbaj/teorie.",
+    tema: "Funcții (Jakobson)", ref: "pg. 131"
+  },
+  {
+    t: "Funcția REPREZENTATIVĂ (referențială) apare, în mediul militar, în:",
+    o: ["Raportul companiei / indicațiile înainte de tragere", "Cântecele de cătănie intonate de recruți în marș", "Exprimarea emoțiilor și trăirilor personale ale soldatului", "Menținerea unei conversații de politețe cu un camarad"],
+    c: 0,
+    e: "✓ Corect: funcția reprezentativă = comunicare OBIECTIVĂ, centrată pe context (raportul companiei, indicațiile dinaintea tragerii). Emoțiile = expresivă; politețea = fatică. 📌 Reprezentativă = fapte obiective.",
+    tema: "Funcții (Jakobson)", ref: "pg. 131"
+  },
+  {
+    t: "Funcția POETICĂ (Jakobson), centrată pe mesajul în sine, apare în:",
+    o: ["Cântecele de cătănie", "Raportul companiei", "Darea unui ordin", "Indicații de tragere"],
+    c: 0,
+    e: "✓ Corect: funcția poetică e centrată pe FORMA mesajului (cântecele de cătănie). Raportul/indicațiile = reprezentativă; ordinul = conativă. 📌 Poetică = forma mesajului contează.",
+    tema: "Funcții (Jakobson)", ref: "pg. 131"
+  },
+  {
+    t: "Funcția FATICĂ (empatică) a limbajului se concentrează asupra:",
+    o: ["Contactului (menținerea canalelor deschise)", "Codului (discursul despre propriul limbaj)", "Emițătorului (stările lui interne, emoțiile)", "Mesajului (forma și structura sa proprie)"],
+    c: 0,
+    e: "✓ Corect: funcția fatică se concentrează pe CONTACT (canalul), prin forme ritualizate (politețe, saluturi, ceremonii). 📌 Fatică = „ține linia deschisă” (salut, ceremonii).",
+    tema: "Funcții (Jakobson)", ref: "13.2"
+  },
+  {
+    t: "Funcția EMOTIVĂ (expresivă) a limbajului este centrată pe:",
+    o: ["Emițător (stările și atitudinea lui)", "Receptor (declanșarea unei reacții)", "Canal (menținerea contactului deschis)", "Cod (verificarea propriului limbaj)"],
+    c: 0,
+    e: "✓ Corect: funcția emotivă e centrată pe EMIȚĂTOR (stările, atitudinea lui). Pe receptor = conativă; pe canal = fatică; pe cod = metalingvistică. 📌 Emotivă = „ce simte emițătorul”.",
+    tema: "Funcții (Jakobson)", ref: "13.2"
+  },
+
+  /* ---------- BARTHES ---------- */
+  {
+    t: "La Barthes, primul nivel de semnificare — DENOTAȚIA — desemnează:",
+    o: ["Sensul evident, literal al semnului", "Înțelesul subiectiv, dependent de cultură", "Un mit al societății de tip capitalist", "Semnul care își pierde caracterul de semn"],
+    c: 0,
+    e: "✓ Corect: DENOTAȚIA = sensul evident, literal, la nivelul simțului comun (nivelul 1); CONOTAȚIA (nivelul 2) = înțelesul subiectiv, dependent de emoții și cultură. 📌 Denotație = „din dicționar”; conotație = încărcătură culturală.",
+    tema: "Modele semiotice (Barthes)", ref: "13.2 (Barthes)"
+  },
+  {
+    t: "La Barthes, când semnificatul devine el însuși semn, generând un înțeles de grad doi, apare:",
+    o: ["Mitul", "Denotația", "Qualisemnul", "Perlocuțiunea"],
+    c: 0,
+    e: "✓ Corect: pe lângă conotație, nivelul secund produce MITUL (barthesian) — o înlănțuire de concepte asociate, în societatea capitalistă (diferit de mitul lui Lévi-Strauss). 📌 Barthes: denotație (1) → conotație + mit (2).",
+    tema: "Modele semiotice (Barthes)", ref: "13.2 (Barthes)"
+  },
+
+  /* ---------- TEORIILE CONSISTENȚEI COGNITIVE ---------- */
+  {
+    t: "Teoria ECHILIBRULUI a lui Heider presupune existența:",
+    o: ["A două persoane (P, O) și a unui obiect (X)", "A cinci întrebări succesive (formula 5W)", "A trei componente ale unui act de limbaj", "A șase factori contextuali ai comunicării"],
+    c: 0,
+    e: "✓ Corect: Heider — structura P–O–X (două persoane + un obiect/idee/eveniment X). Echilibrul apare când toate relațiile sunt pozitive sau una pozitivă și două negative. 📌 Heider = triunghiul P-O-X.",
+    tema: "Teorii ale consistenței (Heider)", ref: "14.1"
+  },
+  {
+    t: "Newcomb a transformat teoria echilibrului în teoria SIMETRIEI, susținând că:",
+    o: ["Influențarea depinde de atracția dintre A și B (model A–B–X)", "Comunicarea este strict liniară, fără nicio atracție între actori", "Nu există niciun referent extern implicat în comunicare", "Simetria se obține doar digital (simpatie sau antipatie)"],
+    c: 0,
+    e: "✓ Corect: Newcomb — model A–B–X; simetria depinde de gradul (analogic) de atracție A–B și de intensitatea atitudinii față de X. Dezechilibrul stimulează comunicarea. 📌 Newcomb = A-B-X, atracția A-B contează.",
+    tema: "Teorii ale consistenței (Newcomb)", ref: "14.2"
+  },
+  {
+    t: "Teoria CONGRUENȚEI (Osgood și Tannenbaum) se ocupă preponderent de:",
+    o: ["Sursa de informații (modelul P–S–O)", "Distrugerea fizică a canalului tehnic", "Cele cinci stiluri de comunicare orală", "Semnele iconice și indexicale ale limbii"],
+    c: 0,
+    e: "✓ Corect: Osgood-Tannenbaum — caz particular al teoriei lui Heider, axat pe SURSĂ (P–S–O). Congruența depinde de atracția lui P față de S și O. 📌 Osgood = congruența P-S-O, accent pe sursă.",
+    tema: "Teorii ale consistenței (Osgood)", ref: "14.3"
+  },
+
+  /* ---------- MODEL INTERACȚIONIST (militarizat) ---------- */
+  {
+    t: "Comandantul dă un ordin, iar militarul răspunde „Am înțeles!”. Modelul Osgood–Schramm subliniază că:",
+    o: ["Conversația e circulară, cu feedback reciproc", "Comunicarea e strict liniară, fără niciun feedback", "Emițătorul și receptorul sunt aceeași persoană", "Mesajul nu are nevoie de un cod comun celor doi"],
+    c: 0,
+    e: "✓ Corect: la Osgood–Schramm comunicarea e CIRCULARĂ, fiecare fiind alternativ emițător/receptor, cu feedback („Am înțeles!”). Modelul strict liniar fără feedback = Shannon-Weaver. 📌 Osgood–Schramm = cerc + feedback.",
+    tema: "Modele (Schramm-Osgood)", ref: "pg. 104-106"
+  },
+
+  /* ---------- COMPLETĂRI — ACOPERIRE TOTALĂ A MATERIEI ---------- */
+  {
+    t: "Încruntarea involuntară a subordonatului care nu a înțeles ordinul ține, la Argyle, de codul:",
+    o: ["Expresia facială", "Postura corporală", "Contactul corporal", "Cronemica personală"],
+    c: 0,
+    e: "✓ Corect: expresiile faciale sunt condiționate biologic, exprimate prin cei 43 de mușchi faciali, și sunt universale; pot fi neintenționate (expresii ale emoțiilor — cazul încruntării involuntare) sau intenționate (exprimarea teatrală). Exemplul profesorului: neînțelegerea ordinului însoțită de încruntare. 📌 Expresie facială = emoția „scrisă” pe față.",
+    tema: "Nonverbal (Argyle)", ref: "pg. 36-39"
+  },
+  {
+    t: "Urmărirea cu privirea a superiorului în timpul dării onorului ține, la Argyle, de:",
+    o: ["Mișcările ochilor și contactul vizual", "Aspectele nonverbale ale vorbirii", "Contactul corporal și proximitatea", "Percepția și utilizarea timpului"],
+    c: 0,
+    e: "✓ Corect: mișcările ochilor și contactul vizual = cod facil și direct de a transmite/sublinia mesaje; contactul vizual este CEL MAI IMPORTANT feedback și are rol în poziționarea ierarhică și exprimarea diferențelor de status. Exemplul profesorului: urmărirea cu privirea a superiorului la darea onorului. 📌 Contact vizual = cel mai important feedback.",
+    tema: "Nonverbal (Argyle)", ref: "pg. 36-39"
+  },
+  {
+    t: "Militarul care își frământă involuntar mâinile înaintea raportului manifestă, după Ekman–Friesen:",
+    o: ["Un adaptor (gest stereotip de disconfort)", "O emblemă (gest care ține loc de cuvânt)", "Un ilustrator (gest ce însoțește vorbirea)", "Un reglator (gest ce controlează dialogul)"],
+    c: 0,
+    e: "✓ Corect: ADAPTORII sunt gesturi stereotipe care transmit informații vagi, imprecise — creează premisa perceperii stării de disconfort, nervozitate, nerăbdare sau tensiune psihică. Nu au înțelesuri precise ca emblemele; ambiguitatea lor permite doar interpretarea STĂRII. 📌 Adaptor = „scăpare” involuntară de stare (nervozitate).",
+    tema: "Nonverbal (Ekman-Friesen)", ref: "pg. 36 / 3.2"
+  },
+  {
+    t: "OLFACTICA, în comunicarea nonverbală, studiază:",
+    o: ["Semnalele olfactive", "Semnalele vocale", "Atingerea cutanată", "Utilizarea timpului"],
+    c: 0,
+    e: "✓ Corect: olfactica = studiul semnalelor OLFACTIVE, cu origini în comunicarea din lumea animală (zoosemiologie); la om e un simț atenuat, dar produce o formă consistentă de comunicare nonverbală. Atingerea = haptica; timpul = cronemica. 📌 Olfactica = mirosul ca semnal nonverbal.",
+    tema: "Nonverbal (Argyle)", ref: "3.2"
+  },
+  {
+    t: "Poziția relaxată și dialogul informal al studenților înaintea unei adunări se încadrează, la Hall, în:",
+    o: ["Zona personală (45–125 cm)", "Zona intimă (până la 45 cm)", "Zona socială (125–360 cm)", "Zona publică (peste 360 cm)"],
+    c: 0,
+    e: "✓ Corect: zona PERSONALĂ (45–125 cm, cu subzonă apropiată până la 75 cm) presupune familiaritate și apropiere fizică, iar subzona îndepărtată caracterizează dialogul obișnuit, INFORMAL — exemplul profesorului: poziția relaxată a studenților dinaintea unei adunări. Raportul formal = zona socială. 📌 Personal = informal, între egali; social = formal, ierarhic.",
+    tema: "Nonverbal (proximitate/Hall)", ref: "pg. 36-39"
+  },
+  {
+    t: "Imaginile diferite pe care le au partenerii despre sine și unul despre celălalt sunt bariere:",
+    o: ["De concepție, privind poziția emițătorului și receptorului", "De concepție, privitoare exclusiv la emițătorul mesajului", "De mediu, de natură tehnică, apărute pe canalul folosit", "De limbaj, generate de înțelesuri diferite ale cuvintelor"],
+    c: 0,
+    e: "✓ Corect: a treia categorie de bariere de concepție privește POZIȚIA emițătorului și receptorului: imaginile diferite despre sine și despre celălalt, perspectiva diferită asupra obiectului/contextului comunicării, sentimentele și intențiile diferite. 📌 Concepție are 3 ramuri: emițător / receptor / poziția ambilor.",
+    tema: "Bariere de comunicare", ref: "pg. 24-25"
+  },
+  {
+    t: "Comunicarea DE GRUP (ex. o grupă de studenți militari) se caracterizează prin:",
+    o: ["Cod restrâns și accent pe apartenența la grup", "Cod elaborat și accent pe conținutul informativ", "Feedback redus și discurs structurat prealabil", "Difuzare generalizată prin canale mediate tehnic"],
+    c: 0,
+    e: "✓ Corect: comunicarea de grup e specifică grupurilor nonformale cu număr redus de membri, elaborată în COD RESTRÂNS, cu rolul de a menține canalele deschise; accentul cade pe apartenența la grup și normele interne, nu pe fluxul de date. Feedback redus + discurs structurat = comunicarea publică; difuzarea mediată = comunicarea de masă. 📌 Grup = cod restrâns + apartenență.",
+    tema: "Forme ale comunicării", ref: "Comunicarea socială"
+  },
+  {
+    t: "Prima trihotomie a semnelor la Peirce distinge între:",
+    o: ["Qualisemn, sinsemn și legisemn", "Remă, dicent și argument", "Icon, indice și simbol", "Semnificant, semnificat, referent"],
+    c: 0,
+    e: "✓ Corect: prima trihotomie = QUALISEMN (o calitate care este semn), SINSEMN (un lucru/eveniment real care este semn) și LEGISEMN (o lege care este semn). A doua trihotomie = icon/indice/simbol (cea mai importantă comunicațional); a treia = remă/dicent/argument. 📌 Trei trihotomii: calitate–lucru–lege / icon–indice–simbol / remă–dicent–argument.",
+    tema: "Semne (Peirce)", ref: "12.2"
+  },
+  {
+    t: "A treia trihotomie a lui Peirce (după modul de reprezentare prin interpretant) cuprinde:",
+    o: ["Remă, dicent și argument", "Qualisemn, sinsemn și legisemn", "Icon, indice și simbol", "Denotație, conotație și mit"],
+    c: 0,
+    e: "✓ Corect: a treia trihotomie = REMĂ (semnul posibilității calitative, despre care nu se poate spune dacă e adevărat), DICENT/dicisemn (semnul existenței actuale, adevărat sau fals) și ARGUMENT (leagă propoziții pe baza valorii lor de adevăr). Denotație/conotație/mit = Barthes. 📌 Remă–dicent–argument = a treia trihotomie.",
+    tema: "Semne (Peirce)", ref: "12.2"
+  },
+  {
+    t: "În câmpul comunicării nonverbale, elementele VOCALE includ:",
+    o: ["Râsul, strigătul, intonația, accentul", "Mimica, gestica și mișcarea corpului", "Orientarea privirii și strângerea mâinii", "Sărutul, bătaia pe umăr, poziția corpului"],
+    c: 0,
+    e: "✓ Corect: prima clasificare a nonverbalului distinge elemente VOCALE (râs, strigăt, mormăit, căscat, intonație, accent) de cele NONVOCALE (mimică, gestică, mișcarea corpului, poziții, orientarea privirii, sărut, strângerea mâinii, bătaia pe umăr). Nonverbalul vocalic se referă la aspectele SONORE ale comunicării. 📌 Vocal = ce se aude; nonvocal = ce se vede.",
+    tema: "Nonverbal (clasificare)", ref: "3.2"
+  },
+  {
+    t: "Distincția spațiu SOCIOPET / SOCIOFUG (Osmond, analizată de Hall) descrie:",
+    o: ["Poziționarea de apropiere sau de îndepărtare", "Diferența dintre timpul monocronic și policronic", "Distincția dintre culturile de contact și noncontact", "Diferența dintre codul digital și codul analogic"],
+    c: 0,
+    e: "✓ Corect: spațiul SOCIOPET descrie poziționarea de apropiere (convergența), iar cel SOCIOFUG de îndepărtare (divergența) — distincție propusă de Humphrey Osmond și analizată de Hall, conotată cultural, parte a organizării spațiale (proxemica). 📌 Sociopet = adună oamenii; sociofug = îi separă.",
+    tema: "Nonverbal (proximitate/Hall)", ref: "3.2"
+  },
+  {
+    t: "Antropologii clasifică culturile, în raport cu atingerea (haptica), în:",
+    o: ["Culturi de contact și culturi de noncontact", "Culturi monocronice și culturi policronice", "Culturi sociopete și culturi sociofuge", "Culturi broadcast și culturi narrowcast"],
+    c: 0,
+    e: "✓ Corect: plecând de la modelele din lumea animală, antropologii disting culturi DE CONTACT (interacțiune cutanată frecventă, distanțe reduse între parteneri) și culturi DE NONCONTACT (interacțiune de la distanță mai mare, evitarea atingerii) — Hall, Montagu. 📌 Contact = atingere frecventă + distanțe mici.",
+    tema: "Nonverbal (Argyle)", ref: "3.2"
+  }
+];
+
+
+/* ============================================================
+   APLICAȚIE GRILE LICENȚĂ — logică
+   9 grile per materie, extrase aleator la fiecare set nou.
+   Mod "Examen complet" = 9 + 9 + 9 = 27 de grile din toate materiile.
+   ============================================================ */
+"use strict";
+
+const MATERII = {
+  rdlc: { nume: "Radiolocație", desc: "principii, radar, monoimpuls, Doppler", banca: () => window.BANCA_RDLC },
+  re:   { nume: "Război Electronic", desc: "ECM, ECCM, bruiaj, SIGINT", banca: () => window.BANCA_RE },
+  tc:   { nume: "Teoria Comunicării", desc: "semne, coduri, funcții — în cheie militară", banca: () => window.BANCA_TC },
+};
+const ORDINE_COMPLET = ["rdlc", "re", "tc"];
+const NR_GRILE = 9;          // 9 grile per materie (cerință)
+const LITERE = ["A", "B", "C", "D"];
+
+let stare = {
+  materie: "rdlc",           // "rdlc" | "re" | "tc" | "complet"
+  mod: "examen",            // "examen" | "invatare"
+  setCurent: [],
+  raspunsuri: [],
+  verificat: false,
+};
+
+/* ---------- utilitare ---------- */
+function amesteca(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+// construiește un obiect de întrebare randabil, cu opțiunile amestecate
+function construiesteIntrebare(q, materieNume) {
+  const indici = amesteca(q.o.map((_, i) => i));
+  return {
+    text: q.t,
+    optiuni: indici.map((i) => q.o[i]),
+    corect: indici.indexOf(q.c),
+    explicatie: q.e,
+    tema: q.tema,
+    ref: q.ref,
+    materieNume: materieNume,
+  };
+}
+
+function extrageDinBanca(cheie) {
+  const banca = MATERII[cheie].banca() || [];
+  return amesteca(banca).slice(0, Math.min(NR_GRILE, banca.length))
+    .map((q) => construiesteIntrebare(q, MATERII[cheie].nume));
+}
+
+// generează setul curent în funcție de materia selectată
+function genereazaSet(cheieMaterie) {
+  if (cheieMaterie === "complet") {
+    let tot = [];
+    ORDINE_COMPLET.forEach((c) => { tot = tot.concat(extrageDinBanca(c)); });
+    return tot; // 27 de grile, grupate pe materii
+  }
+  return extrageDinBanca(cheieMaterie);
+}
+
+/* ---------- randare controale ---------- */
+function randeazaControale() {
+  const cont = document.getElementById("materii");
+  cont.innerHTML = "";
+  Object.entries(MATERII).forEach(([cheie, m]) => {
+    const b = document.createElement("button");
+    b.className = "materie-btn" + (cheie === stare.materie ? " activ" : "");
+    b.innerHTML = `${m.nume}<small>${m.desc}</small>`;
+    b.onclick = () => { stare.materie = cheie; setNou(); };
+    cont.appendChild(b);
+  });
+  // butonul special "Examen complet"
+  const bc = document.createElement("button");
+  bc.className = "materie-btn complet-btn" + (stare.materie === "complet" ? " activ" : "");
+  bc.innerHTML = `🎖️ Examen complet<small>9 + 9 + 9 = 27 de grile din toate materiile</small>`;
+  bc.onclick = () => { stare.materie = "complet"; setNou(); };
+  cont.appendChild(bc);
+
+  document.querySelectorAll(".mod-switch button").forEach((btn) => {
+    btn.classList.toggle("activ", btn.dataset.mod === stare.mod);
+    btn.onclick = () => { stare.mod = btn.dataset.mod; setNou(); };
+  });
+}
+
+/* ---------- randare set ---------- */
+function randeazaSet() {
+  const zona = document.getElementById("grile");
+  zona.innerHTML = "";
+
+  const eComplet = stare.materie === "complet";
+  document.getElementById("titlu-set").textContent = eComplet
+    ? "Examen complet — 27 de grile (9 per materie)"
+    : "Set de 9 grile — " + MATERII[stare.materie].nume;
+  document.getElementById("contor-banca").textContent = eComplet
+    ? "9 Radiolocație + 9 Război Electronic + 9 Teoria Comunicării · se schimbă la fiecare set nou"
+    : "extrase aleator din " + (MATERII[stare.materie].banca() || []).length + " întrebări • se schimbă la fiecare set nou";
+
+  let materieAnterioara = null;
+  stare.setCurent.forEach((q, idx) => {
+    // separator de materie (doar în examen complet)
+    if (eComplet && q.materieNume !== materieAnterioara) {
+      const sep = document.createElement("div");
+      sep.className = "sectiune-materie";
+      sep.textContent = "📘 " + q.materieNume;
+      zona.appendChild(sep);
+      materieAnterioara = q.materieNume;
+    }
+
+    const card = document.createElement("div");
+    card.className = "card";
+    card.id = "card-" + idx;
+
+    const antet = `<span class="tema-tag">${q.tema}</span>
+      <div class="intrebare"><span class="q-nr">${idx + 1}</span>${q.text}</div>`;
+    const opts = q.optiuni.map((txt, i) => `
+      <div class="optiune" data-q="${idx}" data-i="${i}">
+        <div class="litera">${LITERE[i]}</div>
+        <div class="txt">${txt}</div>
+      </div>`).join("");
+    card.innerHTML = antet + opts + `<div class="explicatie" id="exp-${idx}"></div>`;
+    zona.appendChild(card);
+  });
+
+  zona.querySelectorAll(".optiune").forEach((el) => {
+    el.onclick = () => alegeOptiune(+el.dataset.q, +el.dataset.i);
+  });
+
+  document.getElementById("bara-actiune").style.display = "flex";
+  document.getElementById("btn-verifica").style.display =
+    stare.mod === "examen" ? "inline-block" : "none";
+  document.getElementById("btn-verifica").textContent = eComplet
+    ? "✅ Verifică cele 27 de răspunsuri"
+    : "✅ Verifică cele 9 răspunsuri";
+  document.getElementById("rezultat").innerHTML = "";
+}
+
+function alegeOptiune(qi, oi) {
+  if (stare.verificat) return;
+  if (stare.mod === "invatare" && stare.raspunsuri[qi] != null) return;
+
+  stare.raspunsuri[qi] = oi;
+  const card = document.getElementById("card-" + qi);
+  card.querySelectorAll(".optiune").forEach((el) => {
+    el.classList.toggle("selectat", +el.dataset.i === oi);
+  });
+
+  if (stare.mod === "invatare") {
+    verificaIntrebare(qi);
+    if (stare.raspunsuri.filter((r) => r != null).length === stare.setCurent.length) {
+      afiseazaRezultat();
+    }
+  }
+}
+
+function verificaIntrebare(qi) {
+  const q = stare.setCurent[qi];
+  const ales = stare.raspunsuri[qi];
+  const corect = ales === q.corect;
+  const card = document.getElementById("card-" + qi);
+  card.classList.add(corect ? "corect" : "gresit");
+
+  card.querySelectorAll(".optiune").forEach((el) => {
+    const i = +el.dataset.i;
+    el.classList.add("blocat");
+    if (i === q.corect) el.classList.add("raspuns-corect");
+    else if (i === ales) el.classList.add("raspuns-gresit");
+  });
+
+  const exp = document.getElementById("exp-" + qi);
+  exp.className = "explicatie vizibil " + (corect ? "ok" : "nu");
+  const titlu = corect
+    ? `✔ Răspuns corect — ${LITERE[q.corect]}`
+    : `✘ Greșit — ai ales ${ales != null ? LITERE[ales] : "—"}, corect era ${LITERE[q.corect]}`;
+  exp.innerHTML = `<div class="titlu">${titlu}</div>${q.explicatie}
+    <div style="margin-top:8px;font-size:.8rem;opacity:.7">📖 Reper: ${q.ref}</div>`;
+}
+
+function verificaTot() {
+  stare.setCurent.forEach((_, qi) => verificaIntrebare(qi));
+  stare.verificat = true;
+  document.getElementById("btn-verifica").style.display = "none";
+  afiseazaRezultat();
+  document.getElementById("rezultat").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function afiseazaRezultat() {
+  stare.verificat = true;
+  let corecte = 0;
+  const gresiteTeme = {};
+  const peMaterii = {}; // { materieNume: {corecte, total} }
+
+  stare.setCurent.forEach((q, qi) => {
+    const m = q.materieNume;
+    if (!peMaterii[m]) peMaterii[m] = { corecte: 0, total: 0 };
+    peMaterii[m].total++;
+    if (stare.raspunsuri[qi] === q.corect) {
+      corecte++;
+      peMaterii[m].corecte++;
+    } else {
+      gresiteTeme[q.tema] = (gresiteTeme[q.tema] || 0) + 1;
+    }
+  });
+
+  const total = stare.setCurent.length;
+  const proc = Math.round((corecte / total) * 100);
+  const eComplet = stare.materie === "complet";
+
+  let mesaj, emoji;
+  if (proc === 100) { mesaj = "Perfect! Ai stăpânit complet acest set."; emoji = "🎖️"; }
+  else if (proc >= 78) { mesaj = "Foarte bine — ești pe drumul cel bun."; emoji = "✅"; }
+  else if (proc >= 56) { mesaj = "Acceptabil, dar mai repetă temele de mai jos."; emoji = "📘"; }
+  else { mesaj = "Reia materia la temele marcate și încearcă un set nou."; emoji = "📌"; }
+
+  // defalcare pe materii (doar la examen complet)
+  let defalcareHTML = "";
+  if (eComplet) {
+    defalcareHTML = `<div class="defalcare">` +
+      ORDINE_COMPLET.map((c) => {
+        const m = MATERII[c].nume;
+        const d = peMaterii[m] || { corecte: 0, total: 0 };
+        const p = d.total ? Math.round((d.corecte / d.total) * 100) : 0;
+        return `<div class="defalcare-item">
+          <div class="defalcare-nume">${m}</div>
+          <div class="defalcare-scor">${d.corecte}/${d.total}</div>
+          <div class="defalcare-bara"><div style="width:${p}%"></div></div>
+        </div>`;
+      }).join("") + `</div>`;
+  }
+
+  // teme de repetat
+  let temeHTML;
+  const temeList = Object.entries(gresiteTeme).sort((a, b) => b[1] - a[1]);
+  if (temeList.length === 0) {
+    temeHTML = `<p class="felicitari">🎯 Niciun subiect de repetat — set rezolvat complet corect!</p>`;
+  } else {
+    temeHTML = `<p>Pentru un studiu eficient, concentrează-te pe temele unde ai greșit:</p><ul>` +
+      temeList.map(([t, n]) => `<li><b>${t}</b> — ${n} ${n === 1 ? "greșeală" : "greșeli"}</li>`).join("") +
+      `</ul>`;
+  }
+
+  const etichetaSet = eComplet ? "🎖️ Examen complet nou (3×9)" : "🔄 Set nou de 9 grile";
+
+  document.getElementById("rezultat").innerHTML = `
+    <div class="scor-card">
+      <div style="font-size:1.6rem">${emoji}</div>
+      <div class="nota">${corecte}<small>/${total}</small></div>
+      <div class="mesaj">${mesaj} (${proc}%)</div>
+      <div class="bara-scor"><div style="width:${proc}%"></div></div>
+      ${defalcareHTML}
+    </div>
+    <div class="teme-repetat">
+      <h3>📚 Recomandare de studiu</h3>
+      ${temeHTML}
+    </div>
+    <div class="actiuni-jos">
+      <button class="btn-principal" onclick="setNou()">${etichetaSet}</button>
+      <button class="btn-secundar" onclick="reiaGresite()">↻ Reia doar greșelile</button>
+      <button class="btn-secundar" onclick="window.scrollTo({top:0,behavior:'smooth'})">⬆ Sus</button>
+    </div>`;
+}
+
+/* reia doar întrebările greșite (din aceleași teme) */
+function reiaGresite() {
+  const gresiteTeme = new Set(
+    stare.setCurent.filter((q, qi) => stare.raspunsuri[qi] !== q.corect).map((q) => q.tema)
+  );
+  if (gresiteTeme.size === 0) { setNou(); return; }
+
+  const cheiBanci = stare.materie === "complet" ? ORDINE_COMPLET : [stare.materie];
+  let pool = [];
+  cheiBanci.forEach((c) => {
+    (MATERII[c].banca() || []).forEach((q) => {
+      if (gresiteTeme.has(q.tema)) pool.push(construiesteIntrebare(q, MATERII[c].nume));
+    });
+  });
+  if (pool.length === 0) { setNou(); return; }
+
+  stare.setCurent = amesteca(pool);
+  stare.raspunsuri = new Array(stare.setCurent.length).fill(null);
+  stare.verificat = false;
+  // în acest mod nu mai grupăm pe materii (e o recapitulare țintită)
+  const materieReal = stare.materie;
+  stare.materie = "recap";
+  randeazaControale();
+  stare.materie = materieReal; // păstrează butonul activ corect
+  randeazaControaleRecap();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+// randare simplă pentru recapitulare (fără separatoare de materie)
+function randeazaControaleRecap() {
+  const zona = document.getElementById("grile");
+  zona.innerHTML = "";
+  document.getElementById("titlu-set").textContent = "Recapitulare țintită — doar temele greșite";
+  document.getElementById("contor-banca").textContent = stare.setCurent.length + " întrebări din temele la care ai greșit";
+  stare.setCurent.forEach((q, idx) => {
+    const card = document.createElement("div");
+    card.className = "card";
+    card.id = "card-" + idx;
+    const antet = `<span class="tema-tag">${q.tema}</span>
+      <div class="intrebare"><span class="q-nr">${idx + 1}</span>${q.text}</div>`;
+    const opts = q.optiuni.map((txt, i) => `
+      <div class="optiune" data-q="${idx}" data-i="${i}">
+        <div class="litera">${LITERE[i]}</div><div class="txt">${txt}</div>
+      </div>`).join("");
+    card.innerHTML = antet + opts + `<div class="explicatie" id="exp-${idx}"></div>`;
+    zona.appendChild(card);
+  });
+  zona.querySelectorAll(".optiune").forEach((el) => {
+    el.onclick = () => alegeOptiune(+el.dataset.q, +el.dataset.i);
+  });
+  document.getElementById("bara-actiune").style.display = "flex";
+  document.getElementById("btn-verifica").style.display = stare.mod === "examen" ? "inline-block" : "none";
+  document.getElementById("btn-verifica").textContent = "✅ Verifică răspunsurile";
+  document.getElementById("rezultat").innerHTML = "";
+}
+
+function setNou() {
+  stare.setCurent = genereazaSet(stare.materie);
+  stare.raspunsuri = new Array(stare.setCurent.length).fill(null);
+  stare.verificat = false;
+  randeazaControale();
+  randeazaSet();
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("btn-verifica").onclick = verificaTot;
+  setNou();
+});
+window.setNou = setNou;
+window.reiaGresite = reiaGresite;
+
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grile Licență — Radiolocație · Război Electronic · Teoria Comunicării</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div class="stema">🎯</div>
+    <div>
+      <h1>Pregătire Licență — Grile</h1>
+      <p>Academia Forțelor Aeriene „Henri Coandă” · Radiolocație · Război Electronic · Teoria Comunicării</p>
+      <span class="badge-neclasificat">NECLASIFICAT · sesiunea 2026</span>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <div class="panou">
+    <div class="eticheta">1. Alege materia (9 grile per set)</div>
+    <div class="materii" id="materii"><!-- butoane materii injectate --></div>
+
+    <div class="optiuni-rand">
+      <div>
+        <div class="eticheta" style="margin-bottom:6px">Mod de lucru</div>
+        <div class="mod-switch">
+          <button data-mod="examen" class="activ">📝 Mod examen</button>
+          <button data-mod="invatare">💡 Mod învățare</button>
+        </div>
+      </div>
+      <button class="btn-principal" onclick="setNou()">🔄 Set nou de 9 grile</button>
+    </div>
+
+    <div class="avertisment">
+      ⚠️ <b>Atenție:</b> anul acesta examenul de Radiolocație <b>nu mai conține problema de calcul cu ecuația radarului</b>.
+      Grilele de RDLC de aici sunt conceptuale/teoretice. La <b>Teoria Comunicării</b> întrebările sunt gândite exact ca profesorul —
+      fiecare concept ancorat în mediul militar (ordin, raport, drapel, onor, convorbiri radio, AFASTUD).
+    </div>
+    <p class="hint">💡 <b>Mod examen:</b> răspunzi la toate, apoi apeși „Verifică”. &nbsp; <b>Mod învățare:</b> primești explicația imediat după fiecare răspuns. &nbsp; <b>🎖️ Examen complet:</b> 27 de grile (9 din fiecare materie) + defalcare a scorului pe materii, ca o simulare cap-coadă.</p>
+  </div>
+
+  <div class="antet-set">
+    <h2 id="titlu-set">Set de 9 grile</h2>
+    <span class="contor" id="contor-banca"></span>
+  </div>
+
+  <div id="grile"><!-- carduri întrebări --></div>
+
+  <div id="bara-actiune" class="actiuni-jos" style="display:none">
+    <button id="btn-verifica" class="btn-principal">✅ Verifică cele 9 răspunsuri</button>
+    <button class="btn-secundar" onclick="setNou()">🔄 Alt set</button>
+  </div>
+
+  <div id="rezultat"></div>
+
+  <footer>
+    Instrument de autoevaluare · 191 de întrebări în bănci (53 Radiolocație · 46 Război Electronic · 92 Teoria Comunicării) · seturile se schimbă la fiecare încărcare/refresh<br>
+    Bazat pe materia de licență (Radiolocație–Război Electronic–Teoria Comunicării) și pe structura subiectelor din sesiunea anterioară.
+  </footer>
+</div>
+
+<!-- băncile de întrebări -->
+<script src="banca-rdlc.js"></script>
+<script src="banca-re.js"></script>
+<script src="banca-tc.js"></script>
+<!-- logica -->
+<script src="app.js"></script>
+</body>
+</html>
