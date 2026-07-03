@@ -10,6 +10,7 @@ const MATERII = {
   re:   { nume: "Război Electronic", desc: "ECM, ECCM, bruiaj, SIGINT", banca: () => window.BANCA_RE },
   tc:   { nume: "Teoria Comunicării", desc: "semne, coduri, funcții — în cheie militară", banca: () => window.BANCA_TC },
   carte:{ nume: "📖 Grile carte", desc: "din culegerea de grile TC, cu baremul cărții", banca: () => window.BANCA_CARTE },
+  brdlc:{ nume: "📡 Grile Bazele RDLC", desc: "60 de grile din quiz-ul de bazele radiolocației", banca: () => window.BANCA_BRDLC },
 };
 const ORDINE_COMPLET = ["rdlc", "re", "tc"];
 const NR_GRILE = 9;          // 9 grile per materie (cerință)
