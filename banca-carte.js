@@ -1,11 +1,11 @@
 /* ============================================================
    BANCĂ DE GRILE — GRILE CARTE (Culegerea de grile TC)
-   Întrebările sunt preluate EXACT din culegerea de exerciții
-   (Teoria Comunicării, cu aplicații militare), cu răspunsurile
-   din BAREMUL oficial al cărții.
-   Au fost păstrate DOAR întrebările cu UN SINGUR răspuns corect
-   (27 din 36): cap.1: 1,2,4,6,7,8,9 · cap.2: 1,2,4,5,6,7,8,9 ·
-   cap.3: 1,2,3,5,6,7,8 · cap.4: 1,3,5,6,7.
+   Toate cele 36 de întrebări, preluate EXACT din culegerea de
+   exerciții (Teoria Comunicării, cu aplicații militare), cu
+   răspunsurile din BAREMUL oficial al cărții.
+   27 au un singur răspuns corect (c = index), iar 9 au răspunsuri
+   MULTIPLE (c = listă de indici): cap.1: 3, 5 · cap.2: 3 ·
+   cap.3: 4, 9 · cap.4: 2, 4, 8, 9.
    Notă: grilele din carte au 3 variante (a/b/c).
    ============================================================ */
 window.BANCA_CARTE = [
@@ -204,5 +204,70 @@ window.BANCA_CARTE = [
     c: 0,
     e: "✓ Barem: a) mediatorul. GATEKEEPER-ul („portarul”) este cel care SELECTEAZĂ ce intră și ce nu intră în emisie — în cazul emisiunii TV, MEDIATORUL (realizatorul/moderatorul) decide subiectele aduse în discuție. Dacă un subiect de larg interes lipsește, el a fost „oprit la poartă” de mediator. 📌 Gatekeeper = cel care filtrează subiectele = mediatorul.",
     tema: "Cap.4 — Consistență cognitivă și mass-media", ref: "Culegere TC, cap.4 îtr.7"
+  },
+
+  /* ---------- GRILE CU RĂSPUNS MULTIPLU (9) ---------- */
+  {
+    t: "Stabiliți codul în care se realizează transmiterea unui ordin:",
+    o: ["logic", "analogic", "digital"],
+    c: [0, 2],
+    e: "✓ Barem: a) logic + c) digital (două răspunsuri). Ordinul se transmite VERBAL ⇒ cod DIGITAL (limbajul verbal e preponderent digital), iar fiind impersonal, precis, cu convenție explicită ⇒ cod LOGIC. NU analogic — acela e limbajul nonverbal, arbitrar. Exact ca la darea raportului din materia profesorului: digital + logic. 📌 Ordin = digital (verbal) + logic (precis); analogic = nonverbal.",
+    tema: "Cap.1 — Elemente și modele procesuale", ref: "Culegere TC, cap.1 îtr.3 (multiplu)"
+  },
+  {
+    t: "Identificați clasa barierelor comunicaționale care pot interveni în transmiterea ordinelor:",
+    o: ["bariere de concepție privitoare la emițător", "bariere de concepție privitoare la poziția emițătorului și receptorului în comunicare", "bariere de mediu de natură psihosocială"],
+    c: [0, 1, 2],
+    e: "✓ Barem: a) + b) + c) — TOATE TREI. La transmiterea ordinelor pot interveni: bariere de concepție la EMIȚĂTOR (rutina, presupunerile comandantului), bariere privind POZIȚIA emițător–receptor (imagini diferite despre sine/celălalt, perspective diferite) și bariere de mediu PSIHOSOCIALE (climat necorespunzător, frica de exprimare). 📌 Ordinul poate fi blocat pe oricare din cele trei căi — atenție la grila unde toate variantele sunt corecte!",
+    tema: "Cap.1 — Elemente și modele procesuale", ref: "Culegere TC, cap.1 îtr.5 (multiplu)"
+  },
+  {
+    t: "Diferențele vocale nonverbale în ceea ce privește rostirea comenzii prevestitoare și a celei săvârșitoare sunt de natură:",
+    o: ["proxemică", "prozodică", "paralingvistică"],
+    c: [1, 2],
+    e: "✓ Barem: b) prozodică + c) paralingvistică. Comanda prevestitoare (rostită prelung) și cea săvârșitoare (scurtă, energică) diferă prin aspectele VOCALE nonverbale: PROZODIA (intonația, intensitatea, accentuarea, pauzele intenționate) și PARALIMBAJUL (ton, volum, ritm). NU proxemica — aceea privește DISTANȚA dintre comunicatori, nu vocea. 📌 Cum rostești comanda = prozodie + paralimbaj; unde stai = proxemică.",
+    tema: "Cap.2 — Forme ale comunicării", ref: "Culegere TC, cap.2 îtr.3 (multiplu)"
+  },
+  {
+    t: "Fie însemnele de grad de comandor de aviație. În cazul în care le observați pe epoletul/mâneca vestonului unui militar, căreia dintre categoriile de semne (Ch.S. Peirce) îi aparțin:",
+    o: ["icon", "indice", "simbol"],
+    c: [1, 2],
+    e: "✓ Barem: b) indice + c) simbol. Pe epoletul unui militar REAL, însemnele au legătură existențială DIRECTĂ cu purtătorul (indică gradul lui efectiv, aici și acum) ⇒ INDICE, și în același timp semnifică gradul prin CONVENȚIE ⇒ SIMBOL. Compară cu însemnele de la MUZEU (îtr. 3): fără purtător, rămân DOAR simbol. 📌 Pe uniformă = indice + simbol; în vitrină = doar simbol.",
+    tema: "Cap.3 — Teorii semiotice", ref: "Culegere TC, cap.3 îtr.4 (multiplu)"
+  },
+  {
+    t: "Pentru exercitarea comenzii prin emiterea de ordine, un militar încadrat într-o funcție de comandă beneficiază de putere:",
+    o: ["legitimă", "de coerciție", "de expert"],
+    c: [0, 2],
+    e: "✓ Barem: a) legitimă + c) de expert. Comandantul emite ordine în baza puterii LEGITIME (conferită de funcție, prin norme și regulamente) și a puterii DE EXPERT (competența profesională recunoscută de subordonați). Baremul EXCLUDE coerciția — comanda legală nu se întemeiază pe constrângere/amenințare. 📌 Comanda = funcție (legitimă) + competență (expert), nu frică (coerciție).",
+    tema: "Cap.3 — Teorii semiotice", ref: "Culegere TC, cap.3 îtr.9 (multiplu)"
+  },
+  {
+    t: "Care sunt căile de realizare a echilibrului cognitiv în cazul prezentat anterior (militarii A și B, care se respectă reciproc, au puncte de vedere diferite asupra itinerarului X)?",
+    o: ["A își schimbă opinia despre tema discuției X", "B își schimbă opinia despre tema discuției X", "A și B își schimbă simultan opinia despre tema discuției X"],
+    c: [0, 1],
+    e: "✓ Barem: a) + b). Echilibrul (Heider, triunghiul P–O–X) se reface dacă UNUL dintre cei doi își schimbă atitudinea față de X — fie A, fie B — ajungând la acord. Schimbarea SIMULTANĂ a ambilor nu rezolvă dezechilibrul: și-ar inversa pozițiile și ar rămâne tot în dezacord. 📌 Echilibru = unul cedează (oricare), nu amândoi deodată.",
+    tema: "Cap.4 — Consistență cognitivă și mass-media", ref: "Culegere TC, cap.4 îtr.2 (multiplu)"
+  },
+  {
+    t: "Pentru pregătirea personală, căpitanul A se informează din doctrine, manuale și regulamente. În lipsa accesului la aceste mijloace de informare, la ce va face apel, conform modelului circular al media?",
+    o: ["presă scrisă", "radio", "televiziune"],
+    c: [0, 2],
+    e: "✓ Barem: a) presă scrisă + c) televiziune. Conform modelului circular al media, mijloacele de comunicare în masă se completează reciproc: în lipsa surselor doctrinare (documente scrise oficiale), căpitanul apelează la celelalte media — presa scrisă și televiziunea. 📌 Conform baremului cărții: presă scrisă + TV (radioul nu e indicat la această speță).",
+    tema: "Cap.4 — Consistență cognitivă și mass-media", ref: "Culegere TC, cap.4 îtr.4 (multiplu)"
+  },
+  {
+    t: "Cine stabilește obiectivele emisiunii „Ora Armatei” de la Radio România Actualități, conform modelului „patrulaterului torsionabil”?",
+    o: ["mediatorul", "grupurile de programare", "publicul"],
+    c: [0, 1],
+    e: "✓ Barem: a) mediatorul + b) grupurile de programare. În modelul „patrulaterului torsionabil”, obiectivele emisiunii sunt stabilite de MEDIATOR (realizatorul emisiunii) împreună cu GRUPURILE DE PROGRAMARE (structura editorială care decide grila). PUBLICUL nu stabilește obiectivele — el le receptează (și oferă doar feedback). 📌 Obiectivele = mediator + programare; publicul doar ascultă.",
+    tema: "Cap.4 — Consistență cognitivă și mass-media", ref: "Culegere TC, cap.4 îtr.8 (multiplu)"
+  },
+  {
+    t: "Ce maxime conversaționale fac obiectul atingerii „scopului ilocuționar” prin discursul mediatizat al militarilor?",
+    o: ["maxima cantității", "maxima intenționalității", "maxima manierei"],
+    c: [0, 2],
+    e: "✓ Barem: a) maxima cantității + c) maxima manierei. Maximele conversaționale ale lui Grice: cantitate, calitate, relație, MANIERĂ — „maxima intenționalității” NU EXISTĂ la Grice (capcană!). Scopul ilocuționar prin discurs mediatizat cere maxima CANTITĂȚII (informație exact cât trebuie) și maxima MANIEREI (exprimare clară, fără ambiguitate). 📌 Grice: cantitate–calitate–relație–manieră; „intenționalitatea” e inventată.",
+    tema: "Cap.4 — Consistență cognitivă și mass-media", ref: "Culegere TC, cap.4 îtr.9 (multiplu)"
   }
 ];

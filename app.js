@@ -2,6 +2,8 @@
    APLICAȚIE GRILE LICENȚĂ — logică
    9 grile per materie, extrase aleator la fiecare set nou.
    Mod "Examen complet" = 9 + 9 + 9 = 27 de grile din toate materiile.
+   Suportă grile cu răspuns UNIC (c = index) și cu răspunsuri
+   MULTIPLE (c = listă de indici) — selecție tip checkbox.
    ============================================================ */
 "use strict";
 
@@ -17,11 +19,12 @@ const NR_GRILE = 9;          // 9 grile per materie (cerință)
 const LITERE = ["A", "B", "C", "D"];
 
 let stare = {
-  materie: "rdlc",           // "rdlc" | "re" | "tc" | "complet"
+  materie: "rdlc",           // cheie MATERII | "complet"
   mod: "examen",            // "examen" | "invatare"
   setCurent: [],
-  raspunsuri: [],
-  verificat: false,
+  raspunsuri: [],           // unic: index | multiplu: listă de indici
+  verificate: [],           // per întrebare: a fost corectată?
+  verificat: false,         // tot setul corectat (examen)
 };
 
 /* ---------- utilitare ---------- */
@@ -37,15 +40,27 @@ function amesteca(arr) {
 // construiește un obiect de întrebare randabil, cu opțiunile amestecate
 function construiesteIntrebare(q, materieNume) {
   const indici = amesteca(q.o.map((_, i) => i));
+  const corecteOrig = Array.isArray(q.c) ? q.c : [q.c];
   return {
     text: q.t,
     optiuni: indici.map((i) => q.o[i]),
-    corect: indici.indexOf(q.c),
+    corecte: corecteOrig.map((ci) => indici.indexOf(ci)).sort((a, b) => a - b),
+    multi: corecteOrig.length > 1,
     explicatie: q.e,
     tema: q.tema,
     ref: q.ref,
     materieNume: materieNume,
   };
+}
+
+// răspunsul dat este corect? (compară mulțimile)
+function esteCorecta(q, r) {
+  const alese = q.multi ? (r || []) : (r != null ? [r] : []);
+  return alese.length === q.corecte.length && q.corecte.every((c) => alese.includes(c));
+}
+
+function literele(indici) {
+  return indici.slice().sort((a, b) => a - b).map((i) => LITERE[i]).join(" + ");
 }
 
 function extrageDinBanca(cheie) {
@@ -54,7 +69,6 @@ function extrageDinBanca(cheie) {
     .map((q) => construiesteIntrebare(q, MATERII[cheie].nume));
 }
 
-// generează setul curent în funcție de materia selectată
 function genereazaSet(cheieMaterie) {
   if (cheieMaterie === "complet") {
     let tot = [];
@@ -75,7 +89,6 @@ function randeazaControale() {
     b.onclick = () => { stare.materie = cheie; setNou(); };
     cont.appendChild(b);
   });
-  // butonul special "Examen complet"
   const bc = document.createElement("button");
   bc.className = "materie-btn complet-btn" + (stare.materie === "complet" ? " activ" : "");
   bc.innerHTML = `🎖️ Examen complet<small>9 + 9 + 9 = 27 de grile din toate materiile</small>`;
@@ -86,6 +99,25 @@ function randeazaControale() {
     btn.classList.toggle("activ", btn.dataset.mod === stare.mod);
     btn.onclick = () => { stare.mod = btn.dataset.mod; setNou(); };
   });
+}
+
+/* ---------- HTML-ul unui card de întrebare ---------- */
+function cardHTML(q, idx) {
+  const badge = q.multi
+    ? `<div class="multi-tag">☑ Răspunsuri multiple — bifează toate variantele corecte</div>`
+    : "";
+  const opts = q.optiuni.map((txt, i) => `
+    <div class="optiune" data-q="${idx}" data-i="${i}">
+      <div class="litera">${LITERE[i]}</div>
+      <div class="txt">${txt}</div>
+    </div>`).join("");
+  const confirma = q.multi
+    ? `<button class="btn-confirma" id="conf-${idx}" onclick="confirmaMulti(${idx})">✔ Confirmă răspunsul</button>`
+    : "";
+  return `<span class="tema-tag">${q.tema}</span>
+    <div class="intrebare"><span class="q-nr">${idx + 1}</span>${q.text}</div>
+    ${badge}${opts}${confirma}
+    <div class="explicatie" id="exp-${idx}"></div>`;
 }
 
 /* ---------- randare set ---------- */
@@ -103,7 +135,6 @@ function randeazaSet() {
 
   let materieAnterioara = null;
   stare.setCurent.forEach((q, idx) => {
-    // separator de materie (doar în examen complet)
     if (eComplet && q.materieNume !== materieAnterioara) {
       const sep = document.createElement("div");
       sep.className = "sectiune-materie";
@@ -111,19 +142,10 @@ function randeazaSet() {
       zona.appendChild(sep);
       materieAnterioara = q.materieNume;
     }
-
     const card = document.createElement("div");
     card.className = "card";
     card.id = "card-" + idx;
-
-    const antet = `<span class="tema-tag">${q.tema}</span>
-      <div class="intrebare"><span class="q-nr">${idx + 1}</span>${q.text}</div>`;
-    const opts = q.optiuni.map((txt, i) => `
-      <div class="optiune" data-q="${idx}" data-i="${i}">
-        <div class="litera">${LITERE[i]}</div>
-        <div class="txt">${txt}</div>
-      </div>`).join("");
-    card.innerHTML = antet + opts + `<div class="explicatie" id="exp-${idx}"></div>`;
+    card.innerHTML = cardHTML(q, idx);
     zona.appendChild(card);
   });
 
@@ -136,70 +158,101 @@ function randeazaSet() {
     stare.mod === "examen" ? "inline-block" : "none";
   document.getElementById("btn-verifica").textContent = eComplet
     ? "✅ Verifică cele 27 de răspunsuri"
-    : "✅ Verifică cele 9 răspunsuri";
+    : "✅ Verifică răspunsurile";
   document.getElementById("rezultat").innerHTML = "";
 }
 
+/* ---------- interacțiune ---------- */
 function alegeOptiune(qi, oi) {
-  if (stare.verificat) return;
-  if (stare.mod === "invatare" && stare.raspunsuri[qi] != null) return;
-
-  stare.raspunsuri[qi] = oi;
+  if (stare.verificat || stare.verificate[qi]) return;
+  const q = stare.setCurent[qi];
   const card = document.getElementById("card-" + qi);
-  card.querySelectorAll(".optiune").forEach((el) => {
-    el.classList.toggle("selectat", +el.dataset.i === oi);
-  });
 
-  if (stare.mod === "invatare") {
-    verificaIntrebare(qi);
-    if (stare.raspunsuri.filter((r) => r != null).length === stare.setCurent.length) {
-      afiseazaRezultat();
+  if (q.multi) {
+    // selecție tip checkbox (comută)
+    let sel = Array.isArray(stare.raspunsuri[qi]) ? stare.raspunsuri[qi].slice() : [];
+    sel = sel.includes(oi) ? sel.filter((x) => x !== oi) : sel.concat(oi);
+    stare.raspunsuri[qi] = sel;
+    card.querySelectorAll(".optiune").forEach((el) => {
+      el.classList.toggle("selectat", sel.includes(+el.dataset.i));
+    });
+    // în modul învățare, arată butonul de confirmare când există selecție
+    if (stare.mod === "invatare") {
+      const btn = document.getElementById("conf-" + qi);
+      if (btn) btn.style.display = sel.length ? "inline-block" : "none";
+    }
+  } else {
+    stare.raspunsuri[qi] = oi;
+    card.querySelectorAll(".optiune").forEach((el) => {
+      el.classList.toggle("selectat", +el.dataset.i === oi);
+    });
+    if (stare.mod === "invatare") {
+      verificaIntrebare(qi);
+      verificaFinalInvatare();
     }
   }
 }
 
+// butonul „Confirmă” al grilelor cu răspuns multiplu (mod învățare)
+function confirmaMulti(qi) {
+  if (stare.verificate[qi]) return;
+  verificaIntrebare(qi);
+  verificaFinalInvatare();
+}
+
+function verificaFinalInvatare() {
+  if (stare.mod !== "invatare") return;
+  if (stare.verificate.every(Boolean)) afiseazaRezultat();
+}
+
+/* ---------- corectare ---------- */
 function verificaIntrebare(qi) {
   const q = stare.setCurent[qi];
-  const ales = stare.raspunsuri[qi];
-  const corect = ales === q.corect;
+  const r = stare.raspunsuri[qi];
+  const alese = q.multi ? (r || []) : (r != null ? [r] : []);
+  const corect = esteCorecta(q, r);
   const card = document.getElementById("card-" + qi);
   card.classList.add(corect ? "corect" : "gresit");
+  stare.verificate[qi] = true;
 
   card.querySelectorAll(".optiune").forEach((el) => {
     const i = +el.dataset.i;
     el.classList.add("blocat");
-    if (i === q.corect) el.classList.add("raspuns-corect");
-    else if (i === ales) el.classList.add("raspuns-gresit");
+    if (q.corecte.includes(i)) el.classList.add("raspuns-corect");
+    else if (alese.includes(i)) el.classList.add("raspuns-gresit");
   });
+  const btn = document.getElementById("conf-" + qi);
+  if (btn) btn.style.display = "none";
 
   const exp = document.getElementById("exp-" + qi);
   exp.className = "explicatie vizibil " + (corect ? "ok" : "nu");
   const titlu = corect
-    ? `✔ Răspuns corect — ${LITERE[q.corect]}`
-    : `✘ Greșit — ai ales ${ales != null ? LITERE[ales] : "—"}, corect era ${LITERE[q.corect]}`;
+    ? `✔ Răspuns corect — ${literele(q.corecte)}`
+    : `✘ Greșit — ai ales ${alese.length ? literele(alese) : "—"}, corect era ${literele(q.corecte)}`;
   exp.innerHTML = `<div class="titlu">${titlu}</div>${q.explicatie}
     <div style="margin-top:8px;font-size:.8rem;opacity:.7">📖 Reper: ${q.ref}</div>`;
 }
 
 function verificaTot() {
-  stare.setCurent.forEach((_, qi) => verificaIntrebare(qi));
+  stare.setCurent.forEach((_, qi) => { if (!stare.verificate[qi]) verificaIntrebare(qi); });
   stare.verificat = true;
   document.getElementById("btn-verifica").style.display = "none";
   afiseazaRezultat();
   document.getElementById("rezultat").scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
+/* ---------- rezultat ---------- */
 function afiseazaRezultat() {
   stare.verificat = true;
   let corecte = 0;
   const gresiteTeme = {};
-  const peMaterii = {}; // { materieNume: {corecte, total} }
+  const peMaterii = {};
 
   stare.setCurent.forEach((q, qi) => {
     const m = q.materieNume;
     if (!peMaterii[m]) peMaterii[m] = { corecte: 0, total: 0 };
     peMaterii[m].total++;
-    if (stare.raspunsuri[qi] === q.corect) {
+    if (esteCorecta(q, stare.raspunsuri[qi])) {
       corecte++;
       peMaterii[m].corecte++;
     } else {
@@ -217,7 +270,6 @@ function afiseazaRezultat() {
   else if (proc >= 56) { mesaj = "Acceptabil, dar mai repetă temele de mai jos."; emoji = "📘"; }
   else { mesaj = "Reia materia la temele marcate și încearcă un set nou."; emoji = "📌"; }
 
-  // defalcare pe materii (doar la examen complet)
   let defalcareHTML = "";
   if (eComplet) {
     defalcareHTML = `<div class="defalcare">` +
@@ -233,7 +285,6 @@ function afiseazaRezultat() {
       }).join("") + `</div>`;
   }
 
-  // teme de repetat
   let temeHTML;
   const temeList = Object.entries(gresiteTeme).sort((a, b) => b[1] - a[1]);
   if (temeList.length === 0) {
@@ -265,10 +316,10 @@ function afiseazaRezultat() {
     </div>`;
 }
 
-/* reia doar întrebările greșite (din aceleași teme) */
+/* ---------- recapitulare țintită (doar temele greșite) ---------- */
 function reiaGresite() {
   const gresiteTeme = new Set(
-    stare.setCurent.filter((q, qi) => stare.raspunsuri[qi] !== q.corect).map((q) => q.tema)
+    stare.setCurent.filter((q, qi) => !esteCorecta(q, stare.raspunsuri[qi])).map((q) => q.tema)
   );
   if (gresiteTeme.size === 0) { setNou(); return; }
 
@@ -283,17 +334,14 @@ function reiaGresite() {
 
   stare.setCurent = amesteca(pool);
   stare.raspunsuri = new Array(stare.setCurent.length).fill(null);
+  stare.verificate = new Array(stare.setCurent.length).fill(false);
   stare.verificat = false;
-  // în acest mod nu mai grupăm pe materii (e o recapitulare țintită)
-  const materieReal = stare.materie;
-  stare.materie = "recap";
   randeazaControale();
-  stare.materie = materieReal; // păstrează butonul activ corect
-  randeazaControaleRecap();
+  randeazaRecap();
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
-// randare simplă pentru recapitulare (fără separatoare de materie)
-function randeazaControaleRecap() {
+
+function randeazaRecap() {
   const zona = document.getElementById("grile");
   zona.innerHTML = "";
   document.getElementById("titlu-set").textContent = "Recapitulare țintită — doar temele greșite";
@@ -302,13 +350,7 @@ function randeazaControaleRecap() {
     const card = document.createElement("div");
     card.className = "card";
     card.id = "card-" + idx;
-    const antet = `<span class="tema-tag">${q.tema}</span>
-      <div class="intrebare"><span class="q-nr">${idx + 1}</span>${q.text}</div>`;
-    const opts = q.optiuni.map((txt, i) => `
-      <div class="optiune" data-q="${idx}" data-i="${i}">
-        <div class="litera">${LITERE[i]}</div><div class="txt">${txt}</div>
-      </div>`).join("");
-    card.innerHTML = antet + opts + `<div class="explicatie" id="exp-${idx}"></div>`;
+    card.innerHTML = cardHTML(q, idx);
     zona.appendChild(card);
   });
   zona.querySelectorAll(".optiune").forEach((el) => {
@@ -320,9 +362,11 @@ function randeazaControaleRecap() {
   document.getElementById("rezultat").innerHTML = "";
 }
 
+/* ---------- set nou ---------- */
 function setNou() {
   stare.setCurent = genereazaSet(stare.materie);
   stare.raspunsuri = new Array(stare.setCurent.length).fill(null);
+  stare.verificate = new Array(stare.setCurent.length).fill(false);
   stare.verificat = false;
   randeazaControale();
   randeazaSet();
@@ -334,3 +378,4 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 window.setNou = setNou;
 window.reiaGresite = reiaGresite;
+window.confirmaMulti = confirmaMulti;

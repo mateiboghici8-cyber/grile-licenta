@@ -143,6 +143,19 @@ header.top p{margin:3px 0 0;font-size:.86rem;opacity:.85}
 .optiune.raspuns-gresit .litera{background:var(--rosu);color:#fff}
 .optiune.blocat{cursor:default;pointer-events:none}
 
+/* ---------- RĂSPUNSURI MULTIPLE ---------- */
+.multi-tag{
+  display:inline-block;font-size:.74rem;font-weight:700;letter-spacing:.2px;
+  background:#fff3cd;color:#7a5c00;border:1px solid #eedc9a;
+  padding:4px 12px;border-radius:20px;margin-bottom:12px
+}
+.btn-confirma{
+  display:none;background:var(--bleu-mediu);color:#fff;border:none;
+  padding:10px 18px;border-radius:10px;font-weight:600;font-size:.88rem;
+  cursor:pointer;margin-top:6px;transition:.15s;box-shadow:var(--umbra-mica)
+}
+.btn-confirma:hover{filter:brightness(1.12)}
+
 /* ---------- EXPLICAȚIE ---------- */
 .explicatie{
   margin-top:12px;border-radius:11px;padding:14px 16px;font-size:.9rem;line-height:1.6;
