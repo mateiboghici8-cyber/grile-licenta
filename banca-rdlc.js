@@ -112,9 +112,9 @@ window.BANCA_RDLC = [
   },
   {
     t: "Tehnologiile „stealth” urmăresc, în esență:",
-    o: ["Reducerea SER a țintei prin formă și materiale absorbante", "Creșterea puterii de emisie a propriilor sisteme de bord", "Mărirea SER a țintei pentru o vizibilitate radar sporită", "Emiterea permanentă de semnale IFF către toate radarele"],
+    o: ["Reducerea SER a țintei prin formă și materiale absorbante", "Reducerea semnăturii termice prin ecranarea motoarelor", "Bruierea activă, de la bord, a radarelor adversarului", "Reflectarea undelor radar înapoi, pe direcția de sosire"],
     c: 0,
-    e: "✓ Corect: stealth = reducerea SER prin forme speciale și materiale absorbante. Mărirea SER ar face aeronava mai ușor de detectat. 📌 SER mic = detecție la distanță mică = supraviețuire mai bună.",
+    e: "✓ Corect: conform materiei, tehnologiile stealth = REDUCEREA SER prin proiectarea cu forme speciale și utilizarea materialelor absorbante de radar. ⚠ Capcane: reducerea semnăturii termice și bruiajul de bord sunt ALTE tehnici de protecție (contra rachetelor IR, respectiv ECM) — nu definiția stealth din lecție; reflectarea undelor înapoi spre radar ar MĂRI detectabilitatea, exact opusul. 📌 Stealth = SER mic (forme + absorbanți).",
     tema: "SER / RCS", ref: "2.1.5.1"
   },
   {
@@ -295,9 +295,9 @@ window.BANCA_RDLC = [
   },
   {
     t: "Care este un AVANTAJ al sistemelor radar în impuls?",
-    o: ["Detectarea la distanțe mari și precizia ridicată în distanță", "Imposibilitatea de a lucra pe timp de ploaie, ceață sau ninsoare", "Lipsa totală a imunității la interferențe și mediul ostil", "Consumul energetic egal cu zero pe durata funcționării"],
+    o: ["Detectarea la distanțe mari și precizia ridicată în distanță", "Funcționarea continuă, fără zonă moartă în jurul stației", "Rezoluția unghiulară independentă de dimensiunile antenei", "Imunitatea totală la orice tip de bruiaj activ inamic"],
     c: 0,
-    e: "✓ Corect: radarele în impuls detectează la distanțe mari, au precizie ridicată (timpul de zbor), imunitate sporită la interferențe și lucrează în condiții meteo dificile. 📌 Impuls puternic + timp de zbor = rază + precizie.",
+    e: "✓ Corect: radarele în impuls detectează la distanțe mari (impulsuri de putere mare), au precizie ridicată în distanță (timpul de zbor), imunitate SPORITĂ la interferențe și lucrează pe orice vreme. ⚠ Capcane: radarul în impuls ARE zonă moartă (Dmin = c·τ/2, cât durează emisia); rezoluția unghiulară DEPINDE de antenă (lățimea fasciculului); imunitatea e sporită, nu „totală” — nimic nu e imun complet la bruiaj. 📌 Avantaje reale: rază mare + precizie în distanță.",
     tema: "Stații în impuls", ref: "2.2.2"
   },
 

@@ -74,9 +74,9 @@ window.BANCA_RE = [
   },
   {
     t: "Cele trei componente ale ECM sunt:",
-    o: ["Bruiajul, dezinformarea electronică și distrugerea fizică", "Bruiajul, radiolocația și navigația prin satelit", "Măsurile ESM, ECM și ECCM ale războiului electronic", "Atacul, apărarea și supravegherea electronică"],
+    o: ["Bruiajul, dezinformarea electronică și distrugerea fizică", "Bruiajul, dezinformarea electronică și cercetarea electronică", "Bruiajul, mascarea electronică și distrugerea fizică", "Dezinformarea, interceptarea comunicațiilor și distrugerea fizică"],
     c: 0,
-    e: "✓ Corect: componentele ECM = bruiaj + dezinformare electronică + distrugere fizică. „ESM/ECM/ECCM” = componentele majore RE; „atac/apărare/supraveghere” = categoriile de acțiuni RE. 📌 Nu confunda componentele ECM cu ale războiului electronic.",
+    e: "✓ Corect: componentele ECM = bruiaj + dezinformare electronică + distrugere fizică — exact aceste trei. ⚠ Capcane: „cercetarea electronică” și „interceptarea comunicațiilor” țin de SUPRAVEGHERE (ESM/SIGINT), nu de ECM; „mascarea electronică” nu apare printre componentele ECM din materie. 📌 ECM = bruiaj + dezinformare + distrugere fizică.",
     tema: "ECM", ref: "3.2.1"
   },
   {
@@ -195,9 +195,9 @@ window.BANCA_RE = [
   },
   {
     t: "ECCM cuprinde, în ansamblu, trei tipuri de măsuri:",
-    o: ["Organizatorice, tehnice și de exploatare", "De atac, de apărare și de supraveghere", "Bruiaj, dezinformare și distrugere fizică", "ELINT, COMINT și măsuri de sprijin ESM"],
+    o: ["Organizatorice, tehnice și de exploatare", "Organizatorice, tehnice și de planificare", "Organizatorice, operative și de exploatare", "Tehnice, tactice și de exploatare"],
     c: 0,
-    e: "✓ Corect: ECCM = măsuri organizatorice + tehnice + de exploatare. „Atac/apărare/supraveghere” = acțiunile RE; „bruiaj/dezinformare/distrugere” = componentele ECM. 📌 Tripleta ECCM: organizatorice–tehnice–exploatare.",
+    e: "✓ Corect: ECCM = măsuri organizatorice + tehnice + de exploatare — exact aceste trei. ⚠ Capcane: fiecare distractor schimbă UN SINGUR termen („planificare”, „operative”, „tactice” nu apar în tripleta din materie). 📌 Tripleta ECCM: organizatorice–tehnice–exploatare, fără substituții.",
     tema: "ECCM", ref: "3.2.2"
   },
   {
@@ -239,9 +239,9 @@ window.BANCA_RE = [
   /* ---------- 3.3.1 SUPRAVEGHEREA ELECTRONICĂ / SIGINT ---------- */
   {
     t: "Acțiunile de război electronic se împart în trei categorii:",
-    o: ["Atac, apărare și supraveghere electronică", "Bruiaj, dezinformare și distrugere fizică", "Măsuri organizatorice, tehnice și de exploatare", "Culegere ELINT, culegere COMINT și sprijin ESM"],
+    o: ["Atac, apărare și supraveghere electronică", "Atac, protecție și cercetare electronică", "Atac, apărare și sprijin electronic", "Ofensivă, defensivă și recunoaștere electronică"],
     c: 0,
-    e: "✓ Corect: acțiunile RE = atac electronic + apărare electronică + supraveghere electronică. „Bruiaj/dezinformare/distrugere” = componentele ECM; „organizatorice/tehnice/exploatare” = măsurile ECCM. 📌 Categoriile RE: atac–apărare–supraveghere.",
+    e: "✓ Corect: acțiunile RE = ATAC electronic + APĂRARE electronică + SUPRAVEGHERE electronică — exact acești termeni. ⚠ Capcane: „protecție/cercetare”, „sprijin” (acela e ESM, dintre componentele majore) și „ofensivă/defensivă/recunoaștere” sunt parafraze, nu termenii din materie. 📌 Categoriile RE: atac–apărare–supraveghere, cuvânt cu cuvânt.",
     tema: "Componentele RE", ref: "3.3.1"
   },
   {
@@ -260,9 +260,9 @@ window.BANCA_RE = [
   },
   {
     t: "SIGINT (Signal Intelligence) are două componente principale:",
-    o: ["ELINT și COMINT", "ECM și ECCM", "PSR și SSR", "Bruiaj activ și pasiv"],
+    o: ["ELINT și COMINT", "ELINT și HUMINT", "COMINT și MASINT", "ELINT și ESM"],
     c: 0,
-    e: "✓ Corect: SIGINT = ELINT (date din echipamente non-comunicații, ex. radar) + COMINT (date din comunicații). 📌 SIGINT = umbrela; ELINT (radar) + COMINT (comunicații) = piloni.",
+    e: "✓ Corect: SIGINT = ELINT (date din echipamente non-comunicații, ex. radar) + COMINT (date din comunicații). ⚠ Capcane: HUMINT (informații din surse umane) și MASINT sunt ALTE discipline de intelligence, nu componente SIGINT; ESM e o componentă majoră a RE, nu a SIGINT. 📌 SIGINT = ELINT + COMINT, exact această pereche.",
     tema: "SIGINT", ref: "3.3.1"
   },
   {

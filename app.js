@@ -63,10 +63,44 @@ function literele(indici) {
   return indici.slice().sort((a, b) => a - b).map((i) => LITERE[i]).join(" + ");
 }
 
+/* ---------- pachet fără repetare (deck) ----------
+   Fiecare bancă e amestecată o dată ca un pachet de cărți și se
+   „împart” câte 9 întrebări pe set. O întrebare NU reapare până
+   nu se epuizează întreaga bancă; la reamestecare, întrebările
+   din setul imediat anterior intră la fundul pachetului, deci nu
+   se repetă nici imediat după. Persistă între refresh-uri. */
+function citesteJSON(k) {
+  try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; }
+}
+function scrieJSON(k, v) {
+  try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {}
+}
+
 function extrageDinBanca(cheie) {
   const banca = MATERII[cheie].banca() || [];
-  return amesteca(banca).slice(0, Math.min(NR_GRILE, banca.length))
-    .map((q) => construiesteIntrebare(q, MATERII[cheie].nume));
+  const n = Math.min(NR_GRILE, banca.length);
+  const toate = banca.map((_, i) => i);
+
+  // pachetul salvat (resetat automat dacă banca s-a schimbat între timp)
+  const st = citesteJSON("grile_deck_" + cheie);
+  let deck = (st && st.n === banca.length && Array.isArray(st.deck))
+    ? st.deck.filter((i) => i >= 0 && i < banca.length)
+    : amesteca(toate);
+  const ultim = (citesteJSON("grile_ultim_" + cheie) || []).filter((i) => i >= 0 && i < banca.length);
+
+  const alese = [];
+  while (alese.length < n) {
+    if (deck.length === 0) {
+      // pachet epuizat → reamestecă; setul anterior intră la fundul pachetului
+      const rest = toate.filter((i) => !alese.includes(i) && !ultim.includes(i));
+      const laFund = ultim.filter((i) => !alese.includes(i));
+      deck = amesteca(laFund).concat(amesteca(rest)); // pop() ia din coadă → „rest” iese primul
+    }
+    alese.push(deck.pop());
+  }
+  scrieJSON("grile_deck_" + cheie, { n: banca.length, deck });
+  scrieJSON("grile_ultim_" + cheie, alese);
+  return alese.map((i) => construiesteIntrebare(banca[i], MATERII[cheie].nume));
 }
 
 function genereazaSet(cheieMaterie) {

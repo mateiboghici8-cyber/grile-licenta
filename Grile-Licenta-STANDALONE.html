@@ -254,7 +254,7 @@ footer{text-align:center;color:var(--gri);font-size:.78rem;margin-top:40px;paddi
       Grilele de RDLC de aici sunt conceptuale/teoretice. La <b>Teoria Comunicării</b> întrebările sunt gândite exact ca profesorul —
       fiecare concept ancorat în mediul militar (ordin, raport, drapel, onor, convorbiri radio, AFASTUD).
     </div>
-    <p class="hint">💡 <b>Mod examen:</b> răspunzi la toate, apoi apeși „Verifică”. &nbsp; <b>Mod învățare:</b> primești explicația imediat după fiecare răspuns. &nbsp; <b>🎖️ Examen complet:</b> 27 de grile (9 din fiecare materie) + defalcare a scorului pe materii, ca o simulare cap-coadă.</p>
+    <p class=”hint”>💡 <b>Mod examen:</b> răspunzi la toate, apoi apeși „Verifică”. &nbsp; <b>Mod învățare:</b> primești explicația imediat după fiecare răspuns. &nbsp; <b>🎖️ Examen complet:</b> 27 de grile (9 din fiecare materie) + defalcare a scorului pe materii. &nbsp; <b>🔁 Fără repetări:</b> întrebările nu reapar până nu parcurgi toată banca materiei.</p>
   </div>
 
   <div class="antet-set">
@@ -392,9 +392,9 @@ window.BANCA_RDLC = [
   },
   {
     t: "Tehnologiile „stealth” urmăresc, în esență:",
-    o: ["Reducerea SER a țintei prin formă și materiale absorbante", "Creșterea puterii de emisie a propriilor sisteme de bord", "Mărirea SER a țintei pentru o vizibilitate radar sporită", "Emiterea permanentă de semnale IFF către toate radarele"],
+    o: ["Reducerea SER a țintei prin formă și materiale absorbante", "Reducerea semnăturii termice prin ecranarea motoarelor", "Bruierea activă, de la bord, a radarelor adversarului", "Reflectarea undelor radar înapoi, pe direcția de sosire"],
     c: 0,
-    e: "✓ Corect: stealth = reducerea SER prin forme speciale și materiale absorbante. Mărirea SER ar face aeronava mai ușor de detectat. 📌 SER mic = detecție la distanță mică = supraviețuire mai bună.",
+    e: "✓ Corect: conform materiei, tehnologiile stealth = REDUCEREA SER prin proiectarea cu forme speciale și utilizarea materialelor absorbante de radar. ⚠ Capcane: reducerea semnăturii termice și bruiajul de bord sunt ALTE tehnici de protecție (contra rachetelor IR, respectiv ECM) — nu definiția stealth din lecție; reflectarea undelor înapoi spre radar ar MĂRI detectabilitatea, exact opusul. 📌 Stealth = SER mic (forme + absorbanți).",
     tema: "SER / RCS", ref: "2.1.5.1"
   },
   {
@@ -575,9 +575,9 @@ window.BANCA_RDLC = [
   },
   {
     t: "Care este un AVANTAJ al sistemelor radar în impuls?",
-    o: ["Detectarea la distanțe mari și precizia ridicată în distanță", "Imposibilitatea de a lucra pe timp de ploaie, ceață sau ninsoare", "Lipsa totală a imunității la interferențe și mediul ostil", "Consumul energetic egal cu zero pe durata funcționării"],
+    o: ["Detectarea la distanțe mari și precizia ridicată în distanță", "Funcționarea continuă, fără zonă moartă în jurul stației", "Rezoluția unghiulară independentă de dimensiunile antenei", "Imunitatea totală la orice tip de bruiaj activ inamic"],
     c: 0,
-    e: "✓ Corect: radarele în impuls detectează la distanțe mari, au precizie ridicată (timpul de zbor), imunitate sporită la interferențe și lucrează în condiții meteo dificile. 📌 Impuls puternic + timp de zbor = rază + precizie.",
+    e: "✓ Corect: radarele în impuls detectează la distanțe mari (impulsuri de putere mare), au precizie ridicată în distanță (timpul de zbor), imunitate SPORITĂ la interferențe și lucrează pe orice vreme. ⚠ Capcane: radarul în impuls ARE zonă moartă (Dmin = c·τ/2, cât durează emisia); rezoluția unghiulară DEPINDE de antenă (lățimea fasciculului); imunitatea e sporită, nu „totală” — nimic nu e imun complet la bruiaj. 📌 Avantaje reale: rază mare + precizie în distanță.",
     tema: "Stații în impuls", ref: "2.2.2"
   },
 
@@ -753,9 +753,9 @@ window.BANCA_RE = [
   },
   {
     t: "Cele trei componente ale ECM sunt:",
-    o: ["Bruiajul, dezinformarea electronică și distrugerea fizică", "Bruiajul, radiolocația și navigația prin satelit", "Măsurile ESM, ECM și ECCM ale războiului electronic", "Atacul, apărarea și supravegherea electronică"],
+    o: ["Bruiajul, dezinformarea electronică și distrugerea fizică", "Bruiajul, dezinformarea electronică și cercetarea electronică", "Bruiajul, mascarea electronică și distrugerea fizică", "Dezinformarea, interceptarea comunicațiilor și distrugerea fizică"],
     c: 0,
-    e: "✓ Corect: componentele ECM = bruiaj + dezinformare electronică + distrugere fizică. „ESM/ECM/ECCM” = componentele majore RE; „atac/apărare/supraveghere” = categoriile de acțiuni RE. 📌 Nu confunda componentele ECM cu ale războiului electronic.",
+    e: "✓ Corect: componentele ECM = bruiaj + dezinformare electronică + distrugere fizică — exact aceste trei. ⚠ Capcane: „cercetarea electronică” și „interceptarea comunicațiilor” țin de SUPRAVEGHERE (ESM/SIGINT), nu de ECM; „mascarea electronică” nu apare printre componentele ECM din materie. 📌 ECM = bruiaj + dezinformare + distrugere fizică.",
     tema: "ECM", ref: "3.2.1"
   },
   {
@@ -874,9 +874,9 @@ window.BANCA_RE = [
   },
   {
     t: "ECCM cuprinde, în ansamblu, trei tipuri de măsuri:",
-    o: ["Organizatorice, tehnice și de exploatare", "De atac, de apărare și de supraveghere", "Bruiaj, dezinformare și distrugere fizică", "ELINT, COMINT și măsuri de sprijin ESM"],
+    o: ["Organizatorice, tehnice și de exploatare", "Organizatorice, tehnice și de planificare", "Organizatorice, operative și de exploatare", "Tehnice, tactice și de exploatare"],
     c: 0,
-    e: "✓ Corect: ECCM = măsuri organizatorice + tehnice + de exploatare. „Atac/apărare/supraveghere” = acțiunile RE; „bruiaj/dezinformare/distrugere” = componentele ECM. 📌 Tripleta ECCM: organizatorice–tehnice–exploatare.",
+    e: "✓ Corect: ECCM = măsuri organizatorice + tehnice + de exploatare — exact aceste trei. ⚠ Capcane: fiecare distractor schimbă UN SINGUR termen („planificare”, „operative”, „tactice” nu apar în tripleta din materie). 📌 Tripleta ECCM: organizatorice–tehnice–exploatare, fără substituții.",
     tema: "ECCM", ref: "3.2.2"
   },
   {
@@ -918,9 +918,9 @@ window.BANCA_RE = [
   /* ---------- 3.3.1 SUPRAVEGHEREA ELECTRONICĂ / SIGINT ---------- */
   {
     t: "Acțiunile de război electronic se împart în trei categorii:",
-    o: ["Atac, apărare și supraveghere electronică", "Bruiaj, dezinformare și distrugere fizică", "Măsuri organizatorice, tehnice și de exploatare", "Culegere ELINT, culegere COMINT și sprijin ESM"],
+    o: ["Atac, apărare și supraveghere electronică", "Atac, protecție și cercetare electronică", "Atac, apărare și sprijin electronic", "Ofensivă, defensivă și recunoaștere electronică"],
     c: 0,
-    e: "✓ Corect: acțiunile RE = atac electronic + apărare electronică + supraveghere electronică. „Bruiaj/dezinformare/distrugere” = componentele ECM; „organizatorice/tehnice/exploatare” = măsurile ECCM. 📌 Categoriile RE: atac–apărare–supraveghere.",
+    e: "✓ Corect: acțiunile RE = ATAC electronic + APĂRARE electronică + SUPRAVEGHERE electronică — exact acești termeni. ⚠ Capcane: „protecție/cercetare”, „sprijin” (acela e ESM, dintre componentele majore) și „ofensivă/defensivă/recunoaștere” sunt parafraze, nu termenii din materie. 📌 Categoriile RE: atac–apărare–supraveghere, cuvânt cu cuvânt.",
     tema: "Componentele RE", ref: "3.3.1"
   },
   {
@@ -939,9 +939,9 @@ window.BANCA_RE = [
   },
   {
     t: "SIGINT (Signal Intelligence) are două componente principale:",
-    o: ["ELINT și COMINT", "ECM și ECCM", "PSR și SSR", "Bruiaj activ și pasiv"],
+    o: ["ELINT și COMINT", "ELINT și HUMINT", "COMINT și MASINT", "ELINT și ESM"],
     c: 0,
-    e: "✓ Corect: SIGINT = ELINT (date din echipamente non-comunicații, ex. radar) + COMINT (date din comunicații). 📌 SIGINT = umbrela; ELINT (radar) + COMINT (comunicații) = piloni.",
+    e: "✓ Corect: SIGINT = ELINT (date din echipamente non-comunicații, ex. radar) + COMINT (date din comunicații). ⚠ Capcane: HUMINT (informații din surse umane) și MASINT sunt ALTE discipline de intelligence, nu componente SIGINT; ESM e o componentă majoră a RE, nu a SIGINT. 📌 SIGINT = ELINT + COMINT, exact această pereche.",
     tema: "SIGINT", ref: "3.3.1"
   },
   {
@@ -1029,9 +1029,9 @@ window.BANCA_TC = [
   /* ---------- ELEMENTELE PROCESULUI DE COMUNICARE ---------- */
   {
     t: "Elementele indispensabile ale procesului de comunicare (extensia modelului E–M–R) sunt:",
-    o: ["Actorii, mesajul, canalul și codul", "Locuționar, ilocuționar și perlocuționar", "Icon, indice, simbol și interpretant", "Emisie, recepție, bruiaj și distrugere"],
+    o: ["Actorii, mesajul, canalul și codul", "Actorii, mesajul, contextul și feedback-ul", "Emițătorul, mesajul, codul și zgomotul", "Actorii, canalul, codul și referentul"],
     c: 0,
-    e: "✓ Corect: procesul de comunicare = actorii (emițător/receptor) + mesaj + canal + cod, dezvoltat pe structura E–M–R (la rândul ei pe schema behavioristă S–R). 📌 Cei 4 piloni: actori, mesaj, canal, cod.",
+    e: "✓ Corect: procesul de comunicare = actorii (emițător/receptor) + mesaj + canal + cod, dezvoltat pe structura E–M–R (la rândul ei pe schema behavioristă S–R). ⚠ Capcane: contextul, feedback-ul, zgomotul și referentul apar în diverse MODELE, dar nu sunt printre elementele indispensabile enumerate în materie. 📌 Cei 4 piloni: actori, mesaj, canal, cod.",
     tema: "Elementele comunicării", ref: "Elementele procesului"
   },
   {
@@ -1240,9 +1240,9 @@ window.BANCA_TC = [
   },
   {
     t: "Un act de limbaj (Austin) are trei componente, în ordinea:",
-    o: ["Locuționară, ilocuționară, perlocuționară", "Prezentațională, reprezentațională, mecanică", "Emotivă, referențială, conativă", "Icon, indice, simbol"],
+    o: ["Locuționară, ilocuționară, perlocuționară", "Ilocuționară, locuționară, perlocuționară", "Locuționară, perlocuționară, ilocuționară", "Locuționară, ilocuționară, colocuționară"],
     c: 0,
-    e: "✓ Corect: Austin — locuționar (transmiterea de semnificații) + ilocuționar (intenția comunicativă) + perlocuționar (efectul asupra receptorului). 📌 Spun – intenționez – obțin efectul.",
+    e: "✓ Corect: Austin — locuționar (transmiterea de semnificații) + ilocuționar (intenția comunicativă) + perlocuționar (efectul asupra receptorului), în EXACT această ordine. ⚠ Capcane: primele două greșite doar inversează ordinea, iar „colocuționar” NU EXISTĂ la Austin (aceeași capcană apare și în culegerea de grile!). 📌 Spun – intenționez – obțin efectul.",
     tema: "Acte de limbaj", ref: "Austin 1975:109"
   },
   {
@@ -1261,9 +1261,9 @@ window.BANCA_TC = [
   },
   {
     t: "Cele cinci stiluri de comunicare orală (Joos), de la scris spre oralitate, sunt:",
-    o: ["Rece, formal, consultativ, ocazional, intim", "Locuționar, ilocuționar, perlocuționar, referențial", "Digital, analogic, logic, estetic, restrâns", "Icon, indice, simbol, semnal, representamen"],
+    o: ["Rece, formal, consultativ, ocazional, intim", "Rece, oficial, consultativ, ocazional, intim", "Rece, formal, colocvial, ocazional, familiar", "Formal, consultativ, ocazional, personal, intim"],
     c: 0,
-    e: "✓ Corect: Joos — rece → formal → consultativ → ocazional → intim, cinci pași de îndepărtare de comunicarea scrisă. 📌 Rece = aproape de scris (R.G.); intim = cel mai personal.",
+    e: "✓ Corect: Joos — rece → formal → consultativ → ocazional → intim, cinci pași de îndepărtare de comunicarea scrisă. ⚠ Capcane: „oficial”, „colocvial”, „familiar”, „personal” NU sunt termenii lui Joos — și lipsa „stilului rece” din ultima variantă o descalifică. 📌 Rece = aproape de scris (R.G.); intim = cel mai personal.",
     tema: "Stiluri de comunicare", ref: "Joos 1967 / pg. 34"
   },
   {
@@ -1442,9 +1442,9 @@ window.BANCA_TC = [
   /* ---------- MODELE PROCESUALE. SCHEME ---------- */
   {
     t: "Modelul liniar Shannon–Weaver are elementele, în ordine:",
-    o: ["Sursă → transmițător → canal → receptor → destinație", "Emițător → interpretant → obiect → simbol convențional", "Componenta locuționară → ilocuționară → perlocuționară", "Icon → indice → simbol → semnal → representamen"],
+    o: ["Sursă → transmițător → canal → receptor → destinație", "Sursă → codificator → canal → decodificator → destinatar", "Emițător → transmițător → canal → receptor → destinație", "Sursă → transmițător → mesaj → receptor → destinație"],
     c: 0,
-    e: "✓ Corect: Shannon-Weaver = sursă → transmițător → canal → receptor → destinație; model liniar, mecanicist, cu zgomotul pe canal. 📌 5 elemente liniare: sursă–transmițător–canal–receptor–destinație.",
+    e: "✓ Corect: Shannon-Weaver = sursă → transmițător → canal → receptor → destinație; model liniar, mecanicist, cu zgomotul pe canal. ⚠ Capcane: „codificator/decodificator” și „destinatar” nu sunt termenii diagramei; „emițător” la început dublează greșit sursa; „mesajul” nu e o verigă a lanțului (el circulă PRIN canal). 📌 Termenii exacți: sursă–transmițător–canal–receptor–destinație.",
     tema: "Modele (Shannon-Weaver)", ref: "10.1"
   },
   {
@@ -1465,16 +1465,16 @@ window.BANCA_TC = [
   /* ---------- MODELE PROCESUALE. FORMULE ---------- */
   {
     t: "Formula 5W a lui Lasswell descrie comunicarea prin întrebările:",
-    o: ["Cine? Ce? Prin ce canal? Cui? Cu ce efect?", "Unde? Când? De ce? Cât? Pentru cine anume?", "Sursă? Zgomot? Redundanță? Entropie? Bit?", "Icon? Indice? Simbol? Semnal? Representamen?"],
+    o: ["Cine? Ce? Prin ce canal? Cui? Cu ce efect?", "Cine? Ce? Prin ce canal? Cui? În ce context?", "Cine? Ce? Prin ce cod? Cui? Cu ce efect?", "Cine? Ce? Prin ce canal? Când? Cu ce efect?"],
     c: 0,
-    e: "✓ Corect: 5W (Lasswell) = Cine? – Ce? – Prin ce canal? – Cui? – Cu ce efect? Accent pe emițător, comunicarea = act de influențare (Lasswell = expert în propagandă). 📌 5W = Cine–Ce–Canal–Cui–Efect.",
+    e: "✓ Corect: 5W (Lasswell) = Cine? – Ce? – Prin ce canal? – Cui? – Cu ce efect? Accent pe emițător, comunicarea = act de influențare (Lasswell = expert în propagandă). ⚠ Capcane: „În ce context?” este adăugirea ULTERIOARĂ a lui Braddock (nu e în 5W!), iar „cod”/„când” nu apar în formulă. 📌 5W = Cine–Ce–Canal–Cui–Efect.",
     tema: "Modele (Lasswell)", ref: "11.1"
   },
   {
     t: "Braddock a completat formula lui Lasswell cu întrebările:",
-    o: ["„În ce context?” și „Cu ce scop?”", "„Unde?” și „Când?”", "„Cât costă?” și „Cine plătește?”", "„Ce culoare?” și „Ce formă?”"],
+    o: ["„În ce context?” și „Cu ce scop?”", "„În ce context?” și „Cu ce cod?”", "„Cu ce scop?” și „Prin ce mijloace?”", "„În ce situație?” și „Cu ce intenție?”"],
     c: 0,
-    e: "✓ Corect: Braddock (1958) extinde 5W cu „În ce context?” și „Cu ce scop?”, pentru o analiză mai consistentă. 📌 Braddock = Lasswell + context + scop.",
+    e: "✓ Corect: Braddock (1958) extinde 5W cu „În ce context?” și „Cu ce scop?”, pentru o analiză mai consistentă. ⚠ Capcane: fiecare distractor conține una din întrebările corecte împerecheată cu una inventată („cod”, „mijloace”) sau reformulată („situație”, „intenție”). 📌 Braddock = context + scop, exact acești doi termeni.",
     tema: "Modele (Braddock)", ref: "11.1"
   },
   {
@@ -1509,18 +1509,18 @@ window.BANCA_TC = [
   },
   {
     t: "Cele trei entități ale semiozei la Peirce sunt:",
-    o: ["Representamen, obiect și interpretant", "Semnificant, semnificat și realitate", "Sursă, canal și destinație finală", "Emițător, mesaj și receptor"],
+    o: ["Representamen, obiect și interpretant", "Representamen, obiect și interpret", "Representamen, referent și interpretant", "Semnificant, obiect și interpretant"],
     c: 0,
-    e: "✓ Corect: Peirce — semnul (representamen) ține locul unui obiect pentru cineva, creând în minte interpretantul. Saussure = semnificant/semnificat + realitate. 📌 Peirce: representamen – obiect – interpretant.",
+    e: "✓ Corect: Peirce — semnul (representamen) ține locul unui obiect pentru cineva, creând în minte interpretantul. ⚠ Capcane: „interpret” ≠ „interpretant” (interpretantul e conceptul mental, NU persoana!); „referent” = terminologia Ogden–Richards; „semnificant” = terminologia lui Saussure. 📌 Peirce: representamen – obiect – interpretant, exact acești termeni.",
     tema: "Modele semiotice (Peirce)", ref: "12.2"
   },
 
   /* ---------- BÜHLER / JAKOBSON ---------- */
   {
     t: "Cele trei funcții ale limbajului la Karl Bühler sunt:",
-    o: ["Expresivă, reprezentativă și de apel", "Emotivă, poetică și metalingvistică", "Locuționară, ilocuționară, perlocuționară", "Denotativă, conotativă și mitică"],
+    o: ["Expresivă, reprezentativă și de apel", "Expresivă, referențială și conativă", "Emotivă, reprezentativă și de apel", "Expresivă, reprezentativă și fatică"],
     c: 0,
-    e: "✓ Corect: Bühler — expresivă (emițător), reprezentativă (obiecte/context) și de apel (receptor); toate prezente, dar doar una domină. La ordin domină APELUL (= conativa la Jakobson). 📌 Bühler: expresivă–reprezentativă–apel.",
+    e: "✓ Corect: Bühler — expresivă (emițător), reprezentativă (obiecte/context) și de apel (receptor); toate prezente, dar doar una domină. ⚠ Capcane: „referențială”, „conativă”, „emotivă”, „fatică” sunt termenii lui JAKOBSON — nu ai lui Bühler! La ordin domină APELUL (= conativa la Jakobson). 📌 Bühler: expresivă–reprezentativă–apel; Jakobson are 6 funcții cu alte nume.",
     tema: "Funcții (Bühler)", ref: "13.1"
   },
   {
@@ -1585,9 +1585,9 @@ window.BANCA_TC = [
   /* ---------- TEORIILE CONSISTENȚEI COGNITIVE ---------- */
   {
     t: "Teoria ECHILIBRULUI a lui Heider presupune existența:",
-    o: ["A două persoane (P, O) și a unui obiect (X)", "A cinci întrebări succesive (formula 5W)", "A trei componente ale unui act de limbaj", "A șase factori contextuali ai comunicării"],
+    o: ["A două persoane (P, O) și a unui obiect (X)", "A unei persoane (P), a unei surse (S) și a unui obiect (O)", "A două persoane (A, B) și a unei surse externe (S)", "A trei persoane (P, O, Q) aflate în relație directă"],
     c: 0,
-    e: "✓ Corect: Heider — structura P–O–X (două persoane + un obiect/idee/eveniment X). Echilibrul apare când toate relațiile sunt pozitive sau una pozitivă și două negative. 📌 Heider = triunghiul P-O-X.",
+    e: "✓ Corect: Heider — structura P–O–X (DOUĂ persoane + un obiect/idee/eveniment X). Echilibrul apare când toate relațiile sunt pozitive sau una pozitivă și două negative. ⚠ Capcane: P–S–O (persoană–sursă–obiect) = teoria CONGRUENȚEI a lui Osgood; A și B + referent = modelul lui NEWCOMB (A–B–X); trei persoane nu apar în niciunul. 📌 Heider = P-O-X; Newcomb = A-B-X; Osgood = P-S-O.",
     tema: "Teorii ale consistenței (Heider)", ref: "14.1"
   },
   {
@@ -2471,10 +2471,44 @@ function literele(indici) {
   return indici.slice().sort((a, b) => a - b).map((i) => LITERE[i]).join(" + ");
 }
 
+/* ---------- pachet fără repetare (deck) ----------
+   Fiecare bancă e amestecată o dată ca un pachet de cărți și se
+   „împart” câte 9 întrebări pe set. O întrebare NU reapare până
+   nu se epuizează întreaga bancă; la reamestecare, întrebările
+   din setul imediat anterior intră la fundul pachetului, deci nu
+   se repetă nici imediat după. Persistă între refresh-uri. */
+function citesteJSON(k) {
+  try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; }
+}
+function scrieJSON(k, v) {
+  try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {}
+}
+
 function extrageDinBanca(cheie) {
   const banca = MATERII[cheie].banca() || [];
-  return amesteca(banca).slice(0, Math.min(NR_GRILE, banca.length))
-    .map((q) => construiesteIntrebare(q, MATERII[cheie].nume));
+  const n = Math.min(NR_GRILE, banca.length);
+  const toate = banca.map((_, i) => i);
+
+  // pachetul salvat (resetat automat dacă banca s-a schimbat între timp)
+  const st = citesteJSON("grile_deck_" + cheie);
+  let deck = (st && st.n === banca.length && Array.isArray(st.deck))
+    ? st.deck.filter((i) => i >= 0 && i < banca.length)
+    : amesteca(toate);
+  const ultim = (citesteJSON("grile_ultim_" + cheie) || []).filter((i) => i >= 0 && i < banca.length);
+
+  const alese = [];
+  while (alese.length < n) {
+    if (deck.length === 0) {
+      // pachet epuizat → reamestecă; setul anterior intră la fundul pachetului
+      const rest = toate.filter((i) => !alese.includes(i) && !ultim.includes(i));
+      const laFund = ultim.filter((i) => !alese.includes(i));
+      deck = amesteca(laFund).concat(amesteca(rest)); // pop() ia din coadă → „rest” iese primul
+    }
+    alese.push(deck.pop());
+  }
+  scrieJSON("grile_deck_" + cheie, { n: banca.length, deck });
+  scrieJSON("grile_ultim_" + cheie, alese);
+  return alese.map((i) => construiesteIntrebare(banca[i], MATERII[cheie].nume));
 }
 
 function genereazaSet(cheieMaterie) {

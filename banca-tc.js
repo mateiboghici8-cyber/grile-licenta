@@ -9,9 +9,9 @@ window.BANCA_TC = [
   /* ---------- ELEMENTELE PROCESULUI DE COMUNICARE ---------- */
   {
     t: "Elementele indispensabile ale procesului de comunicare (extensia modelului E–M–R) sunt:",
-    o: ["Actorii, mesajul, canalul și codul", "Locuționar, ilocuționar și perlocuționar", "Icon, indice, simbol și interpretant", "Emisie, recepție, bruiaj și distrugere"],
+    o: ["Actorii, mesajul, canalul și codul", "Actorii, mesajul, contextul și feedback-ul", "Emițătorul, mesajul, codul și zgomotul", "Actorii, canalul, codul și referentul"],
     c: 0,
-    e: "✓ Corect: procesul de comunicare = actorii (emițător/receptor) + mesaj + canal + cod, dezvoltat pe structura E–M–R (la rândul ei pe schema behavioristă S–R). 📌 Cei 4 piloni: actori, mesaj, canal, cod.",
+    e: "✓ Corect: procesul de comunicare = actorii (emițător/receptor) + mesaj + canal + cod, dezvoltat pe structura E–M–R (la rândul ei pe schema behavioristă S–R). ⚠ Capcane: contextul, feedback-ul, zgomotul și referentul apar în diverse MODELE, dar nu sunt printre elementele indispensabile enumerate în materie. 📌 Cei 4 piloni: actori, mesaj, canal, cod.",
     tema: "Elementele comunicării", ref: "Elementele procesului"
   },
   {
@@ -220,9 +220,9 @@ window.BANCA_TC = [
   },
   {
     t: "Un act de limbaj (Austin) are trei componente, în ordinea:",
-    o: ["Locuționară, ilocuționară, perlocuționară", "Prezentațională, reprezentațională, mecanică", "Emotivă, referențială, conativă", "Icon, indice, simbol"],
+    o: ["Locuționară, ilocuționară, perlocuționară", "Ilocuționară, locuționară, perlocuționară", "Locuționară, perlocuționară, ilocuționară", "Locuționară, ilocuționară, colocuționară"],
     c: 0,
-    e: "✓ Corect: Austin — locuționar (transmiterea de semnificații) + ilocuționar (intenția comunicativă) + perlocuționar (efectul asupra receptorului). 📌 Spun – intenționez – obțin efectul.",
+    e: "✓ Corect: Austin — locuționar (transmiterea de semnificații) + ilocuționar (intenția comunicativă) + perlocuționar (efectul asupra receptorului), în EXACT această ordine. ⚠ Capcane: primele două greșite doar inversează ordinea, iar „colocuționar” NU EXISTĂ la Austin (aceeași capcană apare și în culegerea de grile!). 📌 Spun – intenționez – obțin efectul.",
     tema: "Acte de limbaj", ref: "Austin 1975:109"
   },
   {
@@ -241,9 +241,9 @@ window.BANCA_TC = [
   },
   {
     t: "Cele cinci stiluri de comunicare orală (Joos), de la scris spre oralitate, sunt:",
-    o: ["Rece, formal, consultativ, ocazional, intim", "Locuționar, ilocuționar, perlocuționar, referențial", "Digital, analogic, logic, estetic, restrâns", "Icon, indice, simbol, semnal, representamen"],
+    o: ["Rece, formal, consultativ, ocazional, intim", "Rece, oficial, consultativ, ocazional, intim", "Rece, formal, colocvial, ocazional, familiar", "Formal, consultativ, ocazional, personal, intim"],
     c: 0,
-    e: "✓ Corect: Joos — rece → formal → consultativ → ocazional → intim, cinci pași de îndepărtare de comunicarea scrisă. 📌 Rece = aproape de scris (R.G.); intim = cel mai personal.",
+    e: "✓ Corect: Joos — rece → formal → consultativ → ocazional → intim, cinci pași de îndepărtare de comunicarea scrisă. ⚠ Capcane: „oficial”, „colocvial”, „familiar”, „personal” NU sunt termenii lui Joos — și lipsa „stilului rece” din ultima variantă o descalifică. 📌 Rece = aproape de scris (R.G.); intim = cel mai personal.",
     tema: "Stiluri de comunicare", ref: "Joos 1967 / pg. 34"
   },
   {
@@ -422,9 +422,9 @@ window.BANCA_TC = [
   /* ---------- MODELE PROCESUALE. SCHEME ---------- */
   {
     t: "Modelul liniar Shannon–Weaver are elementele, în ordine:",
-    o: ["Sursă → transmițător → canal → receptor → destinație", "Emițător → interpretant → obiect → simbol convențional", "Componenta locuționară → ilocuționară → perlocuționară", "Icon → indice → simbol → semnal → representamen"],
+    o: ["Sursă → transmițător → canal → receptor → destinație", "Sursă → codificator → canal → decodificator → destinatar", "Emițător → transmițător → canal → receptor → destinație", "Sursă → transmițător → mesaj → receptor → destinație"],
     c: 0,
-    e: "✓ Corect: Shannon-Weaver = sursă → transmițător → canal → receptor → destinație; model liniar, mecanicist, cu zgomotul pe canal. 📌 5 elemente liniare: sursă–transmițător–canal–receptor–destinație.",
+    e: "✓ Corect: Shannon-Weaver = sursă → transmițător → canal → receptor → destinație; model liniar, mecanicist, cu zgomotul pe canal. ⚠ Capcane: „codificator/decodificator” și „destinatar” nu sunt termenii diagramei; „emițător” la început dublează greșit sursa; „mesajul” nu e o verigă a lanțului (el circulă PRIN canal). 📌 Termenii exacți: sursă–transmițător–canal–receptor–destinație.",
     tema: "Modele (Shannon-Weaver)", ref: "10.1"
   },
   {
@@ -445,16 +445,16 @@ window.BANCA_TC = [
   /* ---------- MODELE PROCESUALE. FORMULE ---------- */
   {
     t: "Formula 5W a lui Lasswell descrie comunicarea prin întrebările:",
-    o: ["Cine? Ce? Prin ce canal? Cui? Cu ce efect?", "Unde? Când? De ce? Cât? Pentru cine anume?", "Sursă? Zgomot? Redundanță? Entropie? Bit?", "Icon? Indice? Simbol? Semnal? Representamen?"],
+    o: ["Cine? Ce? Prin ce canal? Cui? Cu ce efect?", "Cine? Ce? Prin ce canal? Cui? În ce context?", "Cine? Ce? Prin ce cod? Cui? Cu ce efect?", "Cine? Ce? Prin ce canal? Când? Cu ce efect?"],
     c: 0,
-    e: "✓ Corect: 5W (Lasswell) = Cine? – Ce? – Prin ce canal? – Cui? – Cu ce efect? Accent pe emițător, comunicarea = act de influențare (Lasswell = expert în propagandă). 📌 5W = Cine–Ce–Canal–Cui–Efect.",
+    e: "✓ Corect: 5W (Lasswell) = Cine? – Ce? – Prin ce canal? – Cui? – Cu ce efect? Accent pe emițător, comunicarea = act de influențare (Lasswell = expert în propagandă). ⚠ Capcane: „În ce context?” este adăugirea ULTERIOARĂ a lui Braddock (nu e în 5W!), iar „cod”/„când” nu apar în formulă. 📌 5W = Cine–Ce–Canal–Cui–Efect.",
     tema: "Modele (Lasswell)", ref: "11.1"
   },
   {
     t: "Braddock a completat formula lui Lasswell cu întrebările:",
-    o: ["„În ce context?” și „Cu ce scop?”", "„Unde?” și „Când?”", "„Cât costă?” și „Cine plătește?”", "„Ce culoare?” și „Ce formă?”"],
+    o: ["„În ce context?” și „Cu ce scop?”", "„În ce context?” și „Cu ce cod?”", "„Cu ce scop?” și „Prin ce mijloace?”", "„În ce situație?” și „Cu ce intenție?”"],
     c: 0,
-    e: "✓ Corect: Braddock (1958) extinde 5W cu „În ce context?” și „Cu ce scop?”, pentru o analiză mai consistentă. 📌 Braddock = Lasswell + context + scop.",
+    e: "✓ Corect: Braddock (1958) extinde 5W cu „În ce context?” și „Cu ce scop?”, pentru o analiză mai consistentă. ⚠ Capcane: fiecare distractor conține una din întrebările corecte împerecheată cu una inventată („cod”, „mijloace”) sau reformulată („situație”, „intenție”). 📌 Braddock = context + scop, exact acești doi termeni.",
     tema: "Modele (Braddock)", ref: "11.1"
   },
   {
@@ -489,18 +489,18 @@ window.BANCA_TC = [
   },
   {
     t: "Cele trei entități ale semiozei la Peirce sunt:",
-    o: ["Representamen, obiect și interpretant", "Semnificant, semnificat și realitate", "Sursă, canal și destinație finală", "Emițător, mesaj și receptor"],
+    o: ["Representamen, obiect și interpretant", "Representamen, obiect și interpret", "Representamen, referent și interpretant", "Semnificant, obiect și interpretant"],
     c: 0,
-    e: "✓ Corect: Peirce — semnul (representamen) ține locul unui obiect pentru cineva, creând în minte interpretantul. Saussure = semnificant/semnificat + realitate. 📌 Peirce: representamen – obiect – interpretant.",
+    e: "✓ Corect: Peirce — semnul (representamen) ține locul unui obiect pentru cineva, creând în minte interpretantul. ⚠ Capcane: „interpret” ≠ „interpretant” (interpretantul e conceptul mental, NU persoana!); „referent” = terminologia Ogden–Richards; „semnificant” = terminologia lui Saussure. 📌 Peirce: representamen – obiect – interpretant, exact acești termeni.",
     tema: "Modele semiotice (Peirce)", ref: "12.2"
   },
 
   /* ---------- BÜHLER / JAKOBSON ---------- */
   {
     t: "Cele trei funcții ale limbajului la Karl Bühler sunt:",
-    o: ["Expresivă, reprezentativă și de apel", "Emotivă, poetică și metalingvistică", "Locuționară, ilocuționară, perlocuționară", "Denotativă, conotativă și mitică"],
+    o: ["Expresivă, reprezentativă și de apel", "Expresivă, referențială și conativă", "Emotivă, reprezentativă și de apel", "Expresivă, reprezentativă și fatică"],
     c: 0,
-    e: "✓ Corect: Bühler — expresivă (emițător), reprezentativă (obiecte/context) și de apel (receptor); toate prezente, dar doar una domină. La ordin domină APELUL (= conativa la Jakobson). 📌 Bühler: expresivă–reprezentativă–apel.",
+    e: "✓ Corect: Bühler — expresivă (emițător), reprezentativă (obiecte/context) și de apel (receptor); toate prezente, dar doar una domină. ⚠ Capcane: „referențială”, „conativă”, „emotivă”, „fatică” sunt termenii lui JAKOBSON — nu ai lui Bühler! La ordin domină APELUL (= conativa la Jakobson). 📌 Bühler: expresivă–reprezentativă–apel; Jakobson are 6 funcții cu alte nume.",
     tema: "Funcții (Bühler)", ref: "13.1"
   },
   {
@@ -565,9 +565,9 @@ window.BANCA_TC = [
   /* ---------- TEORIILE CONSISTENȚEI COGNITIVE ---------- */
   {
     t: "Teoria ECHILIBRULUI a lui Heider presupune existența:",
-    o: ["A două persoane (P, O) și a unui obiect (X)", "A cinci întrebări succesive (formula 5W)", "A trei componente ale unui act de limbaj", "A șase factori contextuali ai comunicării"],
+    o: ["A două persoane (P, O) și a unui obiect (X)", "A unei persoane (P), a unei surse (S) și a unui obiect (O)", "A două persoane (A, B) și a unei surse externe (S)", "A trei persoane (P, O, Q) aflate în relație directă"],
     c: 0,
-    e: "✓ Corect: Heider — structura P–O–X (două persoane + un obiect/idee/eveniment X). Echilibrul apare când toate relațiile sunt pozitive sau una pozitivă și două negative. 📌 Heider = triunghiul P-O-X.",
+    e: "✓ Corect: Heider — structura P–O–X (DOUĂ persoane + un obiect/idee/eveniment X). Echilibrul apare când toate relațiile sunt pozitive sau una pozitivă și două negative. ⚠ Capcane: P–S–O (persoană–sursă–obiect) = teoria CONGRUENȚEI a lui Osgood; A și B + referent = modelul lui NEWCOMB (A–B–X); trei persoane nu apar în niciunul. 📌 Heider = P-O-X; Newcomb = A-B-X; Osgood = P-S-O.",
     tema: "Teorii ale consistenței (Heider)", ref: "14.1"
   },
   {
